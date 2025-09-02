@@ -2,6 +2,7 @@ package com.main.views.popUp.popUpStaff;
 
 import javax.swing.JLabel;
 
+import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -39,6 +40,14 @@ public class popUpInputAccountStaff extends popUpPanel {
     private String oldPhoneNumber = "";
     private String name, email, phoneNumber, gender, jobdesk, address;
 
+    private appIcons appIcons = new appIcons();
+
+    private imageIcon showPasswordIcon = appIcons.getShowPasswordIcon(25, 25);
+    private imageIcon hidePasswordIcon = appIcons.getHidePasswordIcon(25, 25);
+
+    private imageIcon showConfrimPasswordIcon = appIcons.getShowPasswordIcon(25, 25);
+    private imageIcon hideConfrimPasswordIcon = appIcons.getHidePasswordIcon(25, 25);
+
     public popUpInputAccountStaff(mainFrame parentFrame, dashboardAdminView parentView,
             String name,
             String email,
@@ -67,6 +76,7 @@ public class popUpInputAccountStaff extends popUpPanel {
         setColor();
         setFont();
         handleButtonApps();
+        handelShowIconPassword();
 
         add(headerLabel);
         add(emailLabel);
@@ -100,6 +110,12 @@ public class popUpInputAccountStaff extends popUpPanel {
 
         buttonCancel = new buttonCustom("Cancel", 70, 410, 150, 40, 10);
         buttonSave = new buttonCustom("Save", 270, 410, 150, 40, 10);
+
+        showPasswordIcon.setBounds(390, 210, 60, 60);
+        hidePasswordIcon.setBounds(390, 210, 60, 60);
+
+        showConfrimPasswordIcon.setBounds(390, 300, 60, 60);
+        hideConfrimPasswordIcon.setBounds(390, 300, 60, 60);
 
         this.emailField.setText(email);
         emailField.setEditable(false);
@@ -146,6 +162,91 @@ public class popUpInputAccountStaff extends popUpPanel {
             System.out.println("phone = " + phoneNumber + ", oldPhone = " + oldPhoneNumber);
             System.out.println("staffIdToEdit = " + staffIdToEdit);
         }
+    }
+
+    private void handelShowIconPassword() {
+        final boolean[] isPasswordVisible = { false };
+
+        add(hidePasswordIcon);
+        add(showPasswordIcon);
+        add(hideConfrimPasswordIcon);
+        add(showConfrimPasswordIcon);
+
+        hidePasswordIcon.setBounds(390, 210, 60, 60);
+        showPasswordIcon.setBounds(390, 210, 60, 60);
+        showPasswordIcon.setVisible(false);
+
+        hideConfrimPasswordIcon.setBounds(390, 300, 60, 60);
+        showConfrimPasswordIcon.setBounds(390, 300, 60, 60);
+        showConfrimPasswordIcon.setVisible(false);
+
+        hidePasswordIcon.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                isPasswordVisible[0] = true;
+                passwordField.setEchoChar((char) 0);
+                passwordField.setFont(fontStyle.getFont(fontStyle.FontStyle.SEMIBOLD, 13f));
+
+                hidePasswordIcon.setVisible(false);
+                showPasswordIcon.setVisible(true);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                hidePasswordIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            }
+        });
+
+        showPasswordIcon.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                isPasswordVisible[0] = false;
+                passwordField.setEchoChar('•');
+                passwordField.setFont(fontStyle.getFont(fontStyle.FontStyle.SEMIBOLD, 13f));
+
+                showPasswordIcon.setVisible(false);
+                hidePasswordIcon.setVisible(true);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                showPasswordIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            }
+        });
+
+        hideConfrimPasswordIcon.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                isPasswordVisible[0] = true;
+                confirmPasswordField.setEchoChar((char) 0);
+                confirmPasswordField.setFont(fontStyle.getFont(fontStyle.FontStyle.SEMIBOLD, 13f));
+
+                hideConfrimPasswordIcon.setVisible(false);
+                showConfrimPasswordIcon.setVisible(true);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                hideConfrimPasswordIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            }
+        });
+
+        showConfrimPasswordIcon.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                isPasswordVisible[0] = false;
+                confirmPasswordField.setEchoChar('•');
+                confirmPasswordField.setFont(fontStyle.getFont(fontStyle.FontStyle.SEMIBOLD, 13f));
+
+                showConfrimPasswordIcon.setVisible(false);
+                hideConfrimPasswordIcon.setVisible(true);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                showConfrimPasswordIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            }
+        });
     }
 
     private void handleButtonApps() {

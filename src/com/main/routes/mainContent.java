@@ -46,9 +46,9 @@ public class mainContent extends wrapperPanel {
         if (role == Role.ADMIN) {
             dashboardAdminView = new dashboardAdminView(mainFrame, role);
             parentDashboardAdmin = new parentDashboardAdmin(dashboardAdminView, role);
-            dashboardAdminView.showDashboardCalculation();
+            dashboardAdminView.showDashboardHome();
             dashboardAdminView.resetLastContent();
-            parentDashboardAdmin.getNavbar().showCalculationView();
+            parentDashboardAdmin.getNavbar().showHomeView();
             // add class yang menampung semua content bukan parent dashboard
             add(dashboardAdminView);
         } else {
