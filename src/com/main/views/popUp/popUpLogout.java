@@ -1,5 +1,6 @@
 package com.main.views.popUp;
 
+import com.main.auth.sessionLogin;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -8,6 +9,7 @@ import javax.swing.JLabel;
 import com.main.auth.utils.Role;
 import com.main.components.*;
 import com.main.components.panelApps.popUpPanel;
+import com.main.models.staff.staffService;
 import com.main.routes.dashboardAdminView;
 import com.main.routes.mainFrame;
 
@@ -49,7 +51,7 @@ public class popUpLogout extends popUpPanel {
 
     private void setPosition() {
         logoutLabel = new textLabel("Logout Apps", 0, 35, 300, 100);
-        confrimLabel = new textLabel("<html><body style='text-align: center;'>Are your sure you want to Logout the application?</body></html>",0, 70, 300, 100);
+        confrimLabel = new textLabel("Are your sure you want to Logout the application?",0, 70, 300, 100);
         buttonCancel = new buttonCustom("Cancel", 40, 150, 100, 30, 10);
         buttonLogout = new buttonCustom("Logout", 160, 150, 100, 30, 10);
 
@@ -72,7 +74,8 @@ public class popUpLogout extends popUpPanel {
 
     private void setFont() {
         logoutLabel.setFont(fontStyle.getFont(fontStyle.FontStyle.SEMIBOLD, 16f));
-        confrimLabel.setFont(fontStyle.getFont(fontStyle.FontStyle.SEMIBOLD, 12f));
+        confrimLabel.setFont(fontStyle.getFont(fontStyle.FontStyle.SEMIBOLD, 10f));
+        confrimLabel.setHorizontalAlignment(JLabel.CENTER);
 
         logoutLabel.setHorizontalAlignment(JLabel.CENTER);
     }
@@ -81,6 +84,8 @@ public class popUpLogout extends popUpPanel {
         buttonLogout.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                int idStaff = sessionLogin.get().getIdStaff();
+                staffService.staffLogout(idStaff); 
                 parentFrame.showLoginApp();
                 parentFrame.hideGlassNotificationPanel();
                 dashboardAdminView.resetLastContent();

@@ -131,7 +131,9 @@ public class tableFormView extends contentPanel {
         buttonReset.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent ae) {
-
+                numberField.setText(null);
+                capacityField.setText(null);
+                descriptionField.setText(null);
             }
         });
 

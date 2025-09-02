@@ -22,7 +22,6 @@ import com.main.models.entity.listTransactionProduct;
 import com.main.models.product.loadDataProduct;
 import com.main.routes.dashboardStaffView;
 import com.main.services.authDataProduct;
-import com.main.services.authDataTransaction;
 
 public class transactionFormView extends contentPanel implements searchableView {
 

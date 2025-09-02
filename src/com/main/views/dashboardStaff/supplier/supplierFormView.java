@@ -151,6 +151,16 @@ public class supplierFormView extends contentPanel {
             }
         });
 
+        buttonReset.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                nameField.setText(null);
+                quantityField.setText(null);
+                unitField.setSelectedItem(null);
+                descriptionField.setText(null);
+            }
+        });
+
         buttonSave.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -206,7 +216,8 @@ public class supplierFormView extends contentPanel {
                                     parentView.showFailedPopUp("Failed to Save Data Supplier");
                                 }
                             } else {
-                                success = authDataSupplier.updateDataSupplier(supplierIdToEdit, idStaff, nameSupplier, quantity,
+                                success = authDataSupplier.updateDataSupplier(supplierIdToEdit, idStaff, nameSupplier,
+                                        quantity,
                                         unit, description);
                                 if (success) {
                                     parentView.showDashboardSupplier();

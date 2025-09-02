@@ -13,44 +13,10 @@ import com.main.models.connectionDatabase;
 import com.main.models.entity.dataAlternatif;
 
 public class loadDataAlternatif {
-    public static DefaultTableModel getAllDataAlternatif() {
-        String[] dataHeader = {
-                "ID", "ID", "Product", "Price Product", "Quantity",
-                "Sub Revenue", "Frekuensi", "Periode", "Last Update"
-        };
-
-        DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
-
-        String query = "SELECT * FROM tbl_data_alternatif WHERE DATE(periode) = CURDATE() ORDER BY periode DESC";
-        try (Connection conn = connectionDatabase.getConnection();
-                PreparedStatement state = conn.prepareStatement(query)) {
-
-            ResultSet resultData = state.executeQuery();
-
-            while (resultData.next()) {
-                Object[] rowData = {
-                        "AL00" + resultData.getInt("idAlternatif"),
-                        "AL00" + resultData.getInt("idProduct"),
-                        resultData.getString("product"),
-                        "Rp. " + resultData.getInt("K1"),
-                        resultData.getInt("K2"),
-                        "Rp. " + resultData.getInt("K3"),
-                        resultData.getInt("K4"),
-                        resultData.getString("periode"),
-                        resultData.getString("createAt")
-                };
-                tm.addRow(rowData);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return tm;
-    }
-
     public static DefaultTableModel getAllDataAlternatifByPeriode(String periode) {
         String[] dataHeader = {
-                "ID", "ID", "Product", "Price Product", "Quantity",
-                "Sub Revenue", "Frekuensi", "Periode", "Last Update"
+                "ID", "ID", "Product", "K1", "K2",
+                "K3", "K4", "Periode", "Last Update"
         };
         DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
 

@@ -5,7 +5,8 @@ import javax.swing.*;
 public class linkLabel extends JPanel {
 
     private JLabel label;
-    private JLabel quantityLabel; 
+    private JLabel quantityLabel;
+    private boolean active = false;
 
     public java.awt.event.MouseAdapter labelActive = new java.awt.event.MouseAdapter() {
         @Override
@@ -81,6 +82,8 @@ public class linkLabel extends JPanel {
         setBorder(BorderFactory.createMatteBorder(0, 0, 3, 0, color.DARKGREEN));
         label.setForeground(color.DARKGREEN);
         updateQuantityStyle(true);
+
+        active = true; // <-- tandai sebagai aktif
     }
 
     public void setLabelInActive() {
@@ -93,6 +96,12 @@ public class linkLabel extends JPanel {
         setBorder(BorderFactory.createMatteBorder(0, 0, 3, 0, color.DARKGREY));
         label.setForeground(color.DARKGREY);
         updateQuantityStyle(false);
+
+        active = false; // <-- tandai sebagai tidak aktif
+    }
+
+    public boolean isActive() {
+        return active;
     }
 
     public void setLinkLabelFont(java.awt.Font font) {

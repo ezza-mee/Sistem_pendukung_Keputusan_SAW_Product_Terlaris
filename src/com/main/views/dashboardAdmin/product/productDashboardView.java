@@ -41,7 +41,6 @@ public class productDashboardView extends contentPanel implements searchableView
     private appIcons appIcon = new appIcons();
     private imageIcon iconDelete = appIcon.getDeleteIconWhite(20, 20);
     private imageIcon iconEdit = appIcon.getEditIconWhite(20, 20);
-    private imageIcon iconDetail = appIcon.getDetailIconWhite(20, 20);
 
     private int quantityAllDataProduct = loadDataProduct.getAllQuantityDataProduct();
     private int quantityAllDataFoodProduct = loadDataProduct.getAllQuantityDataFoodProduct();
@@ -99,8 +98,6 @@ public class productDashboardView extends contentPanel implements searchableView
         headerPanel = new panelRounded(40, 80, 1050, 110, 10, 10);
         contentPanel = new panelRounded(40, 140, 1050, 410, 0, 0);
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
-
-        
 
         scrollPane = new scrollPane(contentPanel, 0, 0, getWidth(), getHeight());
         scrollPane.setBounds(40, 220, 1050, 410);
@@ -411,17 +408,14 @@ public class productDashboardView extends contentPanel implements searchableView
         cardPanel.add(statusLabel);
 
         // Tombol Hapus
-        buttonCustom buttonEdit = new buttonCustom("", 810, 35, 40, 40, 10);
-        buttonCustom buttonDelete = new buttonCustom("", 870, 35, 40, 40, 10);
-        buttonCustom buttonDetail = new buttonCustom("", 930, 35, 40, 40, 10);
+        buttonCustom buttonEdit = new buttonCustom("", 860, 35, 40, 40, 10);
+        buttonCustom buttonDelete = new buttonCustom("", 910, 35, 40, 40, 10);
 
         buttonDelete.setIcon(iconDelete);
         buttonEdit.setIcon(iconEdit);
-        buttonDetail.setIcon(iconDetail);
 
         cardPanel.add(buttonEdit);
         cardPanel.add(buttonDelete);
-        cardPanel.add(buttonDetail);
 
         // Padding antar card
         Component padding = Box.createRigidArea(new Dimension(0, 20));
@@ -487,14 +481,6 @@ public class productDashboardView extends contentPanel implements searchableView
                         parentApp.hideGlassNotificationPanel();
                     }
                 });
-            }
-        });
-
-        buttonDetail.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent ae) {
-                int idProduct = product.getIdProduct();
-                System.out.println("idProduct : " + idProduct);
             }
         });
 

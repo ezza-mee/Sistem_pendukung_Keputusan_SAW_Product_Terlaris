@@ -150,6 +150,16 @@ public class supplierFormView extends contentPanel {
             }
         });
 
+        buttonReset.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                nameField.setText(null);
+                quantityField.setText(null);
+                unitField.setSelectedItem(null);
+                descriptionField.setText(null);
+            }
+        });
+
         buttonSave.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {

@@ -1,15 +1,16 @@
 package com.main.components;
 
-import java.awt.*;
-import java.io.File;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 public class fontStyle {
 
-    private static final String FONT_DIR = "src/com/main/resources/fonts/";
     private static final Map<String, Font> FONT_CACHE = new HashMap<>();
+    private static final String FONT_PATH = "/com/main/resources/fonts/";
 
     public enum FontStyle {
         REGULAR("Poppins-Regular.ttf"),
@@ -41,11 +42,19 @@ public class fontStyle {
      */
     public static Font getFont(FontStyle style, float size) {
         try {
+            // cek cache dulu biar nggak load ulang
             if (!FONT_CACHE.containsKey(style.name())) {
-                Font baseFont = Font.createFont(Font.TRUETYPE_FONT, new File(FONT_DIR + style.getFileName()));
-                FONT_CACHE.put(style.name(), baseFont);
+                try (InputStream is = fontStyle.class.getResourceAsStream(FONT_PATH + style.getFileName())) {
+                    if (is == null) {
+                        System.err.println("Font file not found: " + style.getFileName());
+                        return new Font("SansSerif", Font.PLAIN, (int) size);
+                    }
+                    Font baseFont = Font.createFont(Font.TRUETYPE_FONT, is);
+                    FONT_CACHE.put(style.name(), baseFont);
+                }
             }
             return FONT_CACHE.get(style.name()).deriveFont(size);
+
         } catch (FontFormatException | IOException e) {
             e.printStackTrace();
             return new Font("SansSerif", Font.PLAIN, (int) size); // fallback font

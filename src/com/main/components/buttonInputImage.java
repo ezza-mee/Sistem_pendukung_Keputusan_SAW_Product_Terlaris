@@ -72,24 +72,35 @@ public class buttonInputImage extends buttonCustom {
     }
 
     private void openImageChooser() {
-        JFileChooser fileChooser = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Image Files", "jpg", "png", "gif");
-        fileChooser.setFileFilter(filter);
+        // Gunakan FileDialog bawaan OS lewat AWT (lebih native dibanding JFileChooser)
+        java.awt.FileDialog fileDialog = new java.awt.FileDialog((Frame) null, "Pilih Gambar", java.awt.FileDialog.LOAD);
 
-        int result = fileChooser.showOpenDialog(null);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            String path = selectedFile.getAbsolutePath();
+        // Set filter file untuk gambar (sayangnya FileDialog tidak support filter langsung, tapi kita bisa validasi manual)
+        fileDialog.setFilenameFilter((dir, name) -> {
+            String lower = name.toLowerCase();
+            return lower.endsWith(".jpg") || lower.endsWith(".jpeg") || lower.endsWith(".png") || lower.endsWith(".gif");
+        });
 
-            inputField.setText(path);
-            labelInfo.setText("<html><body style='width:200px;'>Path:<br>" + path + "</body></html>");
+        fileDialog.setVisible(true);
 
-            setText("Image Selected");
-            setBackground(color.LIGHTGREY);
-            inputField.setBackground(color.LIGHTGREY);
-            repaint();
+        String directory = fileDialog.getDirectory();
+        String filename = fileDialog.getFile();
+
+        if (directory == null || filename == null) {
+            return; // User cancel
         }
+
+        String path = new File(directory, filename).getAbsolutePath();
+
+        inputField.setText(path);
+        labelInfo.setText("<html><body style='width:200px;'>Path:<br>" + path + "</body></html>");
+
+        setText("Image Selected");
+        setBackground(color.LIGHTGREY);
+        inputField.setBackground(color.LIGHTGREY);
+        repaint();
     }
+
 
     @Override
     protected void paintComponent(Graphics g) {

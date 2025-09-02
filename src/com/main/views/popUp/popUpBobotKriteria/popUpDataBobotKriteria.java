@@ -17,11 +17,12 @@ public class popUpDataBobotKriteria extends popUpPanel {
     private mainFrame parentApp;
     private dashboardAdminView parentView;
 
-    private textLabel headerLabel;
+    private textLabel headerLabel, totalWeightBobot, totalBobotKriteria, resultBobotLabel;
 
     private tableActionButton dataBobotKriteria;
+    private tableNoActionButton calculationBobotKriteria;
 
-    private scrollTable scrollDataBobotKriteria;
+    private scrollTable scrollDataBobotKriteria, scrollTableCalculationKriteria;
 
     private buttonCustom buttonBack, buttonAdd, buttonDetail;
 
@@ -32,12 +33,15 @@ public class popUpDataBobotKriteria extends popUpPanel {
 
     private EnumSet<buttonType> buttonTypes = EnumSet.of(buttonType.EDIT, buttonType.DELETE);
 
+    String valueWeightBobot = loadDataBobotKriteria.getTotalBobotKriteriaText();
+    String valueBobotKriteria = loadDataBobotKriteria.getTotalResultKriteriaText();
+
     public popUpDataBobotKriteria(mainFrame parentApp, dashboardAdminView parentView) {
         super();
         this.parentApp = parentApp;
         this.parentView = parentView;
 
-        setSize(1000, 460);
+        setSize(1000, 750);
         initComponent();
     }
 
@@ -47,7 +51,13 @@ public class popUpDataBobotKriteria extends popUpPanel {
         setFont();
         handleButton();
 
+        add(totalWeightBobot);
+        add(totalBobotKriteria);
+
+        add(resultBobotLabel);
+
         add(scrollDataBobotKriteria);
+        add(scrollTableCalculationKriteria);
 
         add(headerLabel);
         add(buttonBack);
@@ -58,10 +68,14 @@ public class popUpDataBobotKriteria extends popUpPanel {
     }
 
     private void setLayout() {
-        headerLabel = new textLabel("Data Kriteria", 50, 20, 400, 80);
-        buttonBack = new buttonCustom("Back", 50, 400, 130, 40, 10);
-        buttonAdd = new buttonCustom("", 920, 40, 40, 40, 10);
-        buttonDetail = new buttonCustom("", 860, 40, 40, 40, 10);
+        headerLabel = new textLabel("Data Kriteria", 200, 5, 400, 70);
+        resultBobotLabel = new textLabel("Result Weight Kriteria", 20, 390, 400, 40);
+        buttonBack = new buttonCustom("Back", 20, 20, 130, 40, 10);
+        buttonAdd = new buttonCustom("", 920, 20, 40, 40, 10);
+        buttonDetail = new buttonCustom("", 860, 20, 40, 40, 10);
+
+        totalBobotKriteria = new textLabel(valueWeightBobot, 780, 360, 400, 40);
+        totalWeightBobot = new textLabel(valueBobotKriteria, 780, 710, 400, 40);
 
         buttonBack.setIcon(backIcon);
         buttonAdd.setIcon(addIcon);
@@ -171,18 +185,28 @@ public class popUpDataBobotKriteria extends popUpPanel {
         dataBobotKriteria.getColumnModel().getColumn(actionColumnIndex)
                 .setCellEditor(new buttonTableEditor(actionButton, buttonTypes));
 
-        scrollDataBobotKriteria = new scrollTable(dataBobotKriteria, 0, 100, 1000,
-                300);
+        scrollDataBobotKriteria = new scrollTable(dataBobotKriteria, 0, 80, 1000,
+                280);
 
+        calculationBobotKriteria = new tableNoActionButton(loadDataBobotKriteria.getAllDataBobotKriteriaNormalisasi());
+        scrollTableCalculationKriteria = new scrollTable(calculationBobotKriteria, 0, 430, 1050, 280);
+
+        setHeaderDataKriteria();
+        setHeaderBobotKriteria();
     }
 
     private void setColor() {
         headerLabel.setForeground(color.BLACK);
-
+        totalBobotKriteria.setForeground(color.BLACK);
+        totalWeightBobot.setForeground(color.BLACK);
+        resultBobotLabel.setForeground(color.BLACK);
     }
 
     private void setFont() {
         headerLabel.setFont(fontStyle.getFont(fontStyle.FontStyle.BOLD, 20f));
+        totalBobotKriteria.setFont(fontStyle.getFont(fontStyle.FontStyle.BOLD, 18f));
+        totalWeightBobot.setFont(fontStyle.getFont(fontStyle.FontStyle.BOLD, 18f));
+        resultBobotLabel.setFont(fontStyle.getFont(fontStyle.FontStyle.BOLD, 18f));
 
     }
 
@@ -207,5 +231,37 @@ public class popUpDataBobotKriteria extends popUpPanel {
                 parentView.showFormDataKriteria();
             }
         });
+    }
+
+    private void setHeaderDataKriteria() {
+
+        dataBobotKriteria.getColumnModel().getColumn(0).setMinWidth(80);
+        dataBobotKriteria.getColumnModel().getColumn(0).setMaxWidth(80);
+        dataBobotKriteria.getColumnModel().getColumn(0).setWidth(80);
+
+        dataBobotKriteria.getColumnModel().getColumn(1).setMinWidth(390);
+        dataBobotKriteria.getColumnModel().getColumn(1).setMaxWidth(390);
+        dataBobotKriteria.getColumnModel().getColumn(1).setWidth(390);
+
+        dataBobotKriteria.getColumnModel().getColumn(2).setMinWidth(80);
+        dataBobotKriteria.getColumnModel().getColumn(2).setMaxWidth(80);
+        dataBobotKriteria.getColumnModel().getColumn(2).setWidth(80);
+
+        dataBobotKriteria.getColumnModel().getColumn(3).setMinWidth(100);
+        dataBobotKriteria.getColumnModel().getColumn(3).setMaxWidth(100);
+        dataBobotKriteria.getColumnModel().getColumn(3).setWidth(100);
+
+    }
+
+    private void setHeaderBobotKriteria() {
+
+        calculationBobotKriteria.getColumnModel().getColumn(0).setMinWidth(80);
+        calculationBobotKriteria.getColumnModel().getColumn(0).setMaxWidth(80);
+        calculationBobotKriteria.getColumnModel().getColumn(0).setWidth(80);
+
+        calculationBobotKriteria.getColumnModel().getColumn(1).setMinWidth(390);
+        calculationBobotKriteria.getColumnModel().getColumn(1).setMaxWidth(390);
+        calculationBobotKriteria.getColumnModel().getColumn(1).setWidth(390);
+
     }
 }

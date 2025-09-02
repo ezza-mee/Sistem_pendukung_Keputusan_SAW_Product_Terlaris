@@ -38,6 +38,10 @@ public class datePickerField extends JPanel {
 
         initializeComponents(width, height);
         setupCalendarDialog();
+
+        if (placeholder != null && !placeholder.isEmpty()) {
+            setSelectedDate(placeholder);
+        }
     }
 
     private void initializeComponents(int width, int height) {
@@ -342,7 +346,7 @@ public class datePickerField extends JPanel {
             selectedDate.setTime(date);
             currentViewDate = (Calendar) selectedDate.clone();
 
-            SimpleDateFormat displayFormat = new SimpleDateFormat("dd.MM.yyyy");
+            SimpleDateFormat displayFormat = new SimpleDateFormat("yyyy-MM-dd");
             dateField.setText(displayFormat.format(selectedDate.getTime()));
             dateField.setForeground(color.BLACK);
 

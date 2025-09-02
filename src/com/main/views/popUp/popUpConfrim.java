@@ -15,7 +15,7 @@ public class popUpConfrim extends popUpPanel {
     private buttonCustom buttonConfrim;
 
     private appIcons appIcons = new appIcons();
-    private imageIcon confrimIcon = appIcons.getSuccessIconGreen(40, 40);
+    private imageIcon alertIcon = appIcons.getAlertRed(40, 40);
 
     public popUpConfrim(mainFrame parentFrame) {
         super();
@@ -29,7 +29,7 @@ public class popUpConfrim extends popUpPanel {
         setFont();
         setColor();
 
-        add(confrimIcon);
+        add(alertIcon);
         add(confrimLabel);
         add(messageLabel);
 
@@ -40,14 +40,14 @@ public class popUpConfrim extends popUpPanel {
     }
 
     private void setPosition() {
-        confrimLabel = new textLabel("<html><body><h2><b>Confrim Data</b></h2></body></html>", 0, 40, 400, 100);
+        confrimLabel = new textLabel("Confrim Data", 0, 40, 400, 100);
         messageLabel = new textLabel(
-                "<html><body style='text-align: center;'>Are your sure you want to Confrim the application?</body></html>",
+                "Are your sure you want to Confrim the application?",
                 0, 70, 400, 100);
         buttonCancel = new buttonCustom("No", 50, 160, 130, 40, 10);
         buttonConfrim = new buttonCustom("Yes", 220, 160, 130, 40, 10);
 
-        confrimIcon.setBounds(185, 30, 400, 40);
+        alertIcon.setBounds(185, 30, 400, 40);
     }
 
     private void setColor() {

@@ -140,7 +140,10 @@ public class convertionFormView extends contentPanel {
         buttonReset.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent ae) {
-
+                formUnitField.setSelectedItem(null);
+                toUnitField.setSelectedItem(null);
+                multiplierField.setText(null);
+                descriptionField.setText(null);
             }
         });
 
@@ -181,30 +184,32 @@ public class convertionFormView extends contentPanel {
                             contentPanel.add(descriptionEmptyLabel);
                             break;
                         case "VALID":
-                        boolean success = false;
-                        double multiplier = Double.parseDouble(stringMultiplier);
+                            boolean success = false;
+                            double multiplier = Double.parseDouble(stringMultiplier);
 
-                        if (convertionIdToEdit == -1){
-                            success = authDataConvertion.insertDataConvertion(convertionIdToEdit, formUnit, toUnit, multiplier, description);
-                            if(success){
-                                parentView.showDashboardConvertion();
-                                parentView.showSuccessPopUp("Data Convertion Successfully Saved");
+                            if (convertionIdToEdit == -1) {
+                                success = authDataConvertion.insertDataConvertion(convertionIdToEdit, formUnit, toUnit,
+                                        multiplier, description);
+                                if (success) {
+                                    parentView.showDashboardConvertion();
+                                    parentView.showSuccessPopUp("Data Convertion Successfully Saved");
+                                } else {
+                                    parentView.showFailedPopUp("Failed to Save Data Convertion");
+                                }
                             } else {
-                                parentView.showFailedPopUp("Failed to Save Data Convertion");
+                                success = authDataConvertion.updateDataConvertion(convertionIdToEdit, formUnit, toUnit,
+                                        multiplier, description);
+                                if (success) {
+                                    parentView.showDashboardConvertion();
+                                    parentView.showSuccessPopUp("Data Convertion Successfully Update");
+                                } else {
+                                    parentView.showFailedPopUp("Failed to Update Data Convertion");
+                                }
                             }
-                        } else {
-                            success = authDataConvertion.updateDataConvertion(convertionIdToEdit, formUnit, toUnit, multiplier, description);
-                            if(success){
-                                parentView.showDashboardConvertion();
-                                parentView.showSuccessPopUp("Data Convertion Successfully Update");
-                            }else {
-                                parentView.showFailedPopUp("Failed to Update Data Convertion");
-                            }
-                        }
                             break;
                     }
-                     contentPanel.revalidate();
-                contentPanel.repaint();
+                    contentPanel.revalidate();
+                    contentPanel.repaint();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

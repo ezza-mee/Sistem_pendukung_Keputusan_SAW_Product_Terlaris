@@ -32,8 +32,7 @@ public class supplierDashboardView extends contentPanel implements searchableVie
     private int quantityAllStockDataSupplier = loadDataSupplier.getAllQuantityStockDataSupplier();
     private int quantityAllOutStockDataSupplier = loadDataSupplier.getAllQuantityOutStockDataSupplier();
     private int quantityAllRejectedDataSupplier = loadDataSupplier.getAllQuantityRejectedDataSupplier();
-    private EnumSet<buttonType> buttonTypes = EnumSet.of(buttonType.EDIT,
-            buttonType.DETAIL, buttonType.APPROVE);
+    private EnumSet<buttonType> buttonTypes = EnumSet.of(buttonType.EDIT, buttonType.APPROVE);
 
     private String currentStatus = "ALL";
 

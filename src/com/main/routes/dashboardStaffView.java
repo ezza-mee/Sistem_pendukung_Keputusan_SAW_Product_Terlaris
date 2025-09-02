@@ -110,13 +110,13 @@ public class dashboardStaffView extends containerPanel {
     }
 
     public void showDashboardReportCashier() {
-        reportSupplierDashboardView dashboardReport = new reportSupplierDashboardView();
+        reportCashierDashboardView dashboardReport = new reportCashierDashboardView(this);
         lastContent = dashboardReport;
         parentDashboard.setContent(dashboardReport);
     }
 
     public void showDashboardReportSupplier() {
-        reportCashierDashboardView dashboardReport = new reportCashierDashboardView();
+        reportSupplierDashboardView dashboardReport = new reportSupplierDashboardView(this);
         lastContent = dashboardReport;
         parentDashboard.setContent(dashboardReport);
     }

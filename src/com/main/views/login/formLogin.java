@@ -11,9 +11,9 @@ import com.main.auth.sessionManager;
 import com.main.auth.utils.Role;
 import com.main.components.*;
 import com.main.components.panelApps.containerPanel;
-import com.main.models.entity.accountDataStaff;
 import com.main.models.entity.dataStaff;
 import com.main.models.staff.loadDataStaff;
+import com.main.models.staff.staffService;
 import com.main.routes.loginView;
 import com.main.routes.mainFrame;
 import com.main.services.authLogin;
@@ -256,18 +256,19 @@ public class formLogin extends containerPanel {
                         EmailField.setText(null);
                         passwordField.setText(null);
 
-                        // System.out.println("=== Session Login ===");
-                        // System.out.println("ID Account: " + sessionLogin.get().getIdAccount());
-                        // System.out.println("ID Staff: " + sessionLogin.get().getIdStaff());
-                        // System.out.println("Email: " + sessionLogin.get().getEmail());
-                        // System.out.println("Password: " + sessionLogin.get().getPassword());
-                        // System.out.println("Jobdesk: " + sessionLogin.get().getJobdesk()); // Harus
-                        // tampil!
+                         System.out.println("=== Session Login ===");
+                         System.out.println("ID Account: " + sessionLogin.get().getIdAccount());
+                         System.out.println("ID Staff: " + sessionLogin.get().getIdStaff());
+                         System.out.println("Email: " + sessionLogin.get().getEmail());
+                         System.out.println("Password: " + sessionLogin.get().getPassword());
+                         System.out.println("Jobdesk: " + sessionLogin.get().getJobdesk()); // Harus tampil!
 
                         int idStaff = sessionLogin.get().getIdStaff();
                         dataStaff staffData = loadDataStaff.getStaffById(idStaff);
                         sessionManager.setStaffData(staffData);
                         Role role = sessionLogin.getRole();
+                        staffService.staffLogin(idStaff); 
+
                         parentView.loginSuccess(role);
                         break;
                 }

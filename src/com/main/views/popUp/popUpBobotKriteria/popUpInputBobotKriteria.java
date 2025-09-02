@@ -120,6 +120,15 @@ public class popUpInputBobotKriteria extends popUpPanel {
     }
 
     private void handleButton() {
+        buttonReset.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent ae) {
+                kriteriaField.setText(null);
+                weightField.setText(null);
+                typeField.setSelectedItem(null);
+            }
+        });
+
         buttonBack.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent ae) {

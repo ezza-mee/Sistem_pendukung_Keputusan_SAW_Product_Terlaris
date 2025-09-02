@@ -184,6 +184,19 @@ public class staffFormView extends contentPanel {
             }
         });
 
+        buttonReset.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent ae) {
+                nameField.setText(null);
+                emailField.setText(null);
+                phoneField.setText(null);
+                genderField.setSelectedItem(null);
+                jobdeskField.setSelectedItem(null);
+                addresField.setText(null);
+
+            }
+        });
+
         buttonSave.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent ae) {

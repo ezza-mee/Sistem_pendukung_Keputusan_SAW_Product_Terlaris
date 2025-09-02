@@ -192,7 +192,7 @@ public class homeDashboardView extends contentPanel {
 
         dateField = new datePickerField(20, 20, 300, 40, today);
 
-        dataRangking = new tableNoActionButton(loadDataRangking.getAllDataRangking());
+        dataRangking = new tableNoActionButton(loadDataRangking.getAllDataRangkingByPeriode(selectedPriode));
         scrollDataRangking = new scrollTable(dataRangking, 0, 80, 1050, 300);
 
         // content home for staff supplier

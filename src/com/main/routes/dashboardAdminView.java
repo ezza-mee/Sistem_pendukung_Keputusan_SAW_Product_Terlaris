@@ -38,7 +38,6 @@ import com.main.views.popUp.popUpSuccess;
 import com.main.views.popUp.popUpBobotKriteria.popUpBobotKriteria;
 import com.main.views.popUp.popUpBobotKriteria.popUpDataBobotKriteria;
 import com.main.views.popUp.popUpBobotKriteria.popUpInputBobotKriteria;
-import com.main.views.popUp.popUpEditStatusTable.popUpEditStatusTable;
 import com.main.views.popUp.popUpStaff.popUpDetailDataStaff;
 import com.main.views.popUp.popUpStaff.popUpInputAccountStaff;
 import com.main.views.popUp.popUpSupplier.popUpEditStatusSupplier;
@@ -70,7 +69,7 @@ public class dashboardAdminView extends containerPanel {
         parentDashboard = new parentDashboardAdmin(this, role);
         add(parentDashboard);
 
-        parentDashboard.getNavbar().showCalculationView();
+        parentDashboard.getNavbar().showHomeView();
     }
 
     public void showDashboardHome() {
@@ -296,7 +295,7 @@ public class dashboardAdminView extends containerPanel {
     }
 
     public void resetLastContent() {
-        parentDashboard.getNavbar().showCalculationView();
+        parentDashboard.getNavbar().showHomeView();
         lastContent = null;
     }
 

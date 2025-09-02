@@ -202,22 +202,10 @@ public class productFormView extends contentPanel {
         buttonReset.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent ae) {
-                popUpConfrim messagePopUp = parentView
-                        .showConfrimPopUp("Do you want to update the composition as well?");
-
-                messagePopUp.getButtonConfrim().addActionListener(new java.awt.event.ActionListener() {
-                    @Override
-                    public void actionPerformed(java.awt.event.ActionEvent ae) {
-                        parentApp.hideGlassNotificationPanel();
-                    }
-                });
-
-                messagePopUp.getButtonCancel().addActionListener(new java.awt.event.ActionListener() {
-                    @Override
-                    public void actionPerformed(java.awt.event.ActionEvent ae) {
-                        parentApp.hideGlassNotificationPanel();
-                    }
-                });
+                nameProductField.setText(null);
+                priceProductField.setText(null);
+                categoryProductField.setSelectedItem(null);
+                descriptionProductField.setText(null);
             }
         });
 
