@@ -35,9 +35,9 @@ import com.main.views.popUp.popUpConfrim;
 import com.main.views.popUp.popUpFailed;
 import com.main.views.popUp.popUpLogout;
 import com.main.views.popUp.popUpSuccess;
-import com.main.views.popUp.popUpBobotKriteria.popUpBobotKriteria;
-import com.main.views.popUp.popUpBobotKriteria.popUpDataBobotKriteria;
-import com.main.views.popUp.popUpBobotKriteria.popUpInputBobotKriteria;
+import com.main.views.popUp.popUpDataKriteria.popUpBobotKriteria;
+import com.main.views.popUp.popUpDataKriteria.popUpDataKriteria;
+import com.main.views.popUp.popUpDataKriteria.popUpInputKriteria;
 import com.main.views.popUp.popUpStaff.popUpDetailDataStaff;
 import com.main.views.popUp.popUpStaff.popUpInputAccountStaff;
 import com.main.views.popUp.popUpSupplier.popUpEditStatusSupplier;
@@ -177,14 +177,14 @@ public class dashboardAdminView extends containerPanel {
     }
 
     public void showDashboardBobotKriteria() {
-        popUpDataBobotKriteria dashboardBobotKriteria = new popUpDataBobotKriteria(parentApp, this);
+        popUpDataKriteria dashboardBobotKriteria = new popUpDataKriteria(parentApp, this);
         parentDashboard.setContent(restoreLastContent());
         parentApp.showDashboardPopUp(dashboardBobotKriteria);
 
     }
 
     public void showFormDataKriteria() {
-        popUpInputBobotKriteria popUpBobotKriteria = new popUpInputBobotKriteria(parentApp, this);
+        popUpInputKriteria popUpBobotKriteria = new popUpInputKriteria(parentApp, this);
 
         if (dataBobotKriteriaToEdit != null) {
             popUpBobotKriteria.setFormBobotKriteria(dataBobotKriteriaToEdit);

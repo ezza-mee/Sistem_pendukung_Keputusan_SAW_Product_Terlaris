@@ -1,0 +1,47 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "admin",
+      "request": "launch",
+      "mainClass": "com.main.App.admin",
+      "projectName": "tujuLangit-Java-App_fe964b4c"
+    },
+    {
+      "type": "java",
+      "name": "staff",
+      "request": "launch",
+      "mainClass": "com.main.App.staff",
+      "projectName": "tujuLangit-Java-App_83d99fd4"
+    },
+    {
+      "type": "java",
+      "name": "admin",
+      "request": "launch",
+      "mainClass": "com.main.App.admin",
+      "projectName": "tujuLangit-Java-App_83d99fd4"
+    },
+    {
+      "type": "java",
+      "name": "staff",
+      "request": "launch",
+      "mainClass": "com.main.App.staff",
+      "projectName": "tujuLangit-Java-App_9435d15f"
+    },
+    {
+      "type": "java",
+      "name": "admin",
+      "request": "launch",
+      "mainClass": "com.main.App.admin",
+      "projectName": "tujuLangit-Java-App_9435d15f"
+    },
+    {
+      "type": "java",
+      "name": "Run app",
+      "request": "launch",
+      "mainClass": "com.main.App.apps",
+      "classPaths": ["bin", "lib/*"]
+    }
+  ]
+}

@@ -183,6 +183,6 @@ public class appIcons {
     }
 
     public imageIcon getAlertRed(int width, int height) {
-        return loadIcon("src/com/main/resources/images/alert.png", width, height);
+        return loadIcon("/com/main/resources/images/alert.png", width, height);
     }
 }
