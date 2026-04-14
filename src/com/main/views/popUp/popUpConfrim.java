@@ -40,12 +40,12 @@ public class popUpConfrim extends popUpPanel {
     }
 
     private void setPosition() {
-        confrimLabel = new textLabel("Confrim Data", 0, 40, 400, 100);
+        confrimLabel = new textLabel("Konfirmasi Data", 0, 40, 400, 100);
         messageLabel = new textLabel(
-                "Are your sure you want to Confrim the application?",
+                "Pesan Pop Up",
                 0, 70, 400, 100);
-        buttonCancel = new buttonCustom("No", 50, 160, 130, 40, 10);
-        buttonConfrim = new buttonCustom("Yes", 220, 160, 130, 40, 10);
+        buttonCancel = new buttonCustom("Tidak", 50, 160, 130, 40, 10);
+        buttonConfrim = new buttonCustom("Iya", 220, 160, 130, 40, 10);
 
         alertIcon.setBounds(185, 30, 400, 40);
     }

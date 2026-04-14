@@ -47,7 +47,6 @@ public class supplierDashboardView extends contentPanel implements searchableVie
 
     private void setFont() {
         headerLabel.setFont(fontStyle.getFont(fontStyle.FontStyle.BOLD, 30f));
-
         allSupplierLabel.setLinkLabelFont(fontStyle.getFont(fontStyle.FontStyle.BOLD, 14f));
         pendingSupplierLabel.setLinkLabelFont(fontStyle.getFont(fontStyle.FontStyle.BOLD, 14f));
         stockSupplierLabel.setLinkLabelFont(fontStyle.getFont(fontStyle.FontStyle.BOLD, 14f));

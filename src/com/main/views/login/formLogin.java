@@ -192,7 +192,6 @@ public class formLogin extends containerPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 isPasswordVisible[0] = false;
-                passwordField.setEchoChar('•');
                 passwordField.setFont(fontStyle.getFont(fontStyle.FontStyle.SEMIBOLD, 13f));
 
                 showPasswordIcon.setVisible(false);

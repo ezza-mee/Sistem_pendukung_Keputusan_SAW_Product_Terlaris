@@ -61,6 +61,11 @@ public class comboBox<T> extends JComboBox<T> {
         });
     }
 
+    @Override
+    public T getSelectedItem() {
+        return (T) super.getSelectedItem();
+    }
+
     public void setPlaceholder(String placeholder) {
         this.placeholder = placeholder;
         repaint();

@@ -5,8 +5,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.main.controller.appsController;
-import com.main.views.popUp.popUpBobotKriteria.popUpDataBobotKriteria;
-import com.main.views.popUp.popUpBobotKriteria.popUpInputBobotKriteria;
+import com.main.views.popUp.popUpDataKriteria.popUpDataKriteria;
+import com.main.views.popUp.popUpDataKriteria.popUpInputKriteria;
 
 public class admin {
     public static void main(String[] args) {
