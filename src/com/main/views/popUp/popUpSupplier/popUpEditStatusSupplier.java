@@ -71,7 +71,7 @@ public class popUpEditStatusSupplier extends popUpPanel {
         buttonCancel.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent ae) {
-                parentApp.hideGlassNotificationPanel();
+                parentApp.hideGlassFormPanel();
             }
         });
 

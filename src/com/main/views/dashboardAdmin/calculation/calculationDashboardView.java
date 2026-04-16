@@ -15,7 +15,7 @@ import com.main.routes.dashboardAdminView;
 public class calculationDashboardView extends contentPanel {
 
     private dashboardAdminView parentView;
-    private panelRounded headerPanel, contentPanel, tablePanel;
+    private panelRounded headerPanel, navigationPanel, contentPanel, tablePanel;
     private textLabel headerLabel;
     private buttonCustom buttonAddBobot;
     private tableNoActionButton dataAlternatif, dataNormalisation, dataRangking;
@@ -31,11 +31,15 @@ public class calculationDashboardView extends contentPanel {
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     private String today = sdf.format(new Date());
 
+    private appIcons appIcons = new appIcons();
+    private imageIcon addIcon = appIcons.getAddIconWhite(20, 20);
+
     private String currentCalculation = "ALTERNATIF";
 
     private void setColor() {
         headerLabel.setForeground(color.BLACK);
         headerPanel.setBackground(color.WHITE);
+        navigationPanel.setBackground(color.WHITE);
         contentPanel.setBackground(color.WHITE);
     }
 
@@ -64,53 +68,59 @@ public class calculationDashboardView extends contentPanel {
         headerPanel.add(dateField);
         headerPanel.add(buttonAddBobot);
 
-        contentPanel.add(dataAlternatifLink);
-        contentPanel.add(dataNormalisationLink);
-        contentPanel.add(dataRangkingLink);
-        contentPanel.add(dataCalculationField);
+        navigationPanel.add(dataAlternatifLink);
+        navigationPanel.add(dataNormalisationLink);
+        navigationPanel.add(dataRangkingLink);
+        navigationPanel.add(dataCalculationField);
+
         contentPanel.add(tablePanel);
 
         add(headerLabel);
         add(headerPanel);
+        add(navigationPanel);
         add(contentPanel);
 
         setVisible(true);
     }
 
     private void setLayout() {
-        headerLabel = new textLabel("Data Calculation", 40, 0, 300, 80);
-        headerPanel = new panelRounded(40, 80, 1050, 110, 10, 10);
-        contentPanel = new panelRounded(40, 220, 1050, 410, 10, 10);
-        tablePanel = new panelRounded(0, 60, 1050, 300, 0, 0);
-        dateField = new datePickerField(40, 40, 300, 40, today);
+        headerLabel = new textLabel("Data Perhitungan", 40, 0, 300, 80);
+        headerPanel = new panelRounded(40, 80, 1050, 80, 10, 10);
+        navigationPanel = new panelRounded(40, 180, 1050, 50, 10, 10);
+        contentPanel = new panelRounded(40, 250, 1050, 380, 10, 10);
+        tablePanel = new panelRounded(0, 0, 1050, 380, 0, 0);
+
+        dateField = new datePickerField(40, 20, 300, 40, today);
         dateField.setSelectedDate(today);
-        buttonAddBobot = new buttonCustom("Add Bobot", 870, 35, 135, 40, 10);
 
-        dataAlternatifLink = new linkLabel("Data Alternatif", 40, 20, 110, 30);
-        dataNormalisationLink = new linkLabel("Data Normalisation", 190, 20, 150, 30);
-        dataRangkingLink = new linkLabel("Data Rangking", 380, 20, 110, 30);
+        buttonAddBobot = new buttonCustom("     " + "Kriteria", 890, 20, 120, 40, 10);
+        buttonAddBobot.setIcon(addIcon);
 
-        String[] dataCalculationItems = { null, "Calculation", "Output" };
-        dataCalculationField = new comboBox<>(dataCalculationItems, 540, 20, 200, 30, 10);
-        dataCalculationField.setPlaceholder("Select Data");
+        dataAlternatifLink = new linkLabel("Data Alternatif", 40, 10, 110, 30);
+        dataNormalisationLink = new linkLabel("Data Normalisasi", 190, 10, 130, 30);
+        dataRangkingLink = new linkLabel("Data Rangking", 360, 10, 110, 30);
+
+        String[] dataCalculationItems = { null, "Perhitungan", "Hasil" };
+        dataCalculationField = new comboBox<>(dataCalculationItems, 860, 10, 150, 30, 10);
+        dataCalculationField.setPlaceholder("Pilih Data");
 
         dataAlternatif = new tableNoActionButton(loadDataAlternatif.getAllDataAlternatifByPeriode(selectedPriode));
-        scrollDataAlternatif = new scrollTable(dataAlternatif, 0, 0, 1050, 300);
+        scrollDataAlternatif = new scrollTable(dataAlternatif, 0, 0, 1050, 380);
 
         dataNormalisation = new tableNoActionButton(
                 loadDataNormalisation.getAllDataNormalisationByPeriode(selectedPriode));
-        scrollDataNormalisation = new scrollTable(dataNormalisation, 0, 0, 1050, 300);
+        scrollDataNormalisation = new scrollTable(dataNormalisation, 0, 0, 1050, 380);
 
         dataRangking = new tableNoActionButton(loadDataRangking.getAllDataRangkingByPeriode(selectedPriode));
-        scrollDataRangking = new scrollTable(dataRangking, 0, 0, 1050, 300);
+        scrollDataRangking = new scrollTable(dataRangking, 0, 0, 1050, 380);
 
         calculationNormalisation = new tableNoActionButton(
                 loadDataNormalisation.getAllDataNormalisationWithFormula(selectedPriode));
-        scrollCalculationNormalisation = new scrollTable(calculationNormalisation, 0, 0, 1050, 300);
+        scrollCalculationNormalisation = new scrollTable(calculationNormalisation, 0, 0, 1050, 380);
 
         calculationRangking = new tableNoActionButton(
                 loadDataRangking.getAllDataRangkingWithNormalizedWeightByPeriode(selectedPriode));
-        scrollCalculationRangking = new scrollTable(calculationRangking, 0, 0, 1050, 300);
+        scrollCalculationRangking = new scrollTable(calculationRangking, 0, 0, 1050, 380);
 
     }
 
@@ -231,13 +241,13 @@ public class calculationDashboardView extends contentPanel {
             String selected = (String) dataCalculationField.getSelectedItem();
 
             if (dataNormalisationLink.isActive()) {
-                if ("Calculation".equals(selected)) {
+                if ("Perhitungan".equals(selected)) {
                     loadTableCalculationNormalisation(selectedPriode);
                 } else {
                     loadTableNormalisation(selectedPriode);
                 }
             } else if (dataRangkingLink.isActive()) {
-                if ("Calculation".equals(selected)) {
+                if ("Perhitungan".equals(selected)) {
                     loadTableCalculationRangking(selectedPriode);
                 } else {
                     loadTableRangking(selectedPriode);
@@ -394,7 +404,7 @@ public class calculationDashboardView extends contentPanel {
         dataAlternatif.getColumnModel().getColumn(1).setWidth(0);
 
         dataAlternatif.getColumnModel().getColumn(2).setMinWidth(300);
-        dataAlternatif.getColumnModel().getColumn(2).setMaxWidth(0);
+        dataAlternatif.getColumnModel().getColumn(2).setMaxWidth(300);
         dataAlternatif.getColumnModel().getColumn(2).setWidth(300);
 
         dataAlternatif.getColumnModel().getColumn(3).setMinWidth(100);
@@ -421,13 +431,13 @@ public class calculationDashboardView extends contentPanel {
 
     private void setHeaderTableNormalisation() {
 
-        dataNormalisation.getColumnModel().getColumn(0).setMinWidth(80);
-        dataNormalisation.getColumnModel().getColumn(0).setMaxWidth(80);
-        dataNormalisation.getColumnModel().getColumn(0).setWidth(80);
+        dataNormalisation.getColumnModel().getColumn(0).setMinWidth(0);
+        dataNormalisation.getColumnModel().getColumn(0).setMaxWidth(0);
+        dataNormalisation.getColumnModel().getColumn(0).setWidth(0);
 
-        dataNormalisation.getColumnModel().getColumn(1).setMinWidth(0);
-        dataNormalisation.getColumnModel().getColumn(1).setMaxWidth(0);
-        dataNormalisation.getColumnModel().getColumn(1).setWidth(0);
+        dataNormalisation.getColumnModel().getColumn(1).setMinWidth(80);
+        dataNormalisation.getColumnModel().getColumn(1).setMaxWidth(80);
+        dataNormalisation.getColumnModel().getColumn(1).setWidth(80);
 
         dataNormalisation.getColumnModel().getColumn(7).setMinWidth(0);
         dataNormalisation.getColumnModel().getColumn(7).setMaxWidth(0);

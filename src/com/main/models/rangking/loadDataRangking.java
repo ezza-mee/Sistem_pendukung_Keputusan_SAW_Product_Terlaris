@@ -15,7 +15,7 @@ import com.main.models.connectionDatabase;
 public class loadDataRangking {
     public static DefaultTableModel getAllDataRangkingByPeriode(String periode) {
         String[] dataHeader = {
-                "ID", "ID Product", "Product", "score", "rank", "Periode", "Last Update"
+                "ID", "ID", "Produk", "Score", "Rangking", "Periode", "Last Update"
         };
 
         DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
@@ -29,10 +29,10 @@ public class loadDataRangking {
 
             while (resultData.next()) {
                 Object[] rowData = {
-                        "DK00" + resultData.getInt("idRangking"),
+                        "RK00" + resultData.getInt("idRangking"),
                         resultData.getInt("idNormalisation"),
                         resultData.getString("product"),
-                        String.format("%.2f", resultData.getDouble("score")),
+                        String.format("%.3f", resultData.getDouble("score")),
                         resultData.getInt("rank"),
                         resultData.getString("periode"),
                         resultData.getString("createAt")
@@ -47,7 +47,7 @@ public class loadDataRangking {
 
     public static DefaultTableModel getAllDataRangkingWithNormalizedWeightByPeriode(String periode) {
         String[] dataHeader = {
-                "ID", "Product", "Calculation", "Score", "Rank", "Periode", "Last Update"
+                "ID", "Produk", "Perhitungan", "Score", "Ranking", "Periode", "Last Update"
         };
 
         DefaultTableModel tm = new DefaultTableModel(null, dataHeader);

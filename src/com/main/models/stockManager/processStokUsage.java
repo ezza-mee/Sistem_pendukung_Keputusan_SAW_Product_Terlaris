@@ -77,7 +77,7 @@ public class processStokUsage {
                 updateStmt.executeUpdate();
 
                 // Insert usage log
-                String insertLogQuery = "INSERT INTO tbl_supplier_u\n" +
+                String insertLogQuery = "INSERT INTO tbl_supplier_usage_log\n" +
                         "(idSupplier, idProduct, idComposition, idTransaction, date, ingredient, amountUsed, unit, product)\n"
                         +
                         "VALUES (?, ?, ?, ?, NOW(), ?, ?, ?, ?)";
