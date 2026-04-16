@@ -13,7 +13,7 @@ public class navigationDashboardView extends navigationPanel {
     private navigation navHome = new navigation(
             appIcons.getHomeIconDefault(25, 25),
             appIcons.getHomeIconHover(25, 25),
-            "Home",
+            "Beranda",
             70
 
     );
@@ -21,7 +21,7 @@ public class navigationDashboardView extends navigationPanel {
     private navigation navProduct = new navigation(
             appIcons.getProductIconDefault(25, 25),
             appIcons.getProductIconHover(25, 25),
-            "Product",
+            "Produk",
             70 + 50
 
     );
@@ -37,7 +37,7 @@ public class navigationDashboardView extends navigationPanel {
     private navigation navTable = new navigation(
             appIcons.getTableIconDefault(25, 25),
             appIcons.getTableIconHover(25, 25),
-            "Table",
+            "Meja",
             70 + 50 + 50 + 50
 
     );
@@ -45,7 +45,7 @@ public class navigationDashboardView extends navigationPanel {
     private navigation navTransaction = new navigation(
             appIcons.getTransactionIconDefault(25, 25),
             appIcons.getTransactionIconHover(25, 25),
-            "Transaction",
+            "Transaksi",
             70 + 50 + 50 + 50 + 50
 
     );
@@ -53,7 +53,7 @@ public class navigationDashboardView extends navigationPanel {
     private navigation navConvertion = new navigation(
             appIcons.getConvertionIconDefault(25, 25),
             appIcons.getConvertionIconHover(25, 25),
-            "Convertion",
+            "Conversi",
             70 + 50 + 50 + 50 + 50 + 50
 
     );
@@ -61,7 +61,7 @@ public class navigationDashboardView extends navigationPanel {
     private navigation navCalculation = new navigation(
             appIcons.getCalculationIconDefault(25, 25),
             appIcons.getCalculationIconHover(25, 25),
-            "Calculation",
+            "Perhitungan",
             70 + 50 + 50 + 50 + 50 + 50 + 50
 
     );
@@ -85,7 +85,7 @@ public class navigationDashboardView extends navigationPanel {
     private navigation navLogout = new navigation(
             appIcons.getLogoutIconDefault(25, 25),
             appIcons.getLogoutIconHover(25, 25),
-            "Logout",
+            "Keluar",
             70 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50 + 50
 
     );

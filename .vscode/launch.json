@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "staff",
+      "request": "launch",
+      "mainClass": "com.main.App.staff",
+      "projectName": "tujuLangit-Java-App_fe964b4c"
+    },
+    {
+      "type": "java",
       "name": "admin",
       "request": "launch",
       "mainClass": "com.main.App.admin",

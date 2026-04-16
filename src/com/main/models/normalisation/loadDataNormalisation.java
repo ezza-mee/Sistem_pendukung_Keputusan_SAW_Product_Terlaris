@@ -17,13 +17,14 @@ import com.main.models.connectionDatabase;
 public class loadDataNormalisation {
         public static DefaultTableModel getAllDataNormalisationByPeriode(String periode) {
                 String[] dataHeader = {
-                                "ID", "ID", "Product", "K1", "K2",
+                                "ID", "ID", "Produk", "K1", "K2",
                                 "K3", "K4", "Periode", "Last Update"
                 };
 
                 DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
 
-                String query = "SELECT * FROM tbl_data_normalisation WHERE periode = ?";
+                String query = "SELECT * FROM tbl_data_normalisation " +
+                                "WHERE periode = ? ORDER BY idAlternatif ASC";
                 try (Connection conn = connectionDatabase.getConnection();
                                 PreparedStatement state = conn.prepareStatement(query)) {
 
@@ -32,16 +33,16 @@ public class loadDataNormalisation {
 
                         while (resultData.next()) {
                                 Object[] rowData = {
-                                                "DK00" + resultData.getInt("idNormalisation"),
-                                                resultData.getInt("idAlternatif"),
+                                                resultData.getInt("idNormalisation"),
+                                                "DK00" + resultData.getInt("idAlternatif"),
                                                 resultData.getString("product"),
-                                                String.format("%.2f", resultData.getDouble(
+                                                String.format("%.3f", resultData.getDouble(
                                                                 "K1")),
-                                                String.format("%.2f", resultData.getDouble(
+                                                String.format("%.3f", resultData.getDouble(
                                                                 "K2")),
-                                                String.format("%.2f", resultData.getDouble(
+                                                String.format("%.3f", resultData.getDouble(
                                                                 "K3")),
-                                                String.format("%.2f", resultData.getDouble(
+                                                String.format("%.3f", resultData.getDouble(
                                                                 "K4")),
                                                 resultData.getString("periode"),
                                                 resultData.getString("createAt")
@@ -55,101 +56,127 @@ public class loadDataNormalisation {
         }
 
         public static DefaultTableModel getAllDataNormalisationWithFormula(String periode) {
+
                 String[] dataHeader = {
-                                "ID", "ID", "Product", "K1", "K2",
-                                "K3", "K4", "Periode", "Last Update"
+                                "ID", "ID", "Produk", "K1", "K2", "K3", "K4", "Periode", "Last Update"
                 };
+
                 DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
 
-                String query = "SELECT * FROM tbl_data_alternatif WHERE periode = ? ORDER BY idAlternatif ASC";
+                try (Connection conn = connectionDatabase.getConnection()) {
 
-                try (Connection conn = connectionDatabase.getConnection();
-                                PreparedStatement state = conn.prepareStatement(query)) {
+                        // 1. Ambil data alternatif (untuk nilai asli K1–K4)
+                        String queryAlt = "SELECT idAlternatif, product, K1, K2, K3, K4 " +
+                                        "FROM tbl_data_alternatif WHERE DATE(periode) = ?";
+                        PreparedStatement stmtAlt = conn.prepareStatement(queryAlt);
+                        stmtAlt.setString(1, periode);
+                        ResultSet rsAlt = stmtAlt.executeQuery();
 
-                        state.setString(1, periode);
+                        List<Map<String, Object>> alternatifList = new ArrayList<>();
 
-                        try (ResultSet rs = state.executeQuery()) {
+                        double[] max = new double[4];
+                        double[] min = new double[] {
+                                        Double.MAX_VALUE, Double.MAX_VALUE, Double.MAX_VALUE, Double.MAX_VALUE
+                        };
 
-                                List<Map<String, Object>> alternatifList = new ArrayList<>();
+                        while (rsAlt.next()) {
+                                Map<String, Object> alt = new HashMap<>();
 
-                                double[] max = { Double.MIN_VALUE, Double.MIN_VALUE, Double.MIN_VALUE,
-                                                Double.MIN_VALUE };
-                                double[] min = { Double.MAX_VALUE, Double.MAX_VALUE, Double.MAX_VALUE,
-                                                Double.MAX_VALUE };
+                                int id = rsAlt.getInt("idAlternatif");
+                                alt.put("idAlternatif", id);
+                                alt.put("product", rsAlt.getString("product"));
 
-                                while (rs.next()) {
-                                        Map<String, Object> alt = new HashMap<>();
-                                        alt.put("idAlternatif", rs.getInt("idAlternatif"));
-                                        alt.put("product", rs.getString("product"));
-                                        alt.put("createAt", rs.getString("createAt"));
+                                for (int i = 0; i < 4; i++) {
+                                        double val = rsAlt.getDouble("K" + (i + 1));
+                                        alt.put("K" + (i + 1), val);
 
-                                        double k1 = rs.getDouble("K1");
-                                        double k2 = rs.getDouble("K2");
-                                        double k3 = rs.getDouble("K3");
-                                        double k4 = rs.getDouble("K4");
-
-                                        alt.put("K1", k1);
-                                        alt.put("K2", k2);
-                                        alt.put("K3", k3);
-                                        alt.put("K4", k4);
-
-                                        max[0] = Math.max(max[0], k1);
-                                        max[1] = Math.max(max[1], k2);
-                                        max[2] = Math.max(max[2], k3);
-                                        max[3] = Math.max(max[3], k4);
-
-                                        min[0] = Math.min(min[0], k1);
-                                        min[1] = Math.min(min[1], k2);
-                                        min[2] = Math.min(min[2], k3);
-                                        min[3] = Math.min(min[3], k4);
-
-                                        alternatifList.add(alt);
+                                        max[i] = Math.max(max[i], val);
+                                        min[i] = Math.min(min[i], val);
                                 }
 
-                                // ambil tipe kriteria
-                                List<String> tipeList = new ArrayList<>();
-                                try (Statement st = conn.createStatement();
-                                                ResultSet rsKrit = st.executeQuery(
-                                                                "SELECT type FROM tbl_data_kriteria ORDER BY idKriteria ASC")) {
-                                        while (rsKrit.next()) {
-                                                tipeList.add(rsKrit.getString("type").trim().toLowerCase());
-                                        }
+                                alternatifList.add(alt);
+                        }
+
+                        // 2. Ambil tipe kriteria
+                        List<String> tipeList = new ArrayList<>();
+                        try (Statement st = conn.createStatement();
+                                        ResultSet rsKrit = st.executeQuery(
+                                                        "SELECT type FROM tbl_data_kriteria ORDER BY idKriteria ASC")) {
+
+                                while (rsKrit.next()) {
+                                        tipeList.add(rsKrit.getString("type").trim().toLowerCase());
                                 }
+                        }
 
-                                // generate rumus + hasil normalisasi
-                                for (Map<String, Object> alt : alternatifList) {
-                                        double k1 = (double) alt.get("K1");
-                                        double k2 = (double) alt.get("K2");
-                                        double k3 = (double) alt.get("K3");
-                                        double k4 = (double) alt.get("K4");
+                        // 3. Ambil hasil normalisasi dari DB (hasil SAW resmi)
+                        String queryNorm = "SELECT * FROM tbl_data_normalisation "
+                                        + "WHERE periode = ? ORDER BY idAlternatif ASC";
+                        PreparedStatement stmtNorm = conn.prepareStatement(queryNorm);
+                        stmtNorm.setString(1, periode);
+                        ResultSet rsNorm = stmtNorm.executeQuery();
 
-                                        double normK1 = tipeList.get(0).equals("benefit") ? k1 / max[0] : min[0] / k1;
-                                        double normK2 = tipeList.get(1).equals("benefit") ? k2 / max[1] : min[1] / k2;
-                                        double normK3 = tipeList.get(2).equals("benefit") ? k3 / max[2] : min[2] / k3;
-                                        double normK4 = tipeList.get(3).equals("benefit") ? k4 / max[3] : min[3] / k4;
+                        Map<Integer, Map<String, Object>> normMap = new HashMap<>();
 
-                                        String rumusK1 = String.format("%.2f / %.2f = %.3f", k1,
-                                                        tipeList.get(0).equals("benefit") ? max[0] : k1, normK1);
-                                        String rumusK2 = String.format("%.2f / %.2f = %.3f", k2,
-                                                        tipeList.get(1).equals("benefit") ? max[1] : k2, normK2);
-                                        String rumusK3 = String.format("%.2f / %.2f = %.3f", k3,
-                                                        tipeList.get(2).equals("benefit") ? max[2] : k3, normK3);
-                                        String rumusK4 = String.format("%.2f / %.2f = %.3f", k4,
-                                                        tipeList.get(3).equals("benefit") ? max[3] : k4, normK4);
+                        while (rsNorm.next()) {
+                                Map<String, Object> norm = new HashMap<>();
+                                norm.put("K1", rsNorm.getDouble("K1"));
+                                norm.put("K2", rsNorm.getDouble("K2"));
+                                norm.put("K3", rsNorm.getDouble("K3"));
+                                norm.put("K4", rsNorm.getDouble("K4"));
+                                norm.put("createAt", rsNorm.getString("createAt"));
 
-                                        Object[] rowData = {
-                                                        "DK00" + alt.get("idAlternatif"),
-                                                        alt.get("idAlternatif"),
-                                                        alt.get("product"),
-                                                        rumusK1,
-                                                        rumusK2,
-                                                        rumusK3,
-                                                        rumusK4,
-                                                        periode,
-                                                        alt.get("createAt")
-                                        };
-                                        tm.addRow(rowData);
-                                }
+                                normMap.put(rsNorm.getInt("idAlternatif"), norm);
+                        }
+
+                        // 4. Gabungkan & tampilkan
+                        for (Map<String, Object> alt : alternatifList) {
+
+                                int idAlt = (int) alt.get("idAlternatif");
+                                Map<String, Object> norm = normMap.get(idAlt);
+
+                                if (norm == null)
+                                        continue;
+
+                                double k1 = (double) alt.get("K1");
+                                double k2 = (double) alt.get("K2");
+                                double k3 = (double) alt.get("K3");
+                                double k4 = (double) alt.get("K4");
+
+                                double n1 = (double) norm.get("K1");
+                                double n2 = (double) norm.get("K2");
+                                double n3 = (double) norm.get("K3");
+                                double n4 = (double) norm.get("K4");
+
+                                // Rumus (SUDAH BENAR untuk benefit & cost)
+                                String rumusK1 = tipeList.get(0).equals("benefit")
+                                                ? String.format("%.0f / %.0f = %.3f", k1, max[0], n1)
+                                                : String.format("%.0f / %.0f = %.3f", min[0], k1, n1);
+
+                                String rumusK2 = tipeList.get(1).equals("benefit")
+                                                ? String.format("%.0f / %.0f = %.3f", k2, max[1], n2)
+                                                : String.format("%.0f / %.0f = %.3f", min[1], k2, n2);
+
+                                String rumusK3 = tipeList.get(2).equals("benefit")
+                                                ? String.format("%.0f / %.0f = %.3f", k3, max[2], n3)
+                                                : String.format("%.0f / %.0f = %.3f", min[2], k3, n3);
+
+                                String rumusK4 = tipeList.get(3).equals("benefit")
+                                                ? String.format("%.0f / %.0f = %.3f", k4, max[3], n4)
+                                                : String.format("%.0f / %.0f = %.3f", min[3], k4, n4);
+
+                                Object[] rowData = {
+                                                "DK00" + idAlt,
+                                                idAlt,
+                                                alt.get("product"),
+                                                rumusK1,
+                                                rumusK2,
+                                                rumusK3,
+                                                rumusK4,
+                                                periode,
+                                                norm.get("createAt")
+                                };
+
+                                tm.addRow(rowData);
                         }
 
                 } catch (Exception e) {
