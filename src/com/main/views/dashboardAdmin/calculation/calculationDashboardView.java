@@ -138,14 +138,34 @@ public class calculationDashboardView extends contentPanel {
             public void actionPerformed(java.awt.event.ActionEvent ae) {
                 try {
                     String fullDate = dateField.getSelectedDate();
+                    String selected = (String) dataCalculationField.getSelectedItem();
                     if (fullDate != null) {
                         Date parsedDate = new SimpleDateFormat("yyyy-MM-dd").parse(fullDate);
                         selectedPriode = new SimpleDateFormat("yyyy-MM-dd").format(parsedDate);
-                        loadTableAlternatif(selectedPriode);
-                        loadTableNormalisation(selectedPriode);
-                        loadTableRangking(selectedPriode);
+                        switch (currentCalculation) {
+
+                            case "ALTERNATIF":
+                                loadTableAlternatif(selectedPriode);
+                                break;
+
+                            case "NORMALISATION":
+                                if ("Perhitungan".equals(selected)) {
+                                    loadTableCalculationNormalisation(selectedPriode);
+                                } else {
+                                    loadTableNormalisation(selectedPriode);
+                                }
+                                break;
+
+                            case "RANGKING":
+                                if ("Perhitungan".equals(selected)) {
+                                    loadTableCalculationRangking(selectedPriode);
+                                } else {
+                                    loadTableRangking(selectedPriode);
+                                }
+                                break;
+                        }
                     } else {
-                        parentView.showFailedPopUp("Please select a date to display the criteria data");
+                        parentView.showFailedPopUp("Pilih tanggal untuk melihat Data");
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -254,8 +274,6 @@ public class calculationDashboardView extends contentPanel {
                 }
             }
 
-            System.out.println("Priode: " + selectedPriode + ", Filter: " + selected);
-
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -298,6 +316,7 @@ public class calculationDashboardView extends contentPanel {
         tablePanel.revalidate();
         tablePanel.repaint();
 
+        setHeaderTableAlternatif();
     }
 
     private void loadTableNormalisation(String periode) {

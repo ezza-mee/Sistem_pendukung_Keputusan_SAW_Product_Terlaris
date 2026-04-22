@@ -1,10 +1,12 @@
 package com.main.views.dashboardStaff.transaction;
 
 import java.awt.Image;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Date;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -383,13 +385,16 @@ public class transactionFormView extends contentPanel implements searchableView 
                     int quantity = Integer.parseInt(productQuantities.get(idProduct).getText());
                     int price = product.getPrice();
                     int calculationPrice = product.getPrice() * quantity;
+                    SimpleDateFormat sdfPeriode = new SimpleDateFormat("yyyy-MM-dd");
+                    String periode = sdfPeriode.format(new Date());
 
                     listTransactionProduct transactionProduct = new listTransactionProduct(
                             idProduct,
                             product.getNameProduct(),
                             quantity,
                             price,
-                            calculationPrice);
+                            calculationPrice,
+                            periode);
 
                     listProducts.add(transactionProduct);
                     subQuantity += quantity;

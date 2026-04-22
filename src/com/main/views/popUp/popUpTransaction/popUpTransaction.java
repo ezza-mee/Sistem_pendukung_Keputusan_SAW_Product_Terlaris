@@ -3,6 +3,9 @@ package com.main.views.popUp.popUpTransaction;
 import java.util.List;
 
 import java.awt.Component;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -226,6 +229,9 @@ public class popUpTransaction extends popUpPanel {
                             String numberTable = selectedTable.getNumber();
                             int idTable = selectedTable.getIdtable();
 
+                            SimpleDateFormat sdfPeriode = new SimpleDateFormat("yyyy-MM-dd");
+                            String periode = sdfPeriode.format(new Date());
+
                             int idTransaction = authDataTransaction.insertDataTransaction(
                                     idStaff,
                                     idTable,
@@ -237,6 +243,7 @@ public class popUpTransaction extends popUpPanel {
                                     subPrice,
                                     description,
                                     paymentMethod,
+                                    periode,
                                     listProduct);
 
                             if (idTransaction > 0) {

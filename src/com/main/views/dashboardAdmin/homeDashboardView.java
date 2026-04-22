@@ -105,10 +105,10 @@ public class homeDashboardView extends contentPanel {
         panelTransaction = new panelRounded(850, 40, 230, 150, 10, 10);
         panelDiagramTransaction = new panelRounded(40, 230, 1040, 400, 10, 10);
 
-        labelProduct = new textLabel("Data Product", 0, 10, 230, 40);
+        labelProduct = new textLabel("Data Produk", 0, 10, 230, 40);
         labelSupplier = new textLabel("Data Supplier", 0, 10, 230, 40);
         labelStaff = new textLabel("Data Staff", 0, 10, 230, 40);
-        labelTransaction = new textLabel("Data Transaction", 0, 10, 230, 40);
+        labelTransaction = new textLabel("Data Transaksi", 0, 10, 230, 40);
 
         String stringDataProduct = String.valueOf(quantyAllDataProduct);
         String stringDataSupplier = String.valueOf(quantyAllDataSupplier);
@@ -184,7 +184,7 @@ public class homeDashboardView extends contentPanel {
                         selectedPriode = new SimpleDateFormat("yyyy-MM-dd").format(parsedDate);
                         loadTableRangking(selectedPriode);
                     } else {
-                        parentView.showFailedPopUp("Please select a date to display the criteria data");
+                        parentView.showFailedPopUp("Pilih tanggal untuk melihat data");
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
