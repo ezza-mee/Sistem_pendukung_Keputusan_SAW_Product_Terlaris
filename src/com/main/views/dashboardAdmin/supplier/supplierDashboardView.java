@@ -205,7 +205,8 @@ public class supplierDashboardView extends contentPanel implements searchableVie
             @Override
             public void onEdit(int row) {
                 try {
-                    popUpConfrim messagePopUp = parentView.showConfrimPopUp("do you want to delete product data?");
+                    popUpConfrim messagePopUp = parentView
+                            .showConfrimPopUp("Apakah anda ingin mengubah data supplier?");
 
                     messagePopUp.getButtonConfrim().addActionListener(new java.awt.event.ActionListener() {
                         @Override
@@ -223,7 +224,7 @@ public class supplierDashboardView extends contentPanel implements searchableVie
                                     parentView.showFormSupplier();
                                 } else {
                                     parentApp.hideGlassNotificationPanel();
-                                    parentView.showFailedPopUp("Data Supplier not found!");
+                                    parentView.showFailedPopUp("Data supplier tidak ditemukan!");
                                 }
                             }
                         }
@@ -288,7 +289,8 @@ public class supplierDashboardView extends contentPanel implements searchableVie
             @Override
             public void onEdit(int row) {
                 try {
-                    popUpConfrim messagePopUp = parentView.showConfrimPopUp("do you want to delete product data?");
+                    popUpConfrim messagePopUp = parentView
+                            .showConfrimPopUp("Apakah anda ingin mengubah data supplier?");
 
                     messagePopUp.getButtonConfrim().addActionListener(new java.awt.event.ActionListener() {
                         @Override
@@ -306,7 +308,7 @@ public class supplierDashboardView extends contentPanel implements searchableVie
                                     parentView.showFormSupplier();
                                 } else {
                                     parentApp.hideGlassNotificationPanel();
-                                    parentView.showFailedPopUp("Data Supplier not found!");
+                                    parentView.showFailedPopUp("Data supplier tidak ditemukan!");
                                 }
                             }
                         }
@@ -365,7 +367,8 @@ public class supplierDashboardView extends contentPanel implements searchableVie
             @Override
             public void onEdit(int row) {
                 try {
-                    popUpConfrim messagePopUp = parentView.showConfrimPopUp("do you want to delete product data?");
+                    popUpConfrim messagePopUp = parentView
+                            .showConfrimPopUp("Apakah anda ingin mengubah data supplier?");
 
                     messagePopUp.getButtonConfrim().addActionListener(new java.awt.event.ActionListener() {
                         @Override
@@ -383,7 +386,7 @@ public class supplierDashboardView extends contentPanel implements searchableVie
                                     parentView.showFormSupplier();
                                 } else {
                                     parentApp.hideGlassNotificationPanel();
-                                    parentView.showFailedPopUp("Data Supplier not found!");
+                                    parentView.showFailedPopUp("Data supplier tidak ditemukan!");
                                 }
                             }
                         }
@@ -443,7 +446,8 @@ public class supplierDashboardView extends contentPanel implements searchableVie
             @Override
             public void onEdit(int row) {
                 try {
-                    popUpConfrim messagePopUp = parentView.showConfrimPopUp("do you want to delete product data?");
+                    popUpConfrim messagePopUp = parentView
+                            .showConfrimPopUp("Apakah anda ingin mengubah data supplier?");
 
                     messagePopUp.getButtonConfrim().addActionListener(new java.awt.event.ActionListener() {
                         @Override
@@ -461,7 +465,7 @@ public class supplierDashboardView extends contentPanel implements searchableVie
                                     parentView.showFormSupplier();
                                 } else {
                                     parentApp.hideGlassNotificationPanel();
-                                    parentView.showFailedPopUp("Data Supplier not found!");
+                                    parentView.showFailedPopUp("Data supplier tidak ditemukan!");
                                 }
                             }
                         }
@@ -521,7 +525,8 @@ public class supplierDashboardView extends contentPanel implements searchableVie
             @Override
             public void onEdit(int row) {
                 try {
-                    popUpConfrim messagePopUp = parentView.showConfrimPopUp("do you want to delete product data?");
+                    popUpConfrim messagePopUp = parentView
+                            .showConfrimPopUp("Apakah anda ingin mengubah data supplier?");
 
                     messagePopUp.getButtonConfrim().addActionListener(new java.awt.event.ActionListener() {
                         @Override
@@ -539,7 +544,7 @@ public class supplierDashboardView extends contentPanel implements searchableVie
                                     parentView.showFormSupplier();
                                 } else {
                                     parentApp.hideGlassNotificationPanel();
-                                    parentView.showFailedPopUp("Data Supplier not found!");
+                                    parentView.showFailedPopUp("Data supplier tidak ditemukan!");
                                 }
                             }
                         }

@@ -39,11 +39,6 @@ public class productCompositionFormView extends contentPanel {
 
     private scrollPane scrollListIngredient;
 
-    private appIcons appIcons = new appIcons();
-
-    private imageIcon iconDelete = appIcons.getDeleteIconWhite(20, 20);
-    private imageIcon iconEdit = appIcons.getEditIconWhite(20, 20);
-
     private authDataProduct authData = new authDataProduct();
 
     private List<listCompositionData> listComposition = new ArrayList<>();
@@ -54,6 +49,13 @@ public class productCompositionFormView extends contentPanel {
     private boolean isUpdateMode = false;
     private boolean isEditMode = false;
     private listCompositionData currentEditData = null;
+
+    private appIcons appIcons = new appIcons();
+    private imageIcon iconEdit = appIcons.getEditIconWhite(20, 20);
+    private imageIcon backIcon = appIcons.getBackIconWhite(20, 20);
+    private imageIcon resetIcon = appIcons.getDeleteIconWhite(20, 20);
+    private imageIcon saveIcon = appIcons.getSaveIconWhite(20, 20);
+    private imageIcon addIcon = appIcons.getAddIconWhite(20, 20);
 
     public productCompositionFormView(dashboardAdminView parentView, int idProduct, String imageProduct,
             String nameProduct, int price,
@@ -108,15 +110,15 @@ public class productCompositionFormView extends contentPanel {
         scrollListIngredient = new scrollPane(parentListIngredientPanel, 0, 0, getWidth(), getHeight());
         scrollListIngredient.setBounds(0, 80, 400, 360);
 
-        headerLabel = new textLabel("Input Product Ingredient Composition", 40, 0, 600, 80);
-        listIngredientLabel = new textLabel("List Ingredient", 40, 30, 300, 80);
-        nameIngredientLabel = new textLabel("Name Ingredient", 100, 30, 300, 80);
-        quantityIngredientLabel = new textLabel("quantity Ingredient", 100, 130, 300, 80);
-        unitIngredientLabel = new textLabel("unit Ingredient", 100, 230, 300, 80);
+        headerLabel = new textLabel("Input Bahan Produk", 40, 0, 600, 80);
+        listIngredientLabel = new textLabel("List Bahan", 40, 30, 300, 80);
+        nameIngredientLabel = new textLabel("Name Bahan", 100, 30, 300, 80);
+        quantityIngredientLabel = new textLabel("Jumlah Bahan", 100, 130, 300, 80);
+        unitIngredientLabel = new textLabel("Unit Bahan", 100, 230, 300, 80);
 
-        ingredientEmptyLabel = new textLabel("Ingredient is Empty", 100, 85, 300, 80);
-        quantityEmptyLabel = new textLabel("quantity is Empty", 100, 185, 300, 80);
-        unitEmptyLabel = new textLabel("Ingredient is Empty", 100, 290, 300, 80);
+        ingredientEmptyLabel = new textLabel("Bahan tidak boleh kosong!", 100, 85, 300, 80);
+        quantityEmptyLabel = new textLabel("Jumlah bahan tidak boleh kosong!", 100, 185, 300, 80);
+        unitEmptyLabel = new textLabel("Unit bahan tidak boleh kosong!", 100, 290, 300, 80);
 
         List<dataSupplierReady> supplierList = authDataSupplier.loadDataSupplier();
 
@@ -128,7 +130,7 @@ public class productCompositionFormView extends contentPanel {
                 supplierList.toArray(new dataSupplierReady[0]),
                 100, 80, 400, 30, 10);
 
-        String ingredientPlaceholder = "Select Ingredient";
+        String ingredientPlaceholder = "Pilih Bahan";
 
         ingredientField.setRenderer(new DefaultListCellRenderer() {
             @Override
@@ -156,12 +158,17 @@ public class productCompositionFormView extends contentPanel {
                 "Kaleng", "Buah", "Kemasan", "Sachet", "Lembaran",
                 "Batangan", "Biji-bijian", "Cangkir", "Irisan", "Kotak", "Kemasan", "Tetesan" };
         unitIngredientField = new comboBox<>(unitItems, 100, 290, 400, 30, 10);
-        unitIngredientField.setPlaceholder("Select Unit Ingredient");
+        unitIngredientField.setPlaceholder("Pilih unit bahan");
 
-        buttonSave = new buttonCustom("Save", 25, 470, 350, 40, 10);
-        buttonBack = new buttonCustom("Back", 50, 470, 100, 40, 10);
-        buttonReset = new buttonCustom("Reset", 310, 470, 100, 40, 10);
-        buttonAdd = new buttonCustom("Add", 440, 470, 100, 40, 10);
+        buttonSave = new buttonCustom("    " + "Simpan", 25, 470, 350, 40, 10);
+        buttonBack = new buttonCustom("    " + "Kembali", 50, 470, 130, 40, 10);
+        buttonReset = new buttonCustom("    " + "Hapus", 280, 470, 130, 40, 10);
+        buttonAdd = new buttonCustom("    " + "Tambah", 440, 470, 130, 40, 10);
+
+        buttonBack.setIcon(backIcon);
+        buttonReset.setIcon(resetIcon);
+        buttonSave.setIcon(saveIcon);
+        buttonAdd.setIcon(addIcon);
     }
 
     private void setColor() {
@@ -229,7 +236,7 @@ public class productCompositionFormView extends contentPanel {
                 cardPanel.add(quantityAndUnitLabel);
 
                 buttonCustom buttonDelete = new buttonCustom("", 330, 35, 40, 40, 10);
-                buttonDelete.setIcon(iconDelete);
+                buttonDelete.setIcon(resetIcon);
                 cardPanel.add(buttonDelete);
 
                 buttonCustom buttonEdit = new buttonCustom("", 280, 35, 40, 40, 10);
@@ -296,10 +303,10 @@ public class productCompositionFormView extends contentPanel {
                 cardPanel.add(Box.createVerticalGlue());
             }
         } else {
-            parentView.showFailedPopUp("compositionList is null.");
+            parentView.showFailedPopUp("Komposisi bahan kosong!");
         }
 
-        buttonAdd.setText(isEditMode ? "Save" : "Add");
+        buttonAdd.setText(isEditMode ? "Simpan" : "Tambah");
 
         parentListIngredientPanel.revalidate();
         parentListIngredientPanel.repaint();
@@ -442,7 +449,7 @@ public class productCompositionFormView extends contentPanel {
                 cardPanel.add(buttonEdit);
 
                 buttonCustom buttonDelete = new buttonCustom("", 330, 35, 40, 40, 10);
-                buttonDelete.setIcon(iconDelete);
+                buttonDelete.setIcon(resetIcon);
                 cardPanel.add(buttonDelete);
 
                 Component padding = Box.createRigidArea(new Dimension(0, 10));
@@ -464,7 +471,7 @@ public class productCompositionFormView extends contentPanel {
                         isEditMode = true;
                         currentEditData = data;
 
-                        buttonAdd.setText(isEditMode ? "Save" : "Add");
+                        buttonAdd.setText(isEditMode ? "Simpan" : "Tambah");
 
                         parentListIngredientPanel.remove(cardPanel);
                         parentListIngredientPanel.remove(padding);
@@ -491,7 +498,7 @@ public class productCompositionFormView extends contentPanel {
                 parentListIngredientPanel.add(cardPanel, parentListIngredientPanel.getComponentCount());
                 cardPanel.add(Box.createVerticalGlue());
 
-                buttonAdd.setText(isEditMode ? "Save" : "Add");
+                buttonAdd.setText(isEditMode ? "Simpan" : "Tambah");
 
                 parentListIngredientPanel.revalidate();
                 parentListIngredientPanel.repaint();
@@ -510,7 +517,7 @@ public class productCompositionFormView extends contentPanel {
             public void actionPerformed(java.awt.event.ActionEvent ae) {
                 try {
                     if (listComposition.isEmpty()) {
-                        parentView.showFailedPopUp("Please add the composition first");
+                        parentView.showFailedPopUp("Input list komposisi bahan produk");
                         return;
                     }
 
@@ -521,7 +528,7 @@ public class productCompositionFormView extends contentPanel {
 
                     if (quantity <= 0 || unit == null || unit.isEmpty()) {
                         parentView.showFailedPopUp(
-                                "quantity is not filled, please fill in the product composition quantity");
+                                "Jumlah belum terisi, mohon isi jumlah komposisi produk!");
                         return;
                     }
 
@@ -551,15 +558,15 @@ public class productCompositionFormView extends contentPanel {
                     }
 
                     if (success) {
-                        parentView.showSuccessPopUp("Composition Product and Product successfully saved");
+                        parentView.showSuccessPopUp("Komposisi produk dan produk berhasil disimpan");
                         parentView.showDashboardProduct();
                     } else {
-                        parentView.showFailedPopUp("Composition Product and Product failed to save");
+                        parentView.showFailedPopUp("Komposisi produk dan produk gagal disimpan!");
                     }
 
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    parentView.showFailedPopUp("An error occurred while saving the product and product composition");
+                    parentView.showFailedPopUp("Terjadi kesalahan saat menyimpan produk dan komposisi produk.");
                 }
             }
         });

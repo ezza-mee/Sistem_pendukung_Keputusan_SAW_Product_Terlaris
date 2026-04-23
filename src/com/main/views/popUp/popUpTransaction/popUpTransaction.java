@@ -47,6 +47,10 @@ public class popUpTransaction extends popUpPanel {
 
     private int subQuantity, priceProduct, subPrice;
 
+    private appIcons appIcons = new appIcons();
+    private imageIcon backIcon = appIcons.getBackIconWhite(20, 20);
+    private imageIcon saveIcon = appIcons.getSaveIconWhite(20, 20);
+
     public popUpTransaction(mainFrame parentApp, dashboardStaffView parentView,
             List<listTransactionProduct> listProduct, int subQuantity, int priceProduct, int subPrice) {
         super();
@@ -90,28 +94,28 @@ public class popUpTransaction extends popUpPanel {
     }
 
     private void setPosition() {
-        headerLabel = new textLabel("Input Data Transaction", 0, 30, 600, 50);
+        headerLabel = new textLabel("Input Data Transaksi", 0, 30, 600, 50);
 
-        numberTableLabel = new textLabel("Name Table", 70, 100, 300, 40);
-        nameLabel = new textLabel("Name", 70, 190, 300, 40);
-        descriptionLabel = new textLabel("Description", 70, 280, 300, 40);
-        paymentLabel = new textLabel("payment", 70, 410, 300, 40);
+        numberTableLabel = new textLabel("Nomor Meja", 70, 100, 300, 40);
+        nameLabel = new textLabel("Nama", 70, 190, 300, 40);
+        descriptionLabel = new textLabel("Deskripsi", 70, 280, 300, 40);
+        paymentLabel = new textLabel("Pembayaran", 70, 410, 300, 40);
 
-        numberTableEmptyLabel = new textLabel("Number Table is Empty", 70, 155, 300, 40);
-        nameEmptyLabel = new textLabel("Name is Empty", 70, 245, 300, 40);
-        descriptionEmptyLabel = new textLabel("Description is Empty", 70, 380, 300, 40);
-        paymentEmptyLabel = new textLabel("Payment is Empty", 70, 460, 455, 40);
+        numberTableEmptyLabel = new textLabel("Nomor meja tidak boleh kosong!", 70, 155, 300, 40);
+        nameEmptyLabel = new textLabel("Nam tidak boleh kosong!", 70, 245, 300, 40);
+        descriptionEmptyLabel = new textLabel("Deskripsi tidak boleh kosong!", 70, 380, 300, 40);
+        paymentEmptyLabel = new textLabel("Pembayaran tidak boleh kosong!", 70, 460, 455, 40);
 
         List<dataTable> tableList = authDataTable.loadDataTable();
 
         if (tableList.isEmpty()) {
-            tableList.add(new dataTable(0, "Data Table Not Found", "", ""));
+            tableList.add(new dataTable(0, "Data meja kosong", "", ""));
         }
 
         numberTableField = new comboBox<>(
                 tableList.toArray(new dataTable[0]), 70, 135, 460, 30, 10);
 
-        String numbertablePlaceHolder = "Select Number table";
+        String numbertablePlaceHolder = "Pilih nomor meja";
 
         numberTableField.setRenderer(new DefaultListCellRenderer() {
             @Override
@@ -137,10 +141,13 @@ public class popUpTransaction extends popUpPanel {
 
         String[] paymentItems = { null, "Cash", "QRIS", "Mandiri", "BCA", "BSI" };
         paymentField = new comboBox<>(paymentItems, 70, 440, 460, 30, 10);
-        paymentField.setPlaceholder("Select Payment");
+        paymentField.setPlaceholder("Pilih motede pembayaran");
 
-        buttonCancel = new buttonCustom("Cancel", 70, 530, 180, 40, 10);
-        buttonConfrim = new buttonCustom("Save", 350, 530, 180, 40, 10);
+        buttonCancel = new buttonCustom("    " + "Kembali", 40, 190, 140, 40, 10);
+        buttonConfrim = new buttonCustom("    " + "Simpan", 220, 190, 140, 40, 10);
+
+        buttonCancel.setIcon(backIcon);
+        buttonConfrim.setIcon(saveIcon);
 
         scrollDescription = new scrollPane(descriptionField, 70, 310, 460, 80);
     }
@@ -254,15 +261,15 @@ public class popUpTransaction extends popUpPanel {
                                 authDataTable.updateStatusTable(idTable, "Reserved");
                                 parentView.showDashboardTransaction();
                                 parentApp.hideGlassFormPanel();
-                                parentView.showSuccessPopUp("Transaction successful");
+                                parentView.showSuccessPopUp("Transaksi Berhasil");
 
                             } else {
-                                parentView.showFailedPopUp("Transaction failed");
+                                parentView.showFailedPopUp("Transaksi gagal");
                             }
 
                         } catch (Exception e) {
                             e.printStackTrace();
-                            parentView.showFailedPopUp("Transaction failed");
+                            parentView.showFailedPopUp("Transaksi gagal");
                         }
                         break;
                 }

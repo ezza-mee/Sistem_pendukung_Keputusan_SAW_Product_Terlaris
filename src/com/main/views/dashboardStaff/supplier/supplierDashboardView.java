@@ -34,9 +34,12 @@ public class supplierDashboardView extends contentPanel implements searchableVie
     private int quantityAllOutStockDataSupplier = loadDataSupplier.getAllQuantityOutStockDataSupplier();
     private int quantityAllRejectedDataSupplier = loadDataSupplier.getAllQuantityRejectedDataSupplier();
     private EnumSet<buttonType> buttonTypes = EnumSet.of(buttonType.EDIT,
-            buttonType.DELETE, buttonType.DETAIL);
+            buttonType.DELETE);
 
     private String currentStatus = "ALL";
+
+    private appIcons appIcons = new appIcons();
+    private imageIcon addIcon = appIcons.getAddIconWhite(20, 20);
 
     private void setColor() {
         headerLabel.setForeground(color.BLACK);
@@ -102,7 +105,8 @@ public class supplierDashboardView extends contentPanel implements searchableVie
         rejectedSupplierLabel = new linkLabel("Rejected", 630, 40, 120, 30);
         rejectedSupplierLabel.setQuantity(quantityAllRejectedDataSupplier);
 
-        buttonAdd = new buttonCustom("Add", 900, 35, 100, 40, 10);
+        buttonAdd = new buttonCustom("    " + "Tambah", 900, 40, 120, 40, 10);
+        buttonAdd.setIcon(addIcon);
 
     }
 

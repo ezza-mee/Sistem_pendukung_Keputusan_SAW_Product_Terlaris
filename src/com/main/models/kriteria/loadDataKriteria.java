@@ -16,7 +16,7 @@ import com.main.models.entity.dataBobotKriteria;
 public class loadDataKriteria {
     public static DefaultTableModel getAllDataBobotKriteria() {
 
-        String[] dataHeader = { "Aksi", "ID", "Date", "Kriteria", "Tipe", "Bobot" };
+        String[] dataHeader = { "Aksi", "ID", "Tanggal", "Kriteria", "Tipe", "Bobot" };
 
         DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
         String query = "SELECT * FROM tbl_data_kriteria";

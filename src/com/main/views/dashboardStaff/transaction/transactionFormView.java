@@ -43,8 +43,9 @@ public class transactionFormView extends contentPanel implements searchableView 
 
     private appIcons appIcons = new appIcons();
     private imageIcon iconAdd = appIcons.getAddIconWhite(20, 20);
-    private imageIcon iconDetail = appIcons.getDetailIconWhite(20, 20);
     private imageIcon iconMinus = appIcons.getMinusIconWhite(20, 20);
+    private imageIcon iconBack = appIcons.getBackIconWhite(20, 20);
+    private imageIcon iconPayment = appIcons.getCreditCardIconWhite(20, 20);
 
     public transactionFormView(dashboardStaffView parentView) {
         super();
@@ -78,10 +79,10 @@ public class transactionFormView extends contentPanel implements searchableView 
     }
 
     private void setLayout() {
-        headerLabel = new textLabel("Input Transaction", 40, 0, 400, 80);
+        headerLabel = new textLabel("Input Transaksi", 40, 0, 400, 80);
         headerPanel = new panelRounded(40, 80, 600, 80, 10, 10);
 
-        listProductLabel = new textLabel("List Product", 450, 20, 300, 40);
+        listProductLabel = new textLabel("List Produk", 450, 20, 300, 40);
         listProductPanel = new panelRounded(40, 160, 620, 400, 0, 0);
         listProductPanel.setLayout(new BoxLayout(listProductPanel, BoxLayout.Y_AXIS));
         scrollListProduct = new scrollPane(listProductPanel, 0, 0, getWidth(), getHeight());
@@ -99,8 +100,11 @@ public class transactionFormView extends contentPanel implements searchableView 
 
         bottomPanel = new panelRounded(40, 550, 600, 80, 10, 10);
 
-        buttonBack = new buttonCustom("Back", 20, 20, 100, 40, 10);
-        buttonPayment = new buttonCustom("Continue to Payment", 25, 490, 350, 40, 10);
+        buttonBack = new buttonCustom("    " + "Kembali", 20, 20, 130, 40, 10);
+        buttonPayment = new buttonCustom("    " + "Lanjut ke pembayaran", 25, 490, 350, 40, 10);
+
+        buttonBack.setIcon(iconBack);
+        buttonPayment.setIcon(iconPayment);
 
     }
 
@@ -213,13 +217,10 @@ public class transactionFormView extends contentPanel implements searchableView 
         descriptionLabel.setFont(fontStyle.getFont(fontStyle.FontStyle.REGULAR, 10f));
         cardPanel.add(descriptionLabel);
 
-        buttonCustom buttonDetail = new buttonCustom("", 470, 30, 40, 40, 10);
         buttonCustom buttonAdd = new buttonCustom("", 530, 30, 40, 40, 10);
 
-        buttonDetail.setIcon(iconDetail);
         buttonAdd.setIcon(iconAdd);
 
-        cardPanel.add(buttonDetail);
         cardPanel.add(buttonAdd);
 
         Component padding = Box.createRigidArea(new Dimension(0, 20));
@@ -229,7 +230,7 @@ public class transactionFormView extends contentPanel implements searchableView 
             public void actionPerformed(java.awt.event.ActionEvent ae) {
 
                 if (product.getStatus().equalsIgnoreCase("Out Of Stock")) {
-                    parentView.showFailedPopUp("Product is sold out.");
+                    parentView.showFailedPopUp("Produk habis");
                     return;
                 }
 
@@ -367,7 +368,7 @@ public class transactionFormView extends contentPanel implements searchableView 
             @Override
             public void actionPerformed(java.awt.event.ActionEvent ae) {
                 if (productList.isEmpty()) {
-                    parentView.showFailedPopUp("Please add product to make transaction!");
+                    parentView.showFailedPopUp("Tambahkan produk untuk melakukan transaksi!");
                     return;
                 }
 

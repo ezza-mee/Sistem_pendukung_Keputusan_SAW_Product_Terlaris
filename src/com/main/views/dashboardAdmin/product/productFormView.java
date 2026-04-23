@@ -46,6 +46,11 @@ public class productFormView extends contentPanel {
 
     private int productIdToEdit = -1;
 
+    private appIcons appIcons = new appIcons();
+    private imageIcon backIcon = appIcons.getBackIconWhite(20, 20);
+    private imageIcon resetIcon = appIcons.getDeleteIconWhite(20, 20);
+    private imageIcon saveIcon = appIcons.getSaveIconWhite(20, 20);
+
     public productFormView(mainFrame parentApp, dashboardAdminView parentView) {
         super();
         this.parentApp = parentApp;
@@ -88,37 +93,42 @@ public class productFormView extends contentPanel {
     private void setPosition() {
         contentPanel = new panelRounded(40, 80, 1050, 550, 10, 10);
 
-        headerLabel = new textLabel("Input Data Product", 40, 0, 300, 80);
-        nameProductLabel = new textLabel("Name Product", 180, 30, 300, 80);
-        priceProductLabel = new textLabel("Price Product", 180, 130, 300, 80);
-        categoryProductLabel = new textLabel("Category Product", 580, 130, 300, 80);
-        imageProductLabel = new textLabel("Image Product", 580, 30, 300, 80);
-        descriptionProductLabel = new textLabel("Description Product", 180, 230, 300, 80);
+        headerLabel = new textLabel("Input Data Produk", 40, 0, 300, 80);
+        nameProductLabel = new textLabel("Nama produk", 180, 30, 300, 80);
+        priceProductLabel = new textLabel("Harga produk", 180, 130, 300, 80);
+        categoryProductLabel = new textLabel("Kategori produk", 580, 130, 300, 80);
+        imageProductLabel = new textLabel("Gambar produk", 580, 30, 300, 80);
+        descriptionProductLabel = new textLabel("Deskripsi produk", 180, 230, 300, 80);
         pathImageLabel = new textLabel("path : ", 580, 90, 300, 80);
 
-        productEmptyLabel = new textLabel("Name Product is Empty", 180, 90, 200, 80);
-        priceEmptyLabel = new textLabel("Price Product is Empty", 180, 190, 200, 80);
-        categoryEmptyLabel = new textLabel("Category Product is Empty", 580, 190, 200, 80);
-        descriptionEmptyLabel = new textLabel("Description Product is Empty", 180, 395, 200, 80);
+        productEmptyLabel = new textLabel("Nama produk tidak boleh kosong!", 180, 90, 200, 80);
+        priceEmptyLabel = new textLabel("Harga produk tidak boleh kosong!", 180, 190, 200, 80);
+        categoryEmptyLabel = new textLabel("Kategori produk tidak boleh kosong!", 580, 190, 200, 80);
+        descriptionEmptyLabel = new textLabel("Deskripsi produk tidak boleh kosong!", 180, 395, 200, 80);
 
         nameProductField = new textField(180, 85, 300, 10);
         priceProductField = new textField(180, 185, 300, 10);
         descriptionProductField = new textArea(180, 285, 700, 140, 10);
         imagePathField = new textField(580, 85, 300, 10);
 
-        nameProductField.setPlaceholder("Enter Name Product");
-        priceProductField.setPlaceholder("Enter Price Product");
-        descriptionProductField.setPlaceholder("Enter Description Product");
+        nameProductField.setPlaceholder("Masukan nama produk");
+        priceProductField.setPlaceholder("Masukan harga produk");
+        descriptionProductField.setPlaceholder("Masukan deskripsi produk");
 
-        buttonInputImage = new buttonInputImage("Selected Image", 580, 85, 300, 30, 10, imagePathField, pathImageLabel);
+        buttonInputImage = new buttonInputImage("Masukan gambar produk", 580, 85, 300, 30, 10, imagePathField,
+                pathImageLabel);
 
         String[] catergoryItems = { null, "Food", "Coffee", "Drink", "Snack" };
         categoryProductField = new comboBox<>(catergoryItems, 580, 185, 300, 30, 10);
-        categoryProductField.setPlaceholder("Select Category Product");
+        categoryProductField.setPlaceholder("Pilih kategori produk");
 
-        buttonBack = new buttonCustom("Back", 180, 470, 100, 40, 10);
-        buttonReset = new buttonCustom("Reset", 640, 470, 100, 40, 10);
-        buttonSave = new buttonCustom("Save", 780, 470, 100, 40, 10);
+        buttonBack = new buttonCustom("    " + "Kembali", 180, 470, 130, 40, 10);
+        buttonReset = new buttonCustom("    " + "Hapus", 620, 470, 130, 40, 10);
+        buttonSave = new buttonCustom("    " + "Simpan", 780, 470, 130, 40, 10);
+
+        buttonBack.setIcon(backIcon);
+        buttonReset.setIcon(resetIcon);
+        buttonSave.setIcon(saveIcon);
 
         scrollDescription = new scrollPane(descriptionProductField, 180, 285, 700, 140);
     }
@@ -231,7 +241,7 @@ public class productFormView extends contentPanel {
 
                     switch (validation) {
                         case "ALL_FIELDS_EMPTY":
-                            pathImageLabel.setText("Image Product is Empty");
+                            pathImageLabel.setText("Gambar produk tidak boleh kosong!");
                             pathImageLabel.setForeground(color.RED);
                             contentPanel.add(productEmptyLabel);
                             contentPanel.add(priceEmptyLabel);
@@ -239,7 +249,7 @@ public class productFormView extends contentPanel {
                             contentPanel.add(descriptionEmptyLabel);
                             break;
                         case "IMAGE_PRODUCT_EMPTY":
-                            pathImageLabel.setText("Image Product is Empty");
+                            pathImageLabel.setText("Gambar produk tidak boleh kosong!");
                             pathImageLabel.setForeground(color.RED);
                             break;
                         case "NAME_PRODUCT_EMPTY":
@@ -262,7 +272,7 @@ public class productFormView extends contentPanel {
                                         category, description, null);
                             } else {
                                 popUpConfrim messagePopUp = parentView
-                                        .showConfrimPopUp("Do you want to update the composition as well?");
+                                        .showConfrimPopUp("Apakah ingin mengubah data komposisi produk?");
 
                                 messagePopUp.getButtonConfrim().addActionListener(new java.awt.event.ActionListener() {
                                     @Override
@@ -286,7 +296,7 @@ public class productFormView extends contentPanel {
                                         authDataProduct.updateDataProduct(productIdToEdit, imageProduct, nameProduct,
                                                 price, category, description);
                                         productIdToEdit = -1;
-                                        parentView.showSuccessPopUp("Data Product Successfully Saved");
+                                        parentView.showSuccessPopUp("Data produk berhasil disimpan");
                                         parentView.showDashboardProduct();
                                     }
                                 });

@@ -50,10 +50,10 @@ public class popUpLogout extends popUpPanel {
     }
 
     private void setPosition() {
-        logoutLabel = new textLabel("Logout Apps", 0, 35, 300, 100);
-        confrimLabel = new textLabel("Are your sure you want to Logout the application?",0, 70, 300, 100);
-        buttonCancel = new buttonCustom("Cancel", 40, 150, 100, 30, 10);
-        buttonLogout = new buttonCustom("Logout", 160, 150, 100, 30, 10);
+        logoutLabel = new textLabel("Keluar halaman", 0, 35, 300, 100);
+        confrimLabel = new textLabel("Apakah anda nyakin ingin keluar halaman?", 0, 70, 300, 100);
+        buttonCancel = new buttonCustom("Batal", 40, 150, 100, 30, 10);
+        buttonLogout = new buttonCustom("Keluar", 160, 150, 100, 30, 10);
 
         logoutIcon.setBounds(130, 30, 40, 40);
     }
@@ -85,7 +85,7 @@ public class popUpLogout extends popUpPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int idStaff = sessionLogin.get().getIdStaff();
-                staffService.staffLogout(idStaff); 
+                staffService.staffLogout(idStaff);
                 parentFrame.showLoginApp();
                 parentFrame.hideGlassNotificationPanel();
                 dashboardAdminView.resetLastContent();

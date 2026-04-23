@@ -62,27 +62,27 @@ public class tableFormView extends contentPanel {
     private void setPosition() {
         contentPanel = new panelRounded(40, 80, 1050, 550, 10, 10);
 
-        headerLabel = new textLabel("Input Data Table", 40, 0, 300, 80);
+        headerLabel = new textLabel("Input Data Meja", 40, 0, 300, 80);
 
-        numberLabel = new textLabel("Number Table", 180, 30, 300, 80);
-        capacityLabel = new textLabel("Capacity", 180, 130, 300, 80);
-        descriptionLabel = new textLabel("Description", 180, 230, 300, 80);
+        numberLabel = new textLabel("Nomor Meja", 180, 30, 300, 80);
+        capacityLabel = new textLabel("Kapasitas", 180, 130, 300, 80);
+        descriptionLabel = new textLabel("Deskripsi", 180, 230, 300, 80);
 
-        numberEmptyLabel = new textLabel("Number Table cannot be empty", 180, 90, 300, 80);
-        capacityEmptyLabel = new textLabel("Capacity cannot be empty", 180, 190, 300, 80);
-        descriptionEmptyLabel = new textLabel("Description cannot be empty", 180, 400, 300, 80);
+        numberEmptyLabel = new textLabel("Nomor tidak boleh kosong", 180, 90, 300, 80);
+        capacityEmptyLabel = new textLabel("Kapasitas tidak boleh kosong", 180, 190, 300, 80);
+        descriptionEmptyLabel = new textLabel("Deskripsi tidak boleh kosong", 180, 400, 300, 80);
 
         numberField = new textField(180, 85, 700, 10);
         capacityField = new textField(180, 185, 700, 10);
         descriptionField = new textArea(180, 285, 700, 140, 10);
 
-        numberField.setPlaceholder("Enter Number Table");
-        capacityField.setPlaceholder("Enter Capacity Table");
-        descriptionField.setPlaceholder("Enter Description Table");
+        numberField.setPlaceholder("Masukan nomor meja");
+        capacityField.setPlaceholder("Masukan kapasitas meja");
+        descriptionField.setPlaceholder("Masukan deskripsi meja");
 
-        buttonBack = new buttonCustom("Back", 180, 470, 100, 40, 10);
-        buttonReset = new buttonCustom("Reset", 640, 470, 100, 40, 10);
-        buttonSave = new buttonCustom("Save", 780, 470, 100, 40, 10);
+        buttonBack = new buttonCustom("Kembali", 180, 470, 100, 40, 10);
+        buttonReset = new buttonCustom("Hapus", 640, 470, 100, 40, 10);
+        buttonSave = new buttonCustom("Simpan", 780, 470, 100, 40, 10);
 
         scrollDescription = new scrollPane(descriptionField, 180, 285, 700, 140);
     }
@@ -173,18 +173,18 @@ public class tableFormView extends contentPanel {
                                 success = authDataTable.insertDataTable(number, capacity, description);
                                 if (success) {
                                     parentView.showDashboardTable();
-                                    parentView.showSuccessPopUp("Data Table Successfully Saved");
+                                    parentView.showSuccessPopUp("Data meja berhasil disimpan");
                                 } else {
-                                    parentView.showFailedPopUp("Failed to Save Data Table");
+                                    parentView.showFailedPopUp("Data meja gagal disimpan");
                                 }
                             } else {
                                 success = authDataTable.updateDataTable(tableIdToEdit, number,
                                         capacity, description);
                                 if (success) {
                                     parentView.showDashboardTable();
-                                    parentView.showSuccessPopUp("Data Table Successfully Update");
+                                    parentView.showSuccessPopUp("Data meja berhasil diubah");
                                 } else {
-                                    parentView.showFailedPopUp("Failed to Update Data Table");
+                                    parentView.showFailedPopUp("Data meja gagal diubah");
                                 }
                             }
                             break;

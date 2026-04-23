@@ -49,8 +49,8 @@ public class popUpFailed extends popUpPanel {
 
     private void setPosition() {
         failedIcon.setBounds(0, 30, 600, 60);
-        headerLabel = new textLabel("Failed", 0, 110, 600, 80);
-        messageLabel = new textLabel("Data Failed to Save", 0, 135, 600, 80);
+        headerLabel = new textLabel("Gagal", 0, 110, 600, 80);
+        messageLabel = new textLabel("Data gagal ditemukan", 0, 135, 600, 80);
 
         buttonConfirm = new buttonCustom("OK", 0, 200, 200, 40, 10);
 

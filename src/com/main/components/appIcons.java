@@ -185,4 +185,17 @@ public class appIcons {
     public imageIcon getAlertRed(int width, int height) {
         return loadIcon("/com/main/resources/images/alert.png", width, height);
     }
+
+    public imageIcon getSaveIconWhite(int width, int height) {
+        return loadIcon("/com/main/resources/images/save-white.png", width, height);
+    }
+
+    public imageIcon getPrintIconWhite(int width, int height) {
+        return loadIcon("/com/main/resources/images/print-white.png", width, height);
+    }
+
+    public imageIcon getCreditCardIconWhite(int width, int height) {
+        return loadIcon("/com/main/resources/images/credit-card-white.png", width, height);
+    }
+
 }

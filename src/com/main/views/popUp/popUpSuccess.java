@@ -49,8 +49,8 @@ public class popUpSuccess extends popUpPanel {
 
     private void setPosition() {
         successIcon.setBounds(0, 30, 600, 60);
-        headerLabel = new textLabel("Success", 0, 110, 600, 80);
-        messageLabel = new textLabel("Data Successfully Saved", 0, 135, 600, 80);
+        headerLabel = new textLabel("Berhasil", 0, 110, 600, 80);
+        messageLabel = new textLabel("Data berhasil ditemukan", 0, 135, 600, 80);
 
         buttonConfirm = new buttonCustom("OK", 0, 200, 200, 40, 10);
     }

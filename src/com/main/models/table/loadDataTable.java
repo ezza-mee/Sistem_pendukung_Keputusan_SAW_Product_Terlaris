@@ -16,7 +16,7 @@ import com.main.models.entity.dataSearchTable;
 public class loadDataTable {
     public static DefaultTableModel getAllDataTable() {
 
-        String[] dataHeader = { "ID", "Date", "Number", "Capacity", "description", "Status", "Aksi" };
+        String[] dataHeader = { "ID", "Tanggal", "Nomor", "Kapasitas", "Deskripsi", "Status", "Aksi" };
 
         DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
         String query = "SELECT * FROM vwalldatatable";
@@ -92,7 +92,7 @@ public class loadDataTable {
 
     public static DefaultTableModel getAllDataAvailableTable() {
 
-        String[] dataHeader = { "ID", "Date", "Number", "Capacity", "description", "Status", "Aksi" };
+        String[] dataHeader = { "ID", "Tanggal", "Nomor", "Kapasitas", "Deskripsi", "Status", "Aksi" };
 
         DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
         String query = "SELECT * FROM vwalldatatable WHERE status = 'Available'";
@@ -119,7 +119,7 @@ public class loadDataTable {
 
     public static DefaultTableModel getAllDataCleaningTable() {
 
-        String[] dataHeader = { "ID", "Date", "Number", "Capacity", "description", "Status", "Aksi" };
+        String[] dataHeader = { "ID", "Tanggal", "Nomor", "Kapasitas", "Deskripsi", "Status", "Aksi" };
 
         DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
         String query = "SELECT * FROM vwalldatatable WHERE status = 'Cleaning' ";
@@ -146,7 +146,7 @@ public class loadDataTable {
 
     public static DefaultTableModel getAllDataReservedTable() {
 
-        String[] dataHeader = { "ID", "Date", "Number", "Capacity", "description", "Status", "Aksi" };
+        String[] dataHeader = { "ID", "Tanggal", "Nomor", "Kapasitas", "Deskripsi", "Status", "Aksi" };
 
         DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
         String query = "SELECT * FROM vwalldatatable WHERE status = 'Reserved'";
@@ -173,7 +173,7 @@ public class loadDataTable {
 
     public static DefaultTableModel getAllDataOutOfOrderTable() {
 
-        String[] dataHeader = { "ID", "Date", "Number", "Capacity", "description", "Status", "Aksi" };
+       String[] dataHeader = { "ID", "Tanggal", "Nomor", "Kapasitas", "Deskripsi", "Status", "Aksi" };
 
         DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
         String query = "SELECT * FROM vwalldatatable WHERE LOWER(status) = 'Out Of Order'";

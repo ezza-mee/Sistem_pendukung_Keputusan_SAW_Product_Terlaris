@@ -34,6 +34,11 @@ public class supplierFormView extends contentPanel {
 
     private int staffIdToEdit = -1;
 
+    private appIcons appIcons = new appIcons();
+    private imageIcon backIcon = appIcons.getBackIconWhite(20, 20);
+    private imageIcon resetIcon = appIcons.getDeleteIconWhite(20, 20);
+    private imageIcon saveIcon = appIcons.getSaveIconWhite(20, 20);
+
     public supplierFormView(dashboardAdminView parentView) {
         super();
         this.parentView = parentView;
@@ -95,9 +100,13 @@ public class supplierFormView extends contentPanel {
         quantityField.setPlaceholder("Enter quantity Supplier");
         descriptionField.setPlaceholder("Enter Description Supplier");
 
-        buttonBack = new buttonCustom("Back", 180, 470, 100, 40, 10);
-        buttonReset = new buttonCustom("Reset", 640, 470, 100, 40, 10);
-        buttonSave = new buttonCustom("Save", 780, 470, 100, 40, 10);
+        buttonBack = new buttonCustom("    " + "Kembali", 180, 470, 130, 40, 10);
+        buttonReset = new buttonCustom("    " + "Hapus", 620, 470, 130, 40, 10);
+        buttonSave = new buttonCustom("    " + "Simpan", 780, 470, 130, 40, 10);
+
+        buttonBack.setIcon(backIcon);
+        buttonReset.setIcon(resetIcon);
+        buttonSave.setIcon(saveIcon);
 
         scrollDescription = new scrollPane(descriptionField, 180, 285, 700, 140);
 
@@ -210,12 +219,12 @@ public class supplierFormView extends contentPanel {
                                         nameSupplier, quantity, unit, description);
                                 if (success) {
                                     parentView.showDashboardSupplier();
-                                    parentView.showSuccessPopUp("Data Supplier Successfully Updated");
+                                    parentView.showSuccessPopUp("Data supplier berhasil diubah");
                                 } else {
-                                    parentView.showFailedPopUp("Failed to Update Data Supplier");
+                                    parentView.showFailedPopUp("Data supplier gagal diubah!");
                                 }
                             } else {
-                                parentView.showFailedPopUp("No Supplier selected to update");
+                                parentView.showFailedPopUp("Data supplier tidak ditemukan!");
                             }
                             break;
                     }

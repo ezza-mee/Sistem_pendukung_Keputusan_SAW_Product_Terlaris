@@ -17,8 +17,8 @@ import com.main.models.entity.dataSupplierReady;
 public class loadDataSupplier {
     public static DefaultTableModel getAllDataSupplier() {
 
-        String[] dataHeader = { "ID", "Staff", "Supplier", "Quantity", "Unit", "Status", "Date",
-                "Date Approve", "Aksi" };
+        String[] dataHeader = { "ID", "Staff", "Supplier", "Jumlah", "Unit", "Status", "Tanggal",
+                "Tanggal Approve", "Aksi" };
 
         DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
         String query = "SELECT * FROM vwalldatasupplierwithstaff";
@@ -32,7 +32,7 @@ public class loadDataSupplier {
                         "NS00" + resultData.getInt("idSupplier"),
                         resultData.getString("nameStaff"),
                         resultData.getString("nameSupplier"),
-                        resultData.getDouble("quantity"),
+                        String.format("%.2f", resultData.getDouble("quantity")),
                         resultData.getString("unit"),
                         resultData.getString("status"),
                         resultData.getString("date"),
@@ -47,8 +47,8 @@ public class loadDataSupplier {
 
     public static DefaultTableModel getAllSupplierWithStaff(int idStaff) {
 
-        String[] dataHeader = { "ID", "ID Staff", "Staff", "Supplier", "Quantity", "Unit", "Status", "Date",
-                "Date Approve" };
+        String[] dataHeader = { "ID", "ID Staff", "Staff", "Supplier", "Jumlah", "Unit", "Status", "Tanggal",
+                "Tanggal Approve" };
         DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
 
         String query = "SELECT * FROM vwalldatasupplierwithstaff WHERE idStaff = ?";
@@ -66,7 +66,7 @@ public class loadDataSupplier {
                         resultData.getInt("idStaff"),
                         resultData.getString("nameStaff"),
                         resultData.getString("nameSupplier"),
-                        resultData.getDouble("quantity"),
+                        String.format("%.2f", resultData.getDouble("quantity")),
                         resultData.getString("unit"),
                         resultData.getString("status"),
                         resultData.getString("date"),
@@ -83,8 +83,8 @@ public class loadDataSupplier {
 
     public static DefaultTableModel getAllStockDataSupplier() {
 
-        String[] dataHeader = { "ID", "Staff", "Supplier", "Quantity", "Unit", "Status", "Date",
-                "Date Approve", "Aksi" };
+        String[] dataHeader = { "ID", "Staff", "Supplier", "Jumlah", "Unit", "Status", "Tanggal",
+                "Tanggal Approve", "Aksi" };
 
         DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
         String query = "SELECT * FROM vwalldatasupplierwithstaff WHERE status = 'Ready' ";
@@ -98,7 +98,7 @@ public class loadDataSupplier {
                         "NS00" + resultData.getInt("idSupplier"),
                         resultData.getString("nameStaff"),
                         resultData.getString("nameSupplier"),
-                        resultData.getDouble("quantity"),
+                        String.format("%.2f", resultData.getDouble("quantity")),
                         resultData.getString("unit"),
                         resultData.getString("status"),
                         resultData.getString("date"),
@@ -113,8 +113,8 @@ public class loadDataSupplier {
 
     public static DefaultTableModel getAllOutStockDataSupplier() {
 
-        String[] dataHeader = { "ID", "Staff", "Supplier", "Quantity", "Unit", "Status", "Date",
-                "Date Approve", "Aksi" };
+        String[] dataHeader = { "ID", "Staff", "Supplier", "Jumlah", "Unit", "Status", "Tanggal",
+                "Tanggal Approve", "Aksi" };
 
         DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
         String query = "SELECT * FROM vwalldatasupplierwithstaff WHERE status = 'Out of Stock' ";
@@ -128,7 +128,7 @@ public class loadDataSupplier {
                         "NS00" + resultData.getInt("idSupplier"),
                         resultData.getString("nameStaff"),
                         resultData.getString("nameSupplier"),
-                        resultData.getDouble("quantity"),
+                        String.format("%.2f", resultData.getDouble("quantity")),
                         resultData.getString("unit"),
                         resultData.getString("status"),
                         resultData.getString("date"),
@@ -143,8 +143,8 @@ public class loadDataSupplier {
 
     public static DefaultTableModel getAllPendingDataSupplier() {
 
-        String[] dataHeader = { "ID", "Staff", "Supplier", "Quantity", "Unit", "Status", "Date",
-                "Date Approve", "Aksi" };
+        String[] dataHeader = { "ID", "Staff", "Supplier", "Jumlah", "Unit", "Status", "Tanggal",
+                "Tanggal Approve", "Aksi" };
 
         DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
         String query = "SELECT * FROM vwalldatasupplierwithstaff WHERE status = 'Processing' ";
@@ -158,7 +158,7 @@ public class loadDataSupplier {
                         "NS00" + resultData.getInt("idSupplier"),
                         resultData.getString("nameStaff"),
                         resultData.getString("nameSupplier"),
-                        resultData.getDouble("quantity"),
+                        String.format("%.2f", resultData.getDouble("quantity")),
                         resultData.getString("unit"),
                         resultData.getString("status"),
                         resultData.getString("date"),
@@ -173,8 +173,8 @@ public class loadDataSupplier {
 
     public static DefaultTableModel getAllRejectedDataSupplier() {
 
-        String[] dataHeader = { "ID", "Staff", "Supplier", "Quantity", "Unit", "Status", "Date",
-                "Date Approve", "Aksi" };
+        String[] dataHeader = { "ID", "Staff", "Supplier", "Jumlah", "Unit", "Status", "Tanggal",
+                "Tanggal Approve", "Aksi" };
 
         DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
         String query = "SELECT * FROM vwalldatasupplierwithstaff WHERE status = 'Processsing' ";
@@ -188,7 +188,7 @@ public class loadDataSupplier {
                         "NS00" + resultData.getInt("idSupplier"),
                         resultData.getString("nameStaff"),
                         resultData.getString("nameSupplier"),
-                        resultData.getDouble("quantity"),
+                        String.format("%.2f", resultData.getDouble("quantity")),
                         resultData.getString("unit"),
                         resultData.getString("status"),
                         resultData.getString("date"),

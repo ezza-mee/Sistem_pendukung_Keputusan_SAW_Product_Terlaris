@@ -45,12 +45,12 @@ public class popUpExit extends popUpPanel {
     }
 
     private void setPosition() {
-        exitLabel = new textLabel("Exit Apps", 0, 35, 300, 100);
+        exitLabel = new textLabel("Keluar aplikasi", 0, 35, 300, 100);
         confrimLabel = new textLabel(
-                "Are your sure you want to exit the application?",
+                "Apakah anda nyakin ingin keluar aplikasi?",
                 0, 70, 300, 100);
-        buttonCancel = new buttonCustom("Cancel", 40, 150, 100, 30, 10);
-        buttonExit = new buttonCustom("Exit", 160, 150, 100, 30, 10);
+        buttonCancel = new buttonCustom("Batal", 40, 150, 100, 30, 10);
+        buttonExit = new buttonCustom("Keluar", 160, 150, 100, 30, 10);
 
         exitIcon.setBounds(130, 30, 40, 40);
     }
@@ -73,7 +73,7 @@ public class popUpExit extends popUpPanel {
         exitLabel.setFont(fontStyle.getFont(fontStyle.FontStyle.SEMIBOLD, 16f));
         confrimLabel.setFont(fontStyle.getFont(fontStyle.FontStyle.SEMIBOLD, 10f));
         confrimLabel.setHorizontalAlignment(JLabel.CENTER);
-        
+
         exitLabel.setHorizontalAlignment(JLabel.CENTER);
 
     }

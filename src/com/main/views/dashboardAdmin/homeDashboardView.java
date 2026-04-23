@@ -48,9 +48,8 @@ public class homeDashboardView extends contentPanel {
     private int quantyAllDataTransaction = loadDataTransaction.getAllQuantityDataTransaction();
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    private String selectedPriode = sdf.format(new Date());
     private String today = sdf.format(new Date());
-
-    private String selectedPriode = null;
 
     private datePickerField dateField;
 
@@ -69,6 +68,7 @@ public class homeDashboardView extends contentPanel {
         setColor();
         setFont();
         setAction();
+        setHeaderTableRangking();
 
         panelProduct.add(iconProduct);
         panelProduct.add(labelProduct);
@@ -221,13 +221,13 @@ public class homeDashboardView extends contentPanel {
         dataRangking.getColumnModel().getColumn(1).setMaxWidth(0);
         dataRangking.getColumnModel().getColumn(1).setWidth(0);
 
-        dataRangking.getColumnModel().getColumn(2).setMinWidth(300);
-        dataRangking.getColumnModel().getColumn(2).setMaxWidth(300);
-        dataRangking.getColumnModel().getColumn(2).setWidth(300);
+        dataRangking.getColumnModel().getColumn(3).setMinWidth(200);
+        dataRangking.getColumnModel().getColumn(3).setMaxWidth(200);
+        dataRangking.getColumnModel().getColumn(3).setWidth(200);
 
-        dataRangking.getColumnModel().getColumn(4).setMinWidth(150);
-        dataRangking.getColumnModel().getColumn(4).setMaxWidth(150);
-        dataRangking.getColumnModel().getColumn(4).setWidth(150);
+        dataRangking.getColumnModel().getColumn(4).setMinWidth(100);
+        dataRangking.getColumnModel().getColumn(4).setMaxWidth(100);
+        dataRangking.getColumnModel().getColumn(4).setWidth(100);
     }
 
 }

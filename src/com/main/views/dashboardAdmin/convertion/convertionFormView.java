@@ -30,6 +30,11 @@ public class convertionFormView extends contentPanel {
 
     private int convertionIdToEdit = -1;
 
+    private appIcons appIcons = new appIcons();
+    private imageIcon backIcon = appIcons.getBackIconWhite(20, 20);
+    private imageIcon resetIcon = appIcons.getDeleteIconWhite(20, 20);
+    private imageIcon saveIcon = appIcons.getSaveIconWhite(20, 20);
+
     public convertionFormView(dashboardAdminView parentView) {
         super();
         this.parentView = parentView;
@@ -66,15 +71,15 @@ public class convertionFormView extends contentPanel {
     private void setComponent() {
         contentPanel = new panelRounded(40, 80, 1050, 550, 10, 10);
 
-        formUnitLabel = new textLabel("Form Unit", 180, 20, 300, 80);
-        toUnitLabel = new textLabel("To Unit", 180, 100, 300, 80);
-        multiplierLabel = new textLabel("Multiplier", 180, 180, 300, 80);
-        descriptionLabel = new textLabel("Description", 180, 260, 300, 80);
+        formUnitLabel = new textLabel("unit", 180, 20, 300, 80);
+        toUnitLabel = new textLabel("Konversi unit", 180, 100, 300, 80);
+        multiplierLabel = new textLabel("Ukuran unit", 180, 180, 300, 80);
+        descriptionLabel = new textLabel("Deskripsi", 180, 260, 300, 80);
 
-        formUnitEmptyLabel = new textLabel("Form Unit is Empty", 180, 70, 300, 80);
-        toUnitEmptyLabel = new textLabel("To Unit is Empty", 180, 150, 300, 80);
-        multiplierEmptyLabel = new textLabel("Multiplier is Empty", 180, 230, 300, 80);
-        descriptionEmptyLabel = new textLabel("Description is Empty", 180, 380, 300, 80);
+        formUnitEmptyLabel = new textLabel("Unit tidak boleh kosong!", 180, 70, 300, 80);
+        toUnitEmptyLabel = new textLabel("Konversi unit tidak boleh kosong!", 180, 150, 300, 80);
+        multiplierEmptyLabel = new textLabel("Ukuran unit tidak boleh kosong!", 180, 230, 300, 80);
+        descriptionEmptyLabel = new textLabel("Deskripsi unit tidak boleh kosong!", 180, 380, 300, 80);
 
         String[] formUnitItems = { null, "Pcs", "Box", "Kg", "Liter", "Pack", "Dus", "Botol" };
         formUnitField = new comboBox<>(formUnitItems, 180, 70, 700, 30, 10);
@@ -85,15 +90,19 @@ public class convertionFormView extends contentPanel {
                 "Kaleng", "Buah", "Kemasan", "Sachet", "Lembaran",
                 "Batangan", "Biji-bijian", "Cangkir", "Irisan", "Kotak", "Kemasan", "Tetesan" };
         toUnitField = new comboBox<>(toUnitItems, 180, 150, 700, 30, 10);
-        toUnitField.setPlaceholder("Select to Unit Ingredient");
+        toUnitField.setPlaceholder("Pilih konversi unit");
 
         multiplierField = new textField(180, 230, 700, 10);
 
         descriptionField = new textArea(180, 300, 700, 100, 10);
 
-        buttonBack = new buttonCustom("Back", 180, 480, 100, 40, 10);
-        buttonReset = new buttonCustom("Reset", 640, 480, 100, 40, 10);
-        buttonSave = new buttonCustom("Save", 780, 480, 100, 40, 10);
+        buttonBack = new buttonCustom("    " + "Kembali", 180, 470, 130, 40, 10);
+        buttonReset = new buttonCustom("    " + "Hapus", 620, 470, 130, 40, 10);
+        buttonSave = new buttonCustom("    " + "Simpan", 780, 470, 130, 40, 10);
+
+        buttonBack.setIcon(backIcon);
+        buttonReset.setIcon(resetIcon);
+        buttonSave.setIcon(saveIcon);
 
         scrollDescription = new scrollPane(descriptionField, 180, 310, 700, 100);
     }
@@ -192,18 +201,18 @@ public class convertionFormView extends contentPanel {
                                         multiplier, description);
                                 if (success) {
                                     parentView.showDashboardConvertion();
-                                    parentView.showSuccessPopUp("Data Convertion Successfully Saved");
+                                    parentView.showSuccessPopUp("Data konversi berhasil disimpan");
                                 } else {
-                                    parentView.showFailedPopUp("Failed to Save Data Convertion");
+                                    parentView.showFailedPopUp("Data konversi gagal disimpan!");
                                 }
                             } else {
                                 success = authDataConvertion.updateDataConvertion(convertionIdToEdit, formUnit, toUnit,
                                         multiplier, description);
                                 if (success) {
                                     parentView.showDashboardConvertion();
-                                    parentView.showSuccessPopUp("Data Convertion Successfully Update");
+                                    parentView.showSuccessPopUp("Data konversi berhasil diubah");
                                 } else {
-                                    parentView.showFailedPopUp("Failed to Update Data Convertion");
+                                    parentView.showFailedPopUp("Data konversi gagal diubah!");
                                 }
                             }
                             break;
