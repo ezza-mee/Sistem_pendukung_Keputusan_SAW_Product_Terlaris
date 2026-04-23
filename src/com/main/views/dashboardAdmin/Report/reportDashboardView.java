@@ -23,6 +23,9 @@ public class reportDashboardView extends contentPanel {
     private comboBox<String> reportField;
     private buttonCustom buttonPrint;
 
+    private appIcons appIcons = new appIcons();
+    private imageIcon printIcon = appIcons.getPrintIconWhite(20, 20);
+
     // Menyimpan report terakhir yang di-preview
     private JasperPrint jasperPrint;
 
@@ -62,7 +65,7 @@ public class reportDashboardView extends contentPanel {
                 "Data Transaction",
                 "Data Alternatif",
                 "Data Kriteria",
-                "Data Perangkingan", 
+                "Data Perangkingan",
                 "Data Normalisasi"
         };
 
@@ -70,6 +73,8 @@ public class reportDashboardView extends contentPanel {
         reportField.setPlaceholder("Select Report");
 
         buttonPrint = new buttonCustom("Print", 900, 35, 100, 40, 10);
+
+        buttonPrint.setIcon(printIcon);
     }
 
     private void setColor() {
@@ -102,89 +107,87 @@ public class reportDashboardView extends contentPanel {
     }
 
     private void previewReport(String reportName) {
-    try (Connection conn = connectionDatabase.getConnection()) {
+        try (Connection conn = connectionDatabase.getConnection()) {
 
-        String reportPath = getReportPath(reportName);
+            String reportPath = getReportPath(reportName);
 
-        if (reportPath == null) {
-            JOptionPane.showMessageDialog(this, "Report belum tersedia untuk pilihan ini.");
-            return;
-        }
+            if (reportPath == null) {
+                JOptionPane.showMessageDialog(this, "Report belum tersedia untuk pilihan ini.");
+                return;
+            }
 
-        // Ambil report dari classpath
-        java.io.InputStream reportStream = getClass().getResourceAsStream(reportPath);
+            // Ambil report dari classpath
+            java.io.InputStream reportStream = getClass().getResourceAsStream(reportPath);
 
-        if (reportStream == null) {
-            JOptionPane.showMessageDialog(this, "File report tidak ditemukan di classpath.");
-            return;
-        }
+            if (reportStream == null) {
+                JOptionPane.showMessageDialog(this, "File report tidak ditemukan di classpath.");
+                return;
+            }
 
-        Map<String, Object> params = new HashMap<>();
-        // params.put("parameterName", value);
+            Map<String, Object> params = new HashMap<>();
+            // params.put("parameterName", value);
 
-        jasperPrint = JasperFillManager.fillReport(reportStream, params, conn);
+            jasperPrint = JasperFillManager.fillReport(reportStream, params, conn);
 
-        contentPanel.removeAll();
-        contentPanel.add(new JRViewer(jasperPrint), BorderLayout.CENTER);
-        contentPanel.revalidate();
-        contentPanel.repaint();
+            contentPanel.removeAll();
+            contentPanel.add(new JRViewer(jasperPrint), BorderLayout.CENTER);
+            contentPanel.revalidate();
+            contentPanel.repaint();
 
-    } catch (Exception ex) {
-        ex.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Gagal memuat report: " + ex.getMessage());
-    }
-}
-
-
-private void printReport() {
-    if (jasperPrint == null) {
-        JOptionPane.showMessageDialog(this, "Silakan preview report terlebih dahulu.");
-        return;
-    }
-
-    try {
-        // Gunakan FileDialog bawaan OS (lebih native dibanding JFileChooser)
-        java.awt.FileDialog fileDialog = new java.awt.FileDialog((java.awt.Frame) null, "Simpan Laporan", java.awt.FileDialog.SAVE);
-        
-        String selectedReport = (String) reportField.getSelectedItem();
-        if (selectedReport == null) selectedReport = "Laporan";
-
-        // Default nama file
-        fileDialog.setFile(selectedReport.replace(" ", "_") + ".pdf");
-
-        fileDialog.setVisible(true);
-
-        // Ambil lokasi yang dipilih user
-        String directory = fileDialog.getDirectory();
-        String filename = fileDialog.getFile();
-
-        if (directory == null || filename == null) {
-            // User menekan Cancel
-            return;
-        }
-
-        java.io.File fileToSave = new java.io.File(directory, filename);
-
-        // Ekspor ke PDF
-        JasperExportManager.exportReportToPdfFile(jasperPrint, fileToSave.getAbsolutePath());
-
-        JOptionPane.showMessageDialog(this, "Laporan berhasil disimpan:\n" + fileToSave.getAbsolutePath());
-
-        // Opsional: buka foldernya
-        try {
-            java.awt.Desktop.getDesktop().open(new java.io.File(directory));
         } catch (Exception ex) {
-            // Abaikan jika gagal
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Gagal memuat report: " + ex.getMessage());
+        }
+    }
+
+    private void printReport() {
+        if (jasperPrint == null) {
+            JOptionPane.showMessageDialog(this, "Silakan preview report terlebih dahulu.");
+            return;
         }
 
-    } catch (Exception e) {
-        e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Gagal menyimpan laporan: " + e.getMessage());
+        try {
+            // Gunakan FileDialog bawaan OS (lebih native dibanding JFileChooser)
+            java.awt.FileDialog fileDialog = new java.awt.FileDialog((java.awt.Frame) null, "Simpan Laporan",
+                    java.awt.FileDialog.SAVE);
+
+            String selectedReport = (String) reportField.getSelectedItem();
+            if (selectedReport == null)
+                selectedReport = "Laporan";
+
+            // Default nama file
+            fileDialog.setFile(selectedReport.replace(" ", "_") + ".pdf");
+
+            fileDialog.setVisible(true);
+
+            // Ambil lokasi yang dipilih user
+            String directory = fileDialog.getDirectory();
+            String filename = fileDialog.getFile();
+
+            if (directory == null || filename == null) {
+                // User menekan Cancel
+                return;
+            }
+
+            java.io.File fileToSave = new java.io.File(directory, filename);
+
+            // Ekspor ke PDF
+            JasperExportManager.exportReportToPdfFile(jasperPrint, fileToSave.getAbsolutePath());
+
+            JOptionPane.showMessageDialog(this, "Laporan berhasil disimpan:\n" + fileToSave.getAbsolutePath());
+
+            // Opsional: buka foldernya
+            try {
+                java.awt.Desktop.getDesktop().open(new java.io.File(directory));
+            } catch (Exception ex) {
+                // Abaikan jika gagal
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Gagal menyimpan laporan: " + e.getMessage());
+        }
     }
-}
-
-
-
 
     private String getReportPath(String reportName) {
         if ("Data Product".equals(reportName)) {

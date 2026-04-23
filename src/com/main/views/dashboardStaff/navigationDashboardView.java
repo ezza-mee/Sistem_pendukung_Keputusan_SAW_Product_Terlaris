@@ -18,7 +18,7 @@ public class navigationDashboardView extends navigationPanel {
     private navigation navHome = new navigation(
             appIcons.getHomeIconDefault(30, 30),
             appIcons.getHomeIconHover(30, 30),
-            "Home",
+            "Beranda",
             70
 
     );
@@ -26,7 +26,7 @@ public class navigationDashboardView extends navigationPanel {
     private navigation navProduct = new navigation(
             appIcons.getProductIconDefault(30, 30),
             appIcons.getProductIconHover(30, 30),
-            "Product",
+            "Produk",
             70 + 50
 
     );
@@ -42,7 +42,7 @@ public class navigationDashboardView extends navigationPanel {
     private navigation navTable = new navigation(
             appIcons.getTableIconDefault(30, 30),
             appIcons.getTableIconHover(30, 30),
-            "Table",
+            "Meja",
             70 + 50 + 50
 
     );
@@ -50,7 +50,7 @@ public class navigationDashboardView extends navigationPanel {
     private navigation navTransaction = new navigation(
             appIcons.getTransactionIconDefault(30, 30),
             appIcons.getTransactionIconHover(30, 30),
-            "Transaction",
+            "Transaksi",
             70 + 50 + 50 + 50
 
     );
@@ -58,7 +58,7 @@ public class navigationDashboardView extends navigationPanel {
     private navigation navHistoryTransaction = new navigation(
             appIcons.getHistoryTransactionIconDefault(30, 30),
             appIcons.getHistoryTransactionIconHover(30, 30),
-            "History",
+            "Riwayat",
             70 + 50 + 50 + 50 + 50
 
     );
@@ -82,7 +82,7 @@ public class navigationDashboardView extends navigationPanel {
     private navigation navLogout = new navigation(
             appIcons.getLogoutIconDefault(30, 30),
             appIcons.getLogoutIconHover(30, 30),
-            "Logout",
+            "Keluar",
             70 + 50 + 50 + 50 + 50 + 50 + 50
 
     );

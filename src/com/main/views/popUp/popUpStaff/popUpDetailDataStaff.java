@@ -15,6 +15,8 @@ public class popUpDetailDataStaff extends popUpPanel {
     private mainFrame parentFrame;
     private dashboardAdminView parentView;
 
+    private panelRounded lineHeaderPanel;
+
     private textLabel headerLabel, nameLabel, emailLabel, phoneLabel, genderLabel, jobdeskLabel, addressLabel,
             statusLabel, passwordLabel;
 
@@ -42,6 +44,8 @@ public class popUpDetailDataStaff extends popUpPanel {
         handleButton();
         setDetailData(idStaff);
 
+        add(lineHeaderPanel);
+
         add(headerLabel);
         add(nameLabel);
         add(emailLabel);
@@ -67,29 +71,32 @@ public class popUpDetailDataStaff extends popUpPanel {
     }
 
     private void setPosition() {
+        lineHeaderPanel = new panelRounded(250, 80, 300, 5, 10, 10);
+
         headerLabel = new textLabel("Detail Data Staff", 0, 20, 800, 80);
-        nameLabel = new textLabel("Name", 110, 90, 300, 80);
-        genderLabel = new textLabel("Gender", 440, 90, 300, 80);
+        nameLabel = new textLabel("Nama", 110, 90, 300, 80);
+        genderLabel = new textLabel("Jenis Kelamin", 460, 90, 300, 80);
         emailLabel = new textLabel("Email", 110, 160, 300, 80);
-        passwordLabel = new textLabel("Password", 440, 160, 300, 80);
+        passwordLabel = new textLabel("Password", 460, 160, 300, 80);
         jobdeskLabel = new textLabel("Jobdesk", 110, 230, 300, 80);
-        statusLabel = new textLabel("Status", 440, 230, 300, 80);
-        addressLabel = new textLabel("Address", 110, 300, 300, 80);
-        phoneLabel = new textLabel("Phone", 440, 300, 300, 80);
+        statusLabel = new textLabel("Status", 460, 230, 300, 80);
+        addressLabel = new textLabel("Alamat", 110, 300, 300, 80);
+        phoneLabel = new textLabel("Nomor Telpon", 460, 300, 300, 80);
 
         valueNameLabel = new textLabel("a", 110, 115, 300, 80);
-        valueGenderLabel = new textLabel("a", 440, 115, 300, 80);
+        valueGenderLabel = new textLabel("a", 460, 115, 300, 80);
         valueEmailLabel = new textLabel("a", 110, 185, 300, 80);
-        valuePasswordLabel = new textLabel("a", 440, 185, 300, 80);
+        valuePasswordLabel = new textLabel("a", 460, 185, 300, 80);
         valueJobdeskLabel = new textLabel("a", 110, 255, 300, 80);
-        valueStatusLabel = new textLabel("a", 440, 255, 300, 80);
+        valueStatusLabel = new textLabel("a", 460, 255, 300, 80);
         valueAddressLabel = new textLabel("a", 110, 325, 300, 80);
-        valuePhoneLabel = new textLabel("a", 440, 325, 300, 80);
+        valuePhoneLabel = new textLabel("a", 460, 325, 300, 80);
 
         buttonBack = new buttonCustom("Back", 200, 480, 400, 40, 10);
     }
 
     private void setColor() {
+        lineHeaderPanel.setBackground(color.DARKGREEN);
         headerLabel.setForeground(color.BLACK);
     }
 

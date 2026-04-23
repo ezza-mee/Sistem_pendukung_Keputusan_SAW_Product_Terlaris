@@ -11,12 +11,11 @@ public class authDataTransaction {
 
     public static int insertDataTransaction(int idStaff, int idTable, String staff,
             String numberTable, String customer, int qantity, int priceProduct, int subPrice, String description,
-            String payment,
+            String payment, String periode,
             List<listTransactionProduct> listProduct) {
 
         int idTransaction = insertTransaction.insertData(idStaff, idTable, staff, numberTable, customer, qantity,
-                subPrice,
-                description, payment);
+                subPrice, description, payment, periode);
 
         if (idTransaction == -1) {
             System.out.println("gagal insert");
@@ -30,7 +29,8 @@ public class authDataTransaction {
                     data.nameProduct,
                     data.quantity,
                     data.priceProduct,
-                    data.subPrice);
+                    data.subPrice,
+                    data.periode);
 
             if (!insertListProduct) {
                 return -1;

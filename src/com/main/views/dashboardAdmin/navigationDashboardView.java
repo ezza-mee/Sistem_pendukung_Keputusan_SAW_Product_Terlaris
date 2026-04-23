@@ -53,7 +53,7 @@ public class navigationDashboardView extends navigationPanel {
     private navigation navConvertion = new navigation(
             appIcons.getConvertionIconDefault(25, 25),
             appIcons.getConvertionIconHover(25, 25),
-            "Conversi",
+            "Konversi",
             70 + 50 + 50 + 50 + 50 + 50
 
     );

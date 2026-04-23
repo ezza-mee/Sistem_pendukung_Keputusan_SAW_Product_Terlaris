@@ -6,7 +6,6 @@ import java.util.List;
 import com.main.components.*;
 import com.main.components.panelApps.contentPanel;
 import com.main.models.alternatif.getPeriodeTransaction;
-import com.main.models.alternatif.loadDataAlternatif;
 import com.main.models.transaction.loadDataTransaction;
 import com.main.routes.dashboardStaffView;
 import com.main.routes.mainFrame;
@@ -28,6 +27,9 @@ public class transactionDashboardView extends contentPanel {
 
     private tableActionButton dataTransaction;
     private scrollTable scrollTableTransaction;
+
+    private appIcons appIcons = new appIcons();
+    private imageIcon addIcon = appIcons.getAddIconWhite(20, 20);
 
     private EnumSet<buttonType> buttonTypes = EnumSet.of(buttonType.DETAIL, buttonType.APPROVE);
 
@@ -57,11 +59,12 @@ public class transactionDashboardView extends contentPanel {
     }
 
     private void setPostion() {
-        headerLabel = new textLabel("Data Transaction", 40, 0, 400, 80);
+        headerLabel = new textLabel("Data Transaksi", 40, 0, 400, 80);
         headerPanel = new panelRounded(40, 80, 1050, 110, 10, 10);
         contentPanel = new panelRounded(40, 220, 1050, 410, 10, 10);
 
-        buttonAdd = new buttonCustom("Add", 900, 35, 100, 40, 10);
+        buttonAdd = new buttonCustom("    " + "Tambah", 890, 40, 130, 40, 10);
+        buttonAdd.setIcon(addIcon);
 
         actionButtonTable actionButton = new actionButtonTable() {
             @Override

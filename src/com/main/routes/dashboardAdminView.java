@@ -147,7 +147,7 @@ public class dashboardAdminView extends containerPanel {
     }
 
     public void showDashboardTransaction() {
-        transactionDashboardView dashboardTransaction = new transactionDashboardView();
+        transactionDashboardView dashboardTransaction = new transactionDashboardView(this);
         lastContent = dashboardTransaction;
         parentDashboard.setContent(dashboardTransaction);
     }

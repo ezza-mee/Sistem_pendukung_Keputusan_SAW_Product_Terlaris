@@ -48,9 +48,8 @@ public class homeDashboardView extends contentPanel {
     private int quantyAllDataTransaction = loadDataTransaction.getAllQuantityDataTransaction();
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    private String selectedPriode = sdf.format(new Date());
     private String today = sdf.format(new Date());
-
-    private String selectedPriode = null;
 
     private datePickerField dateField;
 
@@ -69,6 +68,7 @@ public class homeDashboardView extends contentPanel {
         setColor();
         setFont();
         setAction();
+        setHeaderTableRangking();
 
         panelProduct.add(iconProduct);
         panelProduct.add(labelProduct);
@@ -105,10 +105,10 @@ public class homeDashboardView extends contentPanel {
         panelTransaction = new panelRounded(850, 40, 230, 150, 10, 10);
         panelDiagramTransaction = new panelRounded(40, 230, 1040, 400, 10, 10);
 
-        labelProduct = new textLabel("Data Product", 0, 10, 230, 40);
+        labelProduct = new textLabel("Data Produk", 0, 10, 230, 40);
         labelSupplier = new textLabel("Data Supplier", 0, 10, 230, 40);
         labelStaff = new textLabel("Data Staff", 0, 10, 230, 40);
-        labelTransaction = new textLabel("Data Transaction", 0, 10, 230, 40);
+        labelTransaction = new textLabel("Data Transaksi", 0, 10, 230, 40);
 
         String stringDataProduct = String.valueOf(quantyAllDataProduct);
         String stringDataSupplier = String.valueOf(quantyAllDataSupplier);
@@ -184,7 +184,7 @@ public class homeDashboardView extends contentPanel {
                         selectedPriode = new SimpleDateFormat("yyyy-MM-dd").format(parsedDate);
                         loadTableRangking(selectedPriode);
                     } else {
-                        parentView.showFailedPopUp("Please select a date to display the criteria data");
+                        parentView.showFailedPopUp("Pilih tanggal untuk melihat data");
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -221,13 +221,13 @@ public class homeDashboardView extends contentPanel {
         dataRangking.getColumnModel().getColumn(1).setMaxWidth(0);
         dataRangking.getColumnModel().getColumn(1).setWidth(0);
 
-        dataRangking.getColumnModel().getColumn(2).setMinWidth(300);
-        dataRangking.getColumnModel().getColumn(2).setMaxWidth(300);
-        dataRangking.getColumnModel().getColumn(2).setWidth(300);
+        dataRangking.getColumnModel().getColumn(3).setMinWidth(200);
+        dataRangking.getColumnModel().getColumn(3).setMaxWidth(200);
+        dataRangking.getColumnModel().getColumn(3).setWidth(200);
 
-        dataRangking.getColumnModel().getColumn(4).setMinWidth(150);
-        dataRangking.getColumnModel().getColumn(4).setMaxWidth(150);
-        dataRangking.getColumnModel().getColumn(4).setWidth(150);
+        dataRangking.getColumnModel().getColumn(4).setMinWidth(100);
+        dataRangking.getColumnModel().getColumn(4).setMaxWidth(100);
+        dataRangking.getColumnModel().getColumn(4).setWidth(100);
     }
 
 }

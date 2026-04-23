@@ -36,6 +36,9 @@ public class convertionDashboardView extends contentPanel implements searchableV
     private EnumSet<buttonType> buttonTypes = EnumSet.of(buttonType.EDIT,
             buttonType.DELETE);
 
+    private appIcons appIcons = new appIcons();
+    private imageIcon addIcon = appIcons.getAddIconWhite(20, 20);
+
     private void setColor() {
         headerLabel.setForeground(color.BLACK);
         headerPanel.setBackground(color.WHITE);
@@ -73,17 +76,19 @@ public class convertionDashboardView extends contentPanel implements searchableV
     }
 
     private void setLayout() {
-        headerLabel = new textLabel("Data Convertion", 40, 0, 300, 80);
+        headerLabel = new textLabel("Data Konversi", 40, 0, 300, 80);
         headerPanel = new panelRounded(40, 80, 1050, 110, 10, 10);
         contentPanel = new panelRounded(40, 220, 1050, 410, 10, 10);
 
-        buttonAdd = new buttonCustom("Add", 900, 35, 100, 40, 10);
+        buttonAdd = new buttonCustom("    " + "Tambah", 890, 35, 130, 40, 10);
+        buttonAdd.setIcon(addIcon);
 
         actionButtonTable actionButton = new actionButtonTable() {
             @Override
             public void onEdit(int row) {
                 try {
-                    popUpConfrim messagePopUp = parentView.showConfrimPopUp("do you want to delete product data?");
+                    popUpConfrim messagePopUp = parentView
+                            .showConfrimPopUp("Apakah anda ingin menghapus data konversi?");
 
                     messagePopUp.getButtonConfrim().addActionListener(new java.awt.event.ActionListener() {
                         @Override
@@ -101,7 +106,7 @@ public class convertionDashboardView extends contentPanel implements searchableV
                                     parentView.showFormConvertion();
                                 } else {
                                     parentApp.hideGlassNotificationPanel();
-                                    parentView.showFailedPopUp("Data Convertion not found!");
+                                    parentView.showFailedPopUp("Data konversi tidak ditemukan!");
                                 }
                             }
                         }
@@ -122,7 +127,8 @@ public class convertionDashboardView extends contentPanel implements searchableV
             public void onDelete(int row) {
                 try {
 
-                    popUpConfrim messagePopUp = parentView.showConfrimPopUp("do you want to delete data convertion?");
+                    popUpConfrim messagePopUp = parentView
+                            .showConfrimPopUp("Apakah anda ingin menghapus data konversi?");
 
                     messagePopUp.getButtonConfrim().addActionListener(new java.awt.event.ActionListener() {
                         @Override
@@ -135,11 +141,11 @@ public class convertionDashboardView extends contentPanel implements searchableV
 
                                 if (isSuccess) {
                                     parentApp.hideGlassNotificationPanel();
-                                    parentView.showSuccessPopUp("Success Delete Data Convertion");
+                                    parentView.showSuccessPopUp("Data konversi berhasil dihapus");
                                     parentView.showDashboardConvertion();
                                 } else {
                                     parentApp.hideGlassNotificationPanel();
-                                    parentView.showFailedPopUp("Failed Delete Data Convertion");
+                                    parentView.showFailedPopUp("Data Konversi gagal dihapus!");
                                     parentView.showDashboardConvertion();
                                 }
 

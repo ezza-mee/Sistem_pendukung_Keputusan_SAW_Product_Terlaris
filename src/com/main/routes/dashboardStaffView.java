@@ -14,7 +14,7 @@ import com.main.views.dashboardStaff.homeDashboardView;
 import com.main.views.dashboardStaff.parentDashboardStaff;
 import com.main.views.dashboardStaff.Report.reportCashierDashboardView;
 import com.main.views.dashboardStaff.Report.reportSupplierDashboardView;
-import com.main.views.dashboardStaff.historyTransaction.historyTransactionDashboardView;
+import com.main.views.dashboardStaff.historyTransaction.historyTransactionView;
 import com.main.views.dashboardStaff.product.productDashboardView;
 import com.main.views.dashboardStaff.table.tableDashboardView;
 import com.main.views.dashboardStaff.transaction.transactionDashboardView;
@@ -80,7 +80,7 @@ public class dashboardStaffView extends containerPanel {
     }
 
     public void showDashboardHistoryTransaction() {
-        historyTransactionDashboardView historyTransaction = new historyTransactionDashboardView();
+        historyTransactionView historyTransaction = new historyTransactionView(this);
         lastContent = historyTransaction;
         parentDashboard.setContent(historyTransaction);
     }

@@ -22,6 +22,10 @@ public class popUpEditStatusSupplier extends popUpPanel {
 
     private int idSupplier;
 
+    private appIcons appIcons = new appIcons();
+    private imageIcon backIcon = appIcons.getBackIconWhite(20, 20);
+    private imageIcon saveIcon = appIcons.getSaveIconWhite(20, 20);
+
     public popUpEditStatusSupplier(mainFrame parentApp, dashboardAdminView parentView, int idSupplier) {
         super();
         this.parentApp = parentApp;
@@ -52,9 +56,11 @@ public class popUpEditStatusSupplier extends popUpPanel {
         statusField = new comboBox<>(statusFields, 40, 100, 320, 30, 10);
         statusField.setPlaceholder("Select status");
 
-        buttonCancel = new buttonCustom("Cancel", 40, 190, 140, 40, 10);
-        buttonConfrim = new buttonCustom("Save", 220, 190, 140, 40, 10);
+        buttonCancel = new buttonCustom("    " + "Kembali", 40, 190, 140, 40, 10);
+        buttonConfrim = new buttonCustom("    " + "Simpan", 220, 190, 140, 40, 10);
 
+        buttonCancel.setIcon(backIcon);
+        buttonConfrim.setIcon(saveIcon);
     }
 
     private void setFont() {
@@ -81,17 +87,17 @@ public class popUpEditStatusSupplier extends popUpPanel {
                 String selectedStatus = (String) statusField.getSelectedItem();
 
                 if (selectedStatus == null || selectedStatus.trim().isEmpty()) {
-                    parentView.showFailedPopUp("Please Select a Status");
+                    parentView.showFailedPopUp("Pilih status untuk mengubah data");
                     return;
                 }
 
                 boolean success = authDataSupplier.updateStatusSupplier(idSupplier, selectedStatus);
                 if (success) {
-                    parentView.showSuccessPopUp("Status updated successfully!");
+                    parentView.showSuccessPopUp("Status berhasil diubah!");
                     parentApp.hideGlassFormPanel();
                     parentView.showDashboardSupplier();
                 } else {
-                    parentView.showFailedPopUp("Failed to update status.");
+                    parentView.showFailedPopUp("Status gagal diubah!");
                 }
             }
         });

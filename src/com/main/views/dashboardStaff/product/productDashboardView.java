@@ -82,7 +82,7 @@ public class productDashboardView extends contentPanel implements searchableView
     }
 
     private void setLayout() {
-        headerLabel = new textLabel("Data Product", 40, 0, 400, 80);
+        headerLabel = new textLabel("Data Produk", 40, 0, 400, 80);
         headerPanel = new panelRounded(40, 80, 1050, 110, 10, 10);
         contentPanel = new panelRounded(40, 140, 1050, 410, 0, 0);
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
@@ -102,8 +102,8 @@ public class productDashboardView extends contentPanel implements searchableView
         drinkProductLabel.setQuantity(quantityAllDataDrinkProduct);
 
         String[] statusProductItems = { null, "Ready", "Out of Stock" };
-        statusProductField = new comboBox<>(statusProductItems, 480, 40, 200, 30, 10);
-        statusProductField.setPlaceholder("Select your Status");
+        statusProductField = new comboBox<>(statusProductItems, 800, 40, 200, 30, 10);
+        statusProductField.setPlaceholder("Pilih Status Produk");
 
     }
 
@@ -388,18 +388,6 @@ public class productDashboardView extends contentPanel implements searchableView
         descLabel.setBounds(130, 65, 600, 20);
         descLabel.setFont(fontStyle.getFont(fontStyle.FontStyle.REGULAR, 14f));
         cardPanel.add(descLabel);
-
-        // status produk
-        JLabel statusLabel = new JLabel(product.getStatus());
-        statusLabel.setBounds(850, 40, 200, 20);
-        statusLabel.setFont(fontStyle.getFont(fontStyle.FontStyle.SEMIBOLD, 16f));
-        cardPanel.add(statusLabel);
-
-        if (product.getStatus().equalsIgnoreCase("Out Of Stock")) {
-            statusLabel.setForeground(color.RED);
-        } else {
-            statusLabel.setForeground(color.GREEN);
-        }
 
         // Padding antar card
         Component padding = Box.createRigidArea(new Dimension(0, 20));

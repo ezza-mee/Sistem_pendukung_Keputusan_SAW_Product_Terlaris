@@ -23,7 +23,6 @@ public class tableDashboardView extends contentPanel implements searchableView {
     private textLabel headerLabel;
     private linkLabel allDataTableLabel, cleaningTableLabel, availableTableLabel, reservedTableLabel,
             outOfOrderTableLabel;
-    private buttonCustom buttonAdd;
     private tableActionButton dataTable;
     private scrollTable scrollTable;
     private int quantityAllDataTable = loadDataTable.getAllQuantityDataTable();
@@ -72,7 +71,6 @@ public class tableDashboardView extends contentPanel implements searchableView {
         headerPanel.add(availableTableLabel);
         headerPanel.add(reservedTableLabel);
         headerPanel.add(outOfOrderTableLabel);
-        headerPanel.add(buttonAdd);
 
         contentPanel.add(scrollTable);
 
@@ -99,7 +97,6 @@ public class tableDashboardView extends contentPanel implements searchableView {
         reservedTableLabel.setQuantity(quantityAllDataReservedTable);
         outOfOrderTableLabel = new linkLabel("Out of Order", 630, 40, 140, 30);
         outOfOrderTableLabel.setQuantity(quantityAllDataOutOfOrderTable);
-        buttonAdd = new buttonCustom("Add", 900, 40, 100, 40, 10);
 
     }
 

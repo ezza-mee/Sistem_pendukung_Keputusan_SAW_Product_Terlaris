@@ -34,6 +34,9 @@ public class tableDashboardView extends contentPanel implements searchableView {
     private int quantityAllDataReservedTable = loadDataTable.getAllQuantityDataReservedTable();
     private int quantityAllDataOutOfOrderTable = loadDataTable.getAllQuantityDataOutOfOrderTable();
 
+    private appIcons appIcons = new appIcons();
+    private imageIcon addIcon = appIcons.getAddIconWhite(20, 20);
+
     private EnumSet<buttonType> buttonTypes = EnumSet.of(buttonType.EDIT, buttonType.DELETE);
 
     private String currentStatus = "ALL";
@@ -89,7 +92,7 @@ public class tableDashboardView extends contentPanel implements searchableView {
         headerPanel = new panelRounded(40, 80, 1050, 110, 10, 10);
         contentPanel = new panelRounded(40, 220, 1050, 410, 10, 10);
 
-        headerLabel = new textLabel("Data Table", 40, 0, 200, 80);
+        headerLabel = new textLabel("Data Meja", 40, 0, 200, 80);
 
         allDataTableLabel = new linkLabel("ALL", 40, 40, 80, 30);
         allDataTableLabel.setQuantity(quantityAllDataTable);
@@ -101,7 +104,8 @@ public class tableDashboardView extends contentPanel implements searchableView {
         reservedTableLabel.setQuantity(quantityAllDataReservedTable);
         outOfOrderTableLabel = new linkLabel("Out of Order", 630, 40, 140, 30);
         outOfOrderTableLabel.setQuantity(quantityAllDataOutOfOrderTable);
-        buttonAdd = new buttonCustom("Add", 900, 40, 100, 40, 10);
+        buttonAdd = new buttonCustom("    " + "Tambah", 900, 40, 120, 40, 10);
+        buttonAdd.setIcon(addIcon);
 
     }
 
@@ -213,7 +217,7 @@ public class tableDashboardView extends contentPanel implements searchableView {
             public void onEdit(int row) {
                 try {
                     popUpConfrim messagePopUp = parentView
-                            .showConfrimPopUp("do you want to edit Data Table?");
+                            .showConfrimPopUp("Apakah anda nyakin ingin mengubah data meja?");
                     messagePopUp.getButtonConfrim().addActionListener(new java.awt.event.ActionListener() {
                         @Override
                         public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -229,7 +233,7 @@ public class tableDashboardView extends contentPanel implements searchableView {
                                     parentView.setDataTableToEdit(selectedData);
                                     parentView.showFormTable();
                                 } else {
-                                    parentView.showFailedPopUp("Data Table not found!");
+                                    parentView.showFailedPopUp("Data meja tidak ditemukan!");
                                 }
                             }
                         }
@@ -251,7 +255,7 @@ public class tableDashboardView extends contentPanel implements searchableView {
             public void onDelete(int row) {
                 try {
                     popUpConfrim messagePopUp = parentView
-                            .showConfrimPopUp("do you want to delete Data Table?");
+                            .showConfrimPopUp("Apakah anda nyakin ingin menghapus data meja?");
                     messagePopUp.getButtonConfrim().addActionListener(new java.awt.event.ActionListener() {
                         @Override
                         public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -263,11 +267,11 @@ public class tableDashboardView extends contentPanel implements searchableView {
 
                                 if (isSuccess) {
                                     parentApp.hideGlassNotificationPanel();
-                                    parentView.showSuccessPopUp("Success Delete Data Table");
+                                    parentView.showSuccessPopUp("Data meja berhasil dihapus");
                                     parentView.showDashboardTable();
                                 } else {
                                     parentApp.hideGlassNotificationPanel();
-                                    parentView.showFailedPopUp("Failed Delete Data Table");
+                                    parentView.showFailedPopUp("Data meja gagal dihapus");
                                     parentView.showDashboardTable();
                                 }
                             }
@@ -323,7 +327,7 @@ public class tableDashboardView extends contentPanel implements searchableView {
             public void onEdit(int row) {
                 try {
                     popUpConfrim messagePopUp = parentView
-                            .showConfrimPopUp("do you want to edit Data Table?");
+                            .showConfrimPopUp("Apakah Anda nyakin ingin mengubah data meja?");
                     messagePopUp.getButtonConfrim().addActionListener(new java.awt.event.ActionListener() {
                         @Override
                         public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -339,7 +343,7 @@ public class tableDashboardView extends contentPanel implements searchableView {
                                     parentView.setDataTableToEdit(selectedData);
                                     parentView.showFormTable();
                                 } else {
-                                    parentView.showFailedPopUp("Data Table not found!");
+                                    parentView.showFailedPopUp("Data meja tidak ditemukan!");
                                 }
                             }
                         }
@@ -361,7 +365,7 @@ public class tableDashboardView extends contentPanel implements searchableView {
             public void onDelete(int row) {
                 try {
                     popUpConfrim messagePopUp = parentView
-                            .showConfrimPopUp("do you want to delete Data Table?");
+                            .showConfrimPopUp("Apakah anda nyakin ingin mengapus data meja?");
                     messagePopUp.getButtonConfrim().addActionListener(new java.awt.event.ActionListener() {
                         @Override
                         public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -373,11 +377,11 @@ public class tableDashboardView extends contentPanel implements searchableView {
 
                                 if (isSuccess) {
                                     parentApp.hideGlassNotificationPanel();
-                                    parentView.showSuccessPopUp("Success Delete Data Table");
+                                    parentView.showSuccessPopUp("Data meja berhasil dihapus");
                                     parentView.showDashboardTable();
                                 } else {
                                     parentApp.hideGlassNotificationPanel();
-                                    parentView.showFailedPopUp("Failed Delete Data Table");
+                                    parentView.showFailedPopUp("Data meja gagal dihapus");
                                     parentView.showDashboardTable();
                                 }
                             }
@@ -433,7 +437,7 @@ public class tableDashboardView extends contentPanel implements searchableView {
             public void onEdit(int row) {
                 try {
                     popUpConfrim messagePopUp = parentView
-                            .showConfrimPopUp("do you want to edit Data Table?");
+                            .showConfrimPopUp("Apakah Anda nyakin ingin mengubah data meja?");
                     messagePopUp.getButtonConfrim().addActionListener(new java.awt.event.ActionListener() {
                         @Override
                         public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -449,7 +453,7 @@ public class tableDashboardView extends contentPanel implements searchableView {
                                     parentView.setDataTableToEdit(selectedData);
                                     parentView.showFormTable();
                                 } else {
-                                    parentView.showFailedPopUp("Data Table not found!");
+                                    parentView.showFailedPopUp("Data meja tidak ditemukan!");
                                 }
                             }
                         }
@@ -471,7 +475,7 @@ public class tableDashboardView extends contentPanel implements searchableView {
             public void onDelete(int row) {
                 try {
                     popUpConfrim messagePopUp = parentView
-                            .showConfrimPopUp("do you want to delete Data Table?");
+                            .showConfrimPopUp("Apakah anda nyakin ingin mengapus data meja?");
                     messagePopUp.getButtonConfrim().addActionListener(new java.awt.event.ActionListener() {
                         @Override
                         public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -483,11 +487,11 @@ public class tableDashboardView extends contentPanel implements searchableView {
 
                                 if (isSuccess) {
                                     parentApp.hideGlassNotificationPanel();
-                                    parentView.showSuccessPopUp("Success Delete Data Table");
+                                    parentView.showSuccessPopUp("Data meja berhasil dihapus");
                                     parentView.showDashboardTable();
                                 } else {
                                     parentApp.hideGlassNotificationPanel();
-                                    parentView.showFailedPopUp("Failed Delete Data Table");
+                                    parentView.showFailedPopUp("Data meja gagal dihapus");
                                     parentView.showDashboardTable();
                                 }
                             }
@@ -543,7 +547,7 @@ public class tableDashboardView extends contentPanel implements searchableView {
             public void onEdit(int row) {
                 try {
                     popUpConfrim messagePopUp = parentView
-                            .showConfrimPopUp("do you want to edit Data Table?");
+                            .showConfrimPopUp("Apakah Anda nyakin ingin mengubah data meja?");
                     messagePopUp.getButtonConfrim().addActionListener(new java.awt.event.ActionListener() {
                         @Override
                         public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -559,7 +563,7 @@ public class tableDashboardView extends contentPanel implements searchableView {
                                     parentView.setDataTableToEdit(selectedData);
                                     parentView.showFormTable();
                                 } else {
-                                    parentView.showFailedPopUp("Data Table not found!");
+                                    parentView.showFailedPopUp("Data meja tidak ditemukan!");
                                 }
                             }
                         }
@@ -581,7 +585,7 @@ public class tableDashboardView extends contentPanel implements searchableView {
             public void onDelete(int row) {
                 try {
                     popUpConfrim messagePopUp = parentView
-                            .showConfrimPopUp("do you want to delete Data Table?");
+                            .showConfrimPopUp("Apakah anda nyakin ingin mengapus data meja?");
                     messagePopUp.getButtonConfrim().addActionListener(new java.awt.event.ActionListener() {
                         @Override
                         public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -593,11 +597,11 @@ public class tableDashboardView extends contentPanel implements searchableView {
 
                                 if (isSuccess) {
                                     parentApp.hideGlassNotificationPanel();
-                                    parentView.showSuccessPopUp("Success Delete Data Table");
+                                    parentView.showSuccessPopUp("Data meja berhasil dihapus");
                                     parentView.showDashboardTable();
                                 } else {
                                     parentApp.hideGlassNotificationPanel();
-                                    parentView.showFailedPopUp("Failed Delete Data Table");
+                                    parentView.showFailedPopUp("Data meja gagal dihapus");
                                     parentView.showDashboardTable();
                                 }
                             }
@@ -653,7 +657,7 @@ public class tableDashboardView extends contentPanel implements searchableView {
             public void onEdit(int row) {
                 try {
                     popUpConfrim messagePopUp = parentView
-                            .showConfrimPopUp("do you want to edit Data Table?");
+                            .showConfrimPopUp("Apakah Anda nyakin ingin mengubah data meja?");
                     messagePopUp.getButtonConfrim().addActionListener(new java.awt.event.ActionListener() {
                         @Override
                         public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -669,7 +673,7 @@ public class tableDashboardView extends contentPanel implements searchableView {
                                     parentView.setDataTableToEdit(selectedData);
                                     parentView.showFormTable();
                                 } else {
-                                    parentView.showFailedPopUp("Data Table not found!");
+                                    parentView.showFailedPopUp("Data meja tidak ditemukan!");
                                 }
                             }
                         }
@@ -691,7 +695,7 @@ public class tableDashboardView extends contentPanel implements searchableView {
             public void onDelete(int row) {
                 try {
                     popUpConfrim messagePopUp = parentView
-                            .showConfrimPopUp("do you want to delete Data Table?");
+                            .showConfrimPopUp("Apakah anda nyakin ingin mengapus data meja?");
                     messagePopUp.getButtonConfrim().addActionListener(new java.awt.event.ActionListener() {
                         @Override
                         public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -703,11 +707,11 @@ public class tableDashboardView extends contentPanel implements searchableView {
 
                                 if (isSuccess) {
                                     parentApp.hideGlassNotificationPanel();
-                                    parentView.showSuccessPopUp("Success Delete Data Table");
+                                    parentView.showSuccessPopUp("Data meja berhasil dihapus");
                                     parentView.showDashboardTable();
                                 } else {
                                     parentApp.hideGlassNotificationPanel();
-                                    parentView.showFailedPopUp("Failed Delete Data Table");
+                                    parentView.showFailedPopUp("Data meja gagal dihapus");
                                     parentView.showDashboardTable();
                                 }
                             }

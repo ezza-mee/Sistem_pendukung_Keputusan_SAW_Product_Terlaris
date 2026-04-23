@@ -44,6 +44,8 @@ public class popUpInputAccountStaff extends popUpPanel {
 
     private imageIcon showPasswordIcon = appIcons.getShowPasswordIcon(25, 25);
     private imageIcon hidePasswordIcon = appIcons.getHidePasswordIcon(25, 25);
+    private imageIcon backIcon = appIcons.getBackIconWhite(20, 20);
+    private imageIcon saveIcon = appIcons.getSaveIconWhite(20, 20);
 
     private imageIcon showConfrimPasswordIcon = appIcons.getShowPasswordIcon(25, 25);
     private imageIcon hideConfrimPasswordIcon = appIcons.getHidePasswordIcon(25, 25);
@@ -94,22 +96,25 @@ public class popUpInputAccountStaff extends popUpPanel {
     }
 
     private void setPosition() {
-        headerLabel = new textLabel("Input Account Staff", 0, 30, 500, 50);
+        headerLabel = new textLabel("Input Data Akun Staff", 0, 30, 500, 50);
 
         emailLabel = new textLabel("Email", 70, 100, 300, 40);
         passwordLabel = new textLabel("Password", 70, 190, 300, 40);
-        confirmPasswordLabel = new textLabel("Confirm Password", 70, 280, 300, 40);
+        confirmPasswordLabel = new textLabel("Konfirmasi Password", 70, 280, 300, 40);
 
         emailEmptyLabel = new textLabel("Email is Empty", 70, 155, 300, 40);
         passwordEmptyLabel = new textLabel("Password is Empty", 70, 245, 300, 40);
-        confirmPasswordEmptyLabel = new textLabel("Confirm Password is Empty", 70, 335, 300, 40);
+        confirmPasswordEmptyLabel = new textLabel("Konfirmasi Password is Empty", 70, 335, 300, 40);
 
         emailField = new textField(70, 135, 350, 10);
         passwordField = new passwordField(70, 225, 350, 10);
         confirmPasswordField = new passwordField(70, 315, 350, 10);
 
-        buttonCancel = new buttonCustom("Cancel", 70, 410, 150, 40, 10);
-        buttonSave = new buttonCustom("Save", 270, 410, 150, 40, 10);
+        buttonCancel = new buttonCustom("    " + "Batal", 70, 410, 150, 40, 10);
+        buttonSave = new buttonCustom("    " + "Simpan", 270, 410, 150, 40, 10);
+
+        buttonCancel.setIcon(backIcon);
+        buttonSave.setIcon(saveIcon);
 
         showPasswordIcon.setBounds(390, 210, 60, 60);
         hidePasswordIcon.setBounds(390, 210, 60, 60);
@@ -139,9 +144,9 @@ public class popUpInputAccountStaff extends popUpPanel {
 
         emailLabel.setFont(fontStyle.getFont(fontStyle.FontStyle.SEMIBOLD, 15f));
         passwordLabel.setFont(fontStyle.getFont(fontStyle.FontStyle.SEMIBOLD, 15f));
-        passwordField.setPlaceholder("Enter Your Password");
+        passwordField.setPlaceholder("Masukan Password");
         confirmPasswordLabel.setFont(fontStyle.getFont(fontStyle.FontStyle.SEMIBOLD, 15f));
-        confirmPasswordField.setPlaceholder("Confirm Your Password");
+        confirmPasswordField.setPlaceholder("Masukan Konfirmasi Password");
 
         emailEmptyLabel.setFont(fontStyle.getFont(fontStyle.FontStyle.SEMIBOLD, 10f));
         passwordEmptyLabel.setFont(fontStyle.getFont(fontStyle.FontStyle.SEMIBOLD, 10f));
@@ -301,22 +306,22 @@ public class popUpInputAccountStaff extends popUpPanel {
                     return;
                 }
 
-                confirmPasswordEmptyLabel.setText("Password and Confirm Password do not match");
+                confirmPasswordEmptyLabel.setText("Password dan konfirmasi password tidak sama");
                 String uniquenessCheck = authDataStaff.validateStaffDataExistence(email, phoneNumber, oldEmail,
                         oldPhoneNumber, staffIdToEdit);
                 if (!uniquenessCheck.equals("VALID")) {
                     switch (uniquenessCheck) {
                         case "EMAIL_ALREADY_EXISTS":
-                            parentView.showFailedPopUp("Email is already used.");
+                            parentView.showFailedPopUp("Email sudah digunakan.");
                             break;
                         case "PHONE_ALREADY_EXISTS":
-                            parentView.showFailedPopUp("Phone number is already used.");
+                            parentView.showFailedPopUp("Nomor telpon sudah digunakan.");
                             break;
                         case "PHONE_TOO_LONG":
-                            parentView.showFailedPopUp("Phone number cannot exceed 13 digits.");
+                            parentView.showFailedPopUp("Nomor telpon perlu 13 digits.");
                             break;
                         default:
-                            parentView.showFailedPopUp("Unknown validation error.");
+                            parentView.showFailedPopUp("Nomor telpon gagal.");
                             break;
                     }
                     return;
@@ -336,12 +341,12 @@ public class popUpInputAccountStaff extends popUpPanel {
                 if (result) {
                     parentFrame.hideGlassNotificationPanel();
                     parentView.showDashboardStaff();
-                    parentView.showSuccessPopUp(isEditMode ? "Data and Account Staff Successfully Updated"
-                            : "Data and Account Staff Successfully Saved");
+                    parentView.showSuccessPopUp(isEditMode ? "Data dan akun staff berhasil di ubah"
+                            : "Data dan akun staff berhasil disimpan");
                 } else {
                     parentFrame.hideGlassNotificationPanel();
                     parentView.showFailedPopUp(
-                            "Failed to " + (isEditMode ? "Update" : "Save") + " Data and Account Staff");
+                            "Gagal " + (isEditMode ? "Ubah" : "Simpan") + " Data and Akun Staff");
                     System.out.println("isEditMode: " + isEditMode);
                     System.out.println("idStaff: " + idStaff);
                     System.out.println("jobdesk : " + jobdesk);

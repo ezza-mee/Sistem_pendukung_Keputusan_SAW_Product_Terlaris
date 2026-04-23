@@ -43,12 +43,12 @@ public class headerDashboardView extends headerPanel {
 
     private void setPosition() {
         brandPanel = new panelRounded(0, 0, 240, 80, 0, 0);
-        welcomeLabel = new textLabel("Welcome", 300, 0, 100, 80);
+        welcomeLabel = new textLabel("Selamat Datang", 300, 0, 200, 80);
         tujuLangitLabel = new textLabel("TujuLangit", 0, 0, 240, 80);
         forestparkLabel = new textLabel("ForestPark", 0, 40, 240, 40);
 
         searchField = new textField(500, 25, 400, 10);
-        searchField.setPlaceholder("Search");
+        searchField.setPlaceholder("Cari");
 
         searchField.addKeyListener(new KeyAdapter() {
             @Override

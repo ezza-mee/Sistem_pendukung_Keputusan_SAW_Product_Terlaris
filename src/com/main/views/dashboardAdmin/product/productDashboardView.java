@@ -49,6 +49,9 @@ public class productDashboardView extends contentPanel implements searchableView
 
     private String currentCategory = "ALL";
 
+    private appIcons appIcons = new appIcons();
+    private imageIcon addIcon = appIcons.getAddIconWhite(20, 20);
+
     private void setColor() {
         headerLabel.setForeground(color.BLACK);
         headerPanel.setBackground(color.WHITE);
@@ -94,7 +97,7 @@ public class productDashboardView extends contentPanel implements searchableView
     }
 
     private void setLayout() {
-        headerLabel = new textLabel("Data Product", 40, 0, 400, 80);
+        headerLabel = new textLabel("Data Produk", 40, 0, 400, 80);
         headerPanel = new panelRounded(40, 80, 1050, 110, 10, 10);
         contentPanel = new panelRounded(40, 140, 1050, 410, 0, 0);
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
@@ -102,7 +105,8 @@ public class productDashboardView extends contentPanel implements searchableView
         scrollPane = new scrollPane(contentPanel, 0, 0, getWidth(), getHeight());
         scrollPane.setBounds(40, 220, 1050, 410);
 
-        buttonAdd = new buttonCustom("Add", 900, 35, 100, 40, 10);
+        buttonAdd = new buttonCustom("    " +"Tambah", 900, 35, 130, 40, 10);
+        buttonAdd.setIcon(addIcon);
 
         allProductLabel = new linkLabel("ALL", 40, 40, 80, 30);
         allProductLabel.setQuantity(quantityAllDataProduct);
@@ -115,7 +119,7 @@ public class productDashboardView extends contentPanel implements searchableView
 
         String[] statusProductItems = { null, "Ready", "Out of Stock" };
         statusProductField = new comboBox<>(statusProductItems, 480, 40, 200, 30, 10);
-        statusProductField.setPlaceholder("Select your Status");
+        statusProductField.setPlaceholder("Pilih status");
 
     }
 
@@ -401,12 +405,6 @@ public class productDashboardView extends contentPanel implements searchableView
         descLabel.setFont(fontStyle.getFont(fontStyle.FontStyle.SEMIBOLD, 14f));
         cardPanel.add(descLabel);
 
-        // status produk
-        JLabel statusLabel = new JLabel(product.getStatus());
-        statusLabel.setBounds(670, 40, 200, 20);
-        statusLabel.setFont(fontStyle.getFont(fontStyle.FontStyle.SEMIBOLD, 16f));
-        cardPanel.add(statusLabel);
-
         // Tombol Hapus
         buttonCustom buttonEdit = new buttonCustom("", 860, 35, 40, 40, 10);
         buttonCustom buttonDelete = new buttonCustom("", 910, 35, 40, 40, 10);
@@ -423,7 +421,7 @@ public class productDashboardView extends contentPanel implements searchableView
         buttonDelete.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent ae) {
-                popUpConfrim messagePopUp = parentView.showConfrimPopUp("do you want to delete product data?");
+                popUpConfrim messagePopUp = parentView.showConfrimPopUp("Apakah anda ingin menghapus data produk?");
 
                 messagePopUp.getButtonConfrim().addActionListener(new java.awt.event.ActionListener() {
                     @Override
@@ -433,13 +431,13 @@ public class productDashboardView extends contentPanel implements searchableView
 
                         if (success) {
                             parentApp.hideGlassNotificationPanel();
-                            parentView.showSuccessPopUp("Success Delete Data Product");
+                            parentView.showSuccessPopUp("Data produk berhasil dihapus");
                             contentPanel.remove(cardPanel);
                             contentPanel.remove(padding);
                             contentPanel.revalidate();
                             contentPanel.repaint();
                         } else {
-                            parentView.showFailedPopUp("Product Delete Data Product");
+                            parentView.showFailedPopUp("Data produk gagal dihapus");
                         }
 
                     }
@@ -457,7 +455,7 @@ public class productDashboardView extends contentPanel implements searchableView
         buttonEdit.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent ae) {
-                popUpConfrim messagePopUp = parentView.showConfrimPopUp("do you want to delete product data?");
+                popUpConfrim messagePopUp = parentView.showConfrimPopUp("Apakah anda ingin mengubah data produk?");
 
                 messagePopUp.getButtonConfrim().addActionListener(new java.awt.event.ActionListener() {
                     @Override
@@ -470,7 +468,7 @@ public class productDashboardView extends contentPanel implements searchableView
                             parentView.setDataProductToEdit(selectedDataProduct);
                             parentView.showFormProduct();
                         } else {
-                            parentView.showFailedPopUp("Product Data Not Found");
+                            parentView.showFailedPopUp("Data produk tidak ditemukan");
                         }
                     }
                 });

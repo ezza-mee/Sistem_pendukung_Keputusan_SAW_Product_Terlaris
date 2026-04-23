@@ -35,6 +35,11 @@ public class staffFormView extends contentPanel {
     private String oldEmail = "";
     private String oldPhoneNumber = "";
 
+    private appIcons appIcons = new appIcons();
+    private imageIcon backIcon = appIcons.getBackIconWhite(20, 20);
+    private imageIcon resetIcon = appIcons.getDeleteIconWhite(20, 20);
+    private imageIcon saveIcon = appIcons.getSaveIconWhite(20, 20);
+
     public staffFormView(dashboardAdminView parentView) {
         super();
         this.parentView = parentView;
@@ -77,28 +82,28 @@ public class staffFormView extends contentPanel {
         headerLabel = new textLabel("Input Data Staff", 40, 0, 400, 80);
         contentPanel = new panelRounded(40, 80, 1050, 550, 10, 10);
 
-        nameLabel = new textLabel("Name", 180, 30, 200, 80);
+        nameLabel = new textLabel("Nama", 180, 30, 200, 80);
         emailLabel = new textLabel("Email", 180, 130, 200, 80);
-        phoneLabel = new textLabel("Phone Number", 180, 230, 200, 80);
-        genderLabel = new textLabel("Gender", 180, 330, 200, 80);
+        phoneLabel = new textLabel("Nomor Telpon", 180, 230, 200, 80);
+        genderLabel = new textLabel("Jenis Kelamin", 180, 330, 200, 80);
         jobdeskLabel = new textLabel("Jobdesk", 580, 30, 200, 80);
-        addressLabel = new textLabel("Address", 580, 130, 200, 80);
+        addressLabel = new textLabel("Alamat", 580, 130, 200, 80);
 
-        nameEmptyLabel = new textLabel("Name is Empty", 180, 90, 200, 80);
-        emailEmptyLabel = new textLabel("Email is Empty", 180, 190, 200, 80);
-        phoneEmptyLabel = new textLabel("Phone is Empty", 180, 290, 200, 80);
-        genderEmptyLabel = new textLabel("Gender is Empty", 180, 390, 200, 80);
-        jobdeskEmptyLabel = new textLabel("Jobdesk is Empty", 580, 90, 200, 80);
-        addressEmptyLabel = new textLabel("Address is Empty", 580, 375, 200, 80);
+        nameEmptyLabel = new textLabel("Nama tidak boleh kosong!", 180, 90, 200, 80);
+        emailEmptyLabel = new textLabel("Email tidak boleh kosong", 180, 190, 200, 80);
+        phoneEmptyLabel = new textLabel("Nomor telpon tidak boleh kosong!", 180, 290, 200, 80);
+        genderEmptyLabel = new textLabel("Jenis kelamin tidak boleh kosong", 180, 390, 200, 80);
+        jobdeskEmptyLabel = new textLabel("Jobdesk tidak boleh kosong!", 580, 90, 200, 80);
+        addressEmptyLabel = new textLabel("Alamak tidak boleh kosong!", 580, 375, 200, 80);
 
         nameField = new textField(180, 85, 300, 10);
         emailField = new textField(180, 185, 300, 10);
         phoneField = new textField(180, 285, 300, 10);
         addresField = new textArea(580, 190, 320, 220, 10);
 
-        String[] genderItems = { null, "Male", "Famale" };
+        String[] genderItems = { null, "Pria", "Perempuan" };
         genderField = new comboBox<>(genderItems, 180, 385, 300, 30, 10);
-        genderField.setPlaceholder("Select your Gender");
+        genderField.setPlaceholder("Pilih jenis kelamin");
 
         String[] jobdeskItems = { null, "Barista", "Cashier", "Waiter", "Chef", "Assistant Chef",
                 "Supplier", "Admin", "Manager", "Housekeeping",
@@ -107,23 +112,27 @@ public class staffFormView extends contentPanel {
         jobdeskField = new comboBox<>(jobdeskItems, 580, 90, 300, 30, 10);
         jobdeskField.setPlaceholder("Select your Jobdesk");
 
-        nameField.setPlaceholder("Enter your name");
-        emailField.setPlaceholder("Enter your email");
-        phoneField.setPlaceholder("Enter your phone number");
-        addresField.setPlaceholder("Enter your address");
+        nameField.setPlaceholder("Masukan nama");
+        emailField.setPlaceholder("Masukan email");
+        phoneField.setPlaceholder("Masukan nomor telpon");
+        addresField.setPlaceholder("Masukan alamat");
 
         scrollAddres = new scrollPane(addresField, 580, 180, 320, 220);
 
-        buttonBack = new buttonCustom("Back", 180, 470, 100, 40, 10);
-        buttonReset = new buttonCustom("Reset", 640, 470, 100, 40, 10);
-        buttonSave = new buttonCustom("Save", 780, 470, 100, 40, 10);
+        buttonBack = new buttonCustom("    " + "Kembali", 180, 470, 130, 40, 10);
+        buttonReset = new buttonCustom("    " + "Hapus", 620, 470, 130, 40, 10);
+        buttonSave = new buttonCustom("    " + "Simpan", 780, 470, 130, 40, 10);
+
+        buttonBack.setIcon(backIcon);
+        buttonReset.setIcon(resetIcon);
+        buttonSave.setIcon(saveIcon);
 
     }
 
     private void setColor() {
         contentPanel.setBackground(color.WHITE);
 
-        headerLabel.setForeground(color.DARKGREEN);
+        headerLabel.setForeground(color.BLACK);
         nameLabel.setForeground(color.DARKGREEN);
         emailLabel.setForeground(color.DARKGREEN);
         phoneLabel.setForeground(color.DARKGREEN);
@@ -285,21 +294,21 @@ public class staffFormView extends contentPanel {
                                     success = authDataStaff.insertDataStaff(name, email, phoneNumber, gender, jobdesk,
                                             address);
                                     if (success) {
-                                        parentView.showSuccessPopUp("Data Staff Successfully Saved");
+                                        parentView.showSuccessPopUp("Data staff berhasil disimpan");
                                         parentView.showDashboardStaff();
                                     } else {
-                                        parentView.showFailedPopUp("Failed to Save Data Staff");
+                                        parentView.showFailedPopUp("Data staff gagal disimpan!");
                                     }
                                 } else {
                                     // UPDATE DATA STAFF tanpa akun
                                     success = authDataStaff.updateDataStaff(staffIdToEdit, name, email,
                                             phoneNumber, gender, jobdesk, address);
                                     if (success) {
-                                        parentView.showSuccessPopUp("Data Staff Successfully Updated");
+                                        parentView.showSuccessPopUp("Data staff berhasil diubah");
                                         parentView.showDashboardStaff();
                                         staffIdToEdit = -1; // reset ID agar tidak update terus-menerus
                                     } else {
-                                        parentView.showFailedPopUp("Failed to Update Data Staff");
+                                        parentView.showFailedPopUp("Data staff gagal diubah");
                                     }
                                 }
                             }

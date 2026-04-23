@@ -34,6 +34,9 @@ public class staffDashboardView extends contentPanel implements searchableView {
     private int quantityDataStaffInActive = loadDataStaff.getAllQuantityDataStaffInActive();
     private int quantityDataStaffResign = loadDataStaff.getAllQuantityDataStaffResign();
 
+    private appIcons appIcons = new appIcons();
+    private imageIcon addIcon = appIcons.getAddIconWhite(20, 20);
+
     private String currentStatus = "ALL";
 
     private void setColor() {
@@ -94,7 +97,8 @@ public class staffDashboardView extends contentPanel implements searchableView {
         dataStaffResignLabel = new linkLabel("Resign", 430, 40, 110, 30);
         dataStaffResignLabel.setQuantity(quantityDataStaffResign);
 
-        buttonAdd = new buttonCustom("Add", 900, 40, 100, 40, 10);
+        buttonAdd = new buttonCustom("    " +"Tambah", 900, 35, 130, 40, 10);
+        buttonAdd.setIcon(addIcon);
     }
 
     private void setAction() {
@@ -189,7 +193,7 @@ public class staffDashboardView extends contentPanel implements searchableView {
             public void onEdit(int row) {
                 try {
                     popUpConfrim messagePopUp = parentView
-                            .showConfrimPopUp("Do you want to edit Data Staff?");
+                            .showConfrimPopUp("Apakah anda ingin mengubah data staff?");
                     messagePopUp.getButtonConfrim().addActionListener(new java.awt.event.ActionListener() {
                         @Override
                         public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -205,7 +209,7 @@ public class staffDashboardView extends contentPanel implements searchableView {
                                     parentView.setDataStaffToEdit(selectedDataStaff);
                                     parentView.showFormStaff();
                                 } else {
-                                    parentView.showFailedPopUp("Data Staff not found!");
+                                    parentView.showFailedPopUp("Data staff tidak ditemukan!");
                                 }
                             }
                         }
@@ -227,7 +231,7 @@ public class staffDashboardView extends contentPanel implements searchableView {
             public void onDelete(int row) {
                 try {
                     popUpConfrim messagePopUp = parentView
-                            .showConfrimPopUp("Do you want to delete Data Staff?");
+                            .showConfrimPopUp("Apakah anda ingin menghapus data staff?");
                     messagePopUp.getButtonConfrim().addActionListener(new java.awt.event.ActionListener() {
                         @Override
                         public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -239,11 +243,11 @@ public class staffDashboardView extends contentPanel implements searchableView {
 
                                 if (isSuccess) {
                                     parentApp.hideGlassNotificationPanel();
-                                    parentView.showSuccessPopUp("Success Delete Data Staff");
+                                    parentView.showSuccessPopUp("Data staff berhasil dihapus");
                                     parentView.showDashboardStaff();
                                 } else {
                                     parentApp.hideGlassNotificationPanel();
-                                    parentView.showFailedPopUp("Failed Delete Data Staff");
+                                    parentView.showFailedPopUp("Data staff gagal dihapus!");
                                     parentView.showDashboardStaff();
                                 }
                             }
@@ -273,7 +277,7 @@ public class staffDashboardView extends contentPanel implements searchableView {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    parentView.showFailedPopUp("Data Staff not found!");
+                    parentView.showFailedPopUp("Data staff tidak ditemukan!");
                 }
             }
 
@@ -307,7 +311,7 @@ public class staffDashboardView extends contentPanel implements searchableView {
             public void onEdit(int row) {
                 try {
                     popUpConfrim messagePopUp = parentView
-                            .showConfrimPopUp("Do you want to edit Data Staff?");
+                            .showConfrimPopUp("Apakah anda ingin mengubah data staff?");
                     messagePopUp.getButtonConfrim().addActionListener(new java.awt.event.ActionListener() {
                         @Override
                         public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -323,7 +327,7 @@ public class staffDashboardView extends contentPanel implements searchableView {
                                     parentView.setDataStaffToEdit(selectedDataStaff);
                                     parentView.showFormStaff();
                                 } else {
-                                    parentView.showFailedPopUp("Data Staff not found!");
+                                    parentView.showFailedPopUp("Data staff tidak ditemukan!");
                                 }
                             }
                         }
@@ -345,7 +349,7 @@ public class staffDashboardView extends contentPanel implements searchableView {
             public void onDelete(int row) {
                 try {
                     popUpConfrim messagePopUp = parentView
-                            .showConfrimPopUp("Do you want to delete Data Staff?");
+                            .showConfrimPopUp("Apakah anda ingin menghapus data staff?");
                     messagePopUp.getButtonConfrim().addActionListener(new java.awt.event.ActionListener() {
                         @Override
                         public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -357,11 +361,11 @@ public class staffDashboardView extends contentPanel implements searchableView {
 
                                 if (isSuccess) {
                                     parentApp.hideGlassNotificationPanel();
-                                    parentView.showSuccessPopUp("Success Delete Data Staff");
+                                    parentView.showSuccessPopUp("Data staff berhasil dihapus");
                                     parentView.showDashboardStaff();
                                 } else {
                                     parentApp.hideGlassNotificationPanel();
-                                    parentView.showFailedPopUp("Failed Delete Data Staff");
+                                    parentView.showFailedPopUp("Data staff gagal dihapus!");
                                     parentView.showDashboardStaff();
                                 }
                             }
@@ -391,7 +395,7 @@ public class staffDashboardView extends contentPanel implements searchableView {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    parentView.showFailedPopUp("Data Staff not found!");
+                    parentView.showFailedPopUp("Data staff tidak ditemukan!");
                 }
             }
 
@@ -426,7 +430,7 @@ public class staffDashboardView extends contentPanel implements searchableView {
             public void onEdit(int row) {
                 try {
                     popUpConfrim messagePopUp = parentView
-                            .showConfrimPopUp("Do you want to edit Data Staff?");
+                            .showConfrimPopUp("Apakah anda ingin mengubah data staff?");
                     messagePopUp.getButtonConfrim().addActionListener(new java.awt.event.ActionListener() {
                         @Override
                         public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -442,7 +446,7 @@ public class staffDashboardView extends contentPanel implements searchableView {
                                     parentView.setDataStaffToEdit(selectedDataStaff);
                                     parentView.showFormStaff();
                                 } else {
-                                    parentView.showFailedPopUp("Data Staff not found!");
+                                    parentView.showFailedPopUp("Data staff tidak ditemukan!");
                                 }
                             }
                         }
@@ -464,7 +468,7 @@ public class staffDashboardView extends contentPanel implements searchableView {
             public void onDelete(int row) {
                 try {
                     popUpConfrim messagePopUp = parentView
-                            .showConfrimPopUp("Do you want to delete Data Staff?");
+                            .showConfrimPopUp("Apakah anda ingin menghapus data staff?");
                     messagePopUp.getButtonConfrim().addActionListener(new java.awt.event.ActionListener() {
                         @Override
                         public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -476,11 +480,11 @@ public class staffDashboardView extends contentPanel implements searchableView {
 
                                 if (isSuccess) {
                                     parentApp.hideGlassNotificationPanel();
-                                    parentView.showSuccessPopUp("Success Delete Data Staff");
+                                    parentView.showSuccessPopUp("Data staff berhasil dihapus");
                                     parentView.showDashboardStaff();
                                 } else {
                                     parentApp.hideGlassNotificationPanel();
-                                    parentView.showFailedPopUp("Failed Delete Data Staff");
+                                    parentView.showFailedPopUp("Data staff gagal dihapus!");
                                     parentView.showDashboardStaff();
                                 }
                             }
@@ -510,7 +514,7 @@ public class staffDashboardView extends contentPanel implements searchableView {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    parentView.showFailedPopUp("Data Staff not found!");
+                    parentView.showFailedPopUp("Data staff tidak ditemukan!");
                 }
             }
 
@@ -545,7 +549,7 @@ public class staffDashboardView extends contentPanel implements searchableView {
             public void onEdit(int row) {
                 try {
                     popUpConfrim messagePopUp = parentView
-                            .showConfrimPopUp("Do you want to edit Data Staff?");
+                            .showConfrimPopUp("Apakah anda ingin mengubah data staff?");
                     messagePopUp.getButtonConfrim().addActionListener(new java.awt.event.ActionListener() {
                         @Override
                         public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -561,7 +565,7 @@ public class staffDashboardView extends contentPanel implements searchableView {
                                     parentView.setDataStaffToEdit(selectedDataStaff);
                                     parentView.showFormStaff();
                                 } else {
-                                    parentView.showFailedPopUp("Data Staff not found!");
+                                    parentView.showFailedPopUp("Data staff tidak ditemukan!");
                                 }
                             }
                         }
@@ -583,7 +587,7 @@ public class staffDashboardView extends contentPanel implements searchableView {
             public void onDelete(int row) {
                 try {
                     popUpConfrim messagePopUp = parentView
-                            .showConfrimPopUp("Do you want to delete Data Staff?");
+                            .showConfrimPopUp("Apakah anda ingin menghapus data staff?");
                     messagePopUp.getButtonConfrim().addActionListener(new java.awt.event.ActionListener() {
                         @Override
                         public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -595,11 +599,11 @@ public class staffDashboardView extends contentPanel implements searchableView {
 
                                 if (isSuccess) {
                                     parentApp.hideGlassNotificationPanel();
-                                    parentView.showSuccessPopUp("Success Delete Data Staff");
+                                    parentView.showSuccessPopUp("Data staff berhasil dihapus");
                                     parentView.showDashboardStaff();
                                 } else {
                                     parentApp.hideGlassNotificationPanel();
-                                    parentView.showFailedPopUp("Failed Delete Data Staff");
+                                    parentView.showFailedPopUp("Data staff gagal dihapus!");
                                     parentView.showDashboardStaff();
                                 }
                             }
@@ -629,7 +633,7 @@ public class staffDashboardView extends contentPanel implements searchableView {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    parentView.showFailedPopUp("Data Staff not found!");
+                    parentView.showFailedPopUp("Data staff tidak ditemukan!");
                 }
             }
 

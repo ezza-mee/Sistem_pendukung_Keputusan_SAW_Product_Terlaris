@@ -82,7 +82,7 @@ public class homeDashboardView extends contentPanel {
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     private String today = sdf.format(new Date());
 
-    private String selectedPriode = null;
+    private String selectedPriode = sdf.format(new Date());
 
     private datePickerField dateField;
 

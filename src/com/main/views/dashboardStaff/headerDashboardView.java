@@ -53,7 +53,7 @@ public class headerDashboardView extends headerPanel {
 
     private void setPosition() {
         brandPanel = new panelRounded(0, 0, 240, 80, 0, 0);
-        welcomeLabel = new textLabel("Welcome" + " , " + nameStaff, 300, 0, 400, 80);
+        welcomeLabel = new textLabel("Selamat Datang" + " ,  " + nameStaff, 300, 0, 400, 80);
         tujuLangitLabel = new textLabel("TujuLangit", 0, 0, 240, 80);
         forestparkLabel = new textLabel("ForestPark", 0, 40, 240, 40);
 

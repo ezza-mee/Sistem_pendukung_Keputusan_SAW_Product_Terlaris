@@ -174,8 +174,8 @@ public class formLogin extends containerPanel {
         hidePasswordIcon.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                isPasswordVisible[0] = true;
-                passwordField.setEchoChar((char) 0);
+                isPasswordVisible[0] = false;
+                passwordField.setEchoChar('•');
                 passwordField.setFont(fontStyle.getFont(fontStyle.FontStyle.SEMIBOLD, 13f));
 
                 hidePasswordIcon.setVisible(false);
@@ -191,7 +191,8 @@ public class formLogin extends containerPanel {
         showPasswordIcon.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                isPasswordVisible[0] = false;
+                isPasswordVisible[0] = true;
+                passwordField.setEchoChar((char) 0);
                 passwordField.setFont(fontStyle.getFont(fontStyle.FontStyle.SEMIBOLD, 13f));
 
                 showPasswordIcon.setVisible(false);
@@ -255,18 +256,18 @@ public class formLogin extends containerPanel {
                         EmailField.setText(null);
                         passwordField.setText(null);
 
-                         System.out.println("=== Session Login ===");
-                         System.out.println("ID Account: " + sessionLogin.get().getIdAccount());
-                         System.out.println("ID Staff: " + sessionLogin.get().getIdStaff());
-                         System.out.println("Email: " + sessionLogin.get().getEmail());
-                         System.out.println("Password: " + sessionLogin.get().getPassword());
-                         System.out.println("Jobdesk: " + sessionLogin.get().getJobdesk()); // Harus tampil!
+                        System.out.println("=== Session Login ===");
+                        System.out.println("ID Account: " + sessionLogin.get().getIdAccount());
+                        System.out.println("ID Staff: " + sessionLogin.get().getIdStaff());
+                        System.out.println("Email: " + sessionLogin.get().getEmail());
+                        System.out.println("Password: " + sessionLogin.get().getPassword());
+                        System.out.println("Jobdesk: " + sessionLogin.get().getJobdesk()); // Harus tampil!
 
                         int idStaff = sessionLogin.get().getIdStaff();
                         dataStaff staffData = loadDataStaff.getStaffById(idStaff);
                         sessionManager.setStaffData(staffData);
                         Role role = sessionLogin.getRole();
-                        staffService.staffLogin(idStaff); 
+                        staffService.staffLogin(idStaff);
 
                         parentView.loginSuccess(role);
                         break;

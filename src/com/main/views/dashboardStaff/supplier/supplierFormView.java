@@ -35,6 +35,11 @@ public class supplierFormView extends contentPanel {
 
     int idStaff = sessionLogin.get().getIdStaff();
 
+    private appIcons appIcons = new appIcons();
+    private imageIcon backIcon = appIcons.getBackIconWhite(20, 20);
+    private imageIcon resetIcon = appIcons.getDeleteIconWhite(20, 20);
+    private imageIcon saveIcon = appIcons.getSaveIconWhite(20, 20);
+
     public supplierFormView(dashboardStaffView parentView) {
         super();
         this.parentView = parentView;
@@ -43,7 +48,7 @@ public class supplierFormView extends contentPanel {
 
     @Override
     public void initContent() {
-        setPosition();
+        setLayout();
         setColor();
         setFont();
         handleButton();
@@ -69,7 +74,7 @@ public class supplierFormView extends contentPanel {
 
     }
 
-    private void setPosition() {
+    private void setLayout() {
         headerLabel = new textLabel("Input Data Supplier", 40, 0, 400, 80);
         contentPanel = new panelRounded(40, 80, 1050, 550, 10, 10);
 
@@ -96,9 +101,13 @@ public class supplierFormView extends contentPanel {
         quantityField.setPlaceholder("Enter quantity Supplier");
         descriptionField.setPlaceholder("Enter Description Supplier");
 
-        buttonBack = new buttonCustom("Back", 180, 470, 100, 40, 10);
-        buttonReset = new buttonCustom("Reset", 640, 470, 100, 40, 10);
-        buttonSave = new buttonCustom("Save", 780, 470, 100, 40, 10);
+        buttonBack = new buttonCustom("    " + "Kembali", 180, 470, 130, 40, 10);
+        buttonReset = new buttonCustom("    " + "Hapus", 620, 470, 130, 40, 10);
+        buttonSave = new buttonCustom("    " + "Simpan", 780, 470, 130, 40, 10);
+
+        buttonBack.setIcon(backIcon);
+        buttonReset.setIcon(resetIcon);
+        buttonSave.setIcon(saveIcon);
 
         scrollDescription = new scrollPane(descriptionField, 180, 285, 700, 140);
 

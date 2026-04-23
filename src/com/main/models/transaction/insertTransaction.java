@@ -10,10 +10,10 @@ import com.main.models.connectionDatabase;
 
 public class insertTransaction {
     public static int insertData(int idStaff, int idTable, String staff, String numberTable, String customer,
-            int subQuantity, int subPrice, String description, String payment) {
+            int subQuantity, int subPrice, String description, String payment, String periode) {
         int generatedId = -1;
 
-        String query = "INSERT INTO tbl_data_transaction (idStaff, idTable, date, staff, numberTable, customer, subQuantity, subPrice, description, payment, status) VALUES (?, ?, now(), ?, ?, ?, ?, ?, ?, ?, 'Process')";
+        String query = "INSERT INTO tbl_data_transaction (idStaff, idTable, date, staff, numberTable, customer, subQuantity, subPrice, description, payment, status, periode) VALUES (?, ?, now(), ?, ?, ?, ?, ?, ?, ?, 'Process', ?)";
 
         try (Connection conn = connectionDatabase.getConnection();
                 PreparedStatement state = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);) {
@@ -27,6 +27,7 @@ public class insertTransaction {
             state.setInt(7, subPrice);
             state.setString(8, description);
             state.setString(9, payment);
+            state.setString(10, periode);
 
             int rows = state.executeUpdate();
 
